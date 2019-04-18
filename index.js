@@ -63,12 +63,11 @@ echoAgent.on('connected', body =>{
 	echoAgent.subscribeRoutingTasks({});
 	
 	setInterval(function(){
-		console.log("ping");
 		echoAgent.getClock({}, (e, resp) => {
 			if (e) { console.log(e) }
 			console.log(resp)
 		});
-	}, 10000);
+	}, 30000);
 
 
 });
