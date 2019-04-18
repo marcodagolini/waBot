@@ -56,6 +56,7 @@ echoAgent.on('routing.RoutingTaskNotification', body =>{
 				console.log("upsert");
 				echoAgent.getUserProfile(c.result.consumerId, (e, profileResp) => {
 					console.log(JSON.stringify(profileResp));
+					console.log(e);
 				});
 
 				
@@ -130,9 +131,10 @@ echoAgent.on('cqm.ExConversationChangeNotification', body =>{
 						var myCustomer = c.result.conversationDetails.participants[i].id;
 					}
 				}
-        echoAgent.getUserProfile(myCustomer, (e, profileResp) => {
-          console.log(JSON.stringify(profileResp));
-        });
+				echoAgent.getUserProfile(myCustomer, (e, profileResp) => {
+					console.log(JSON.stringify(profileResp));
+					console.log(e);
+				});
 
 			}
 		});
@@ -176,7 +178,7 @@ echoAgent.on('closed', body => {
 
 setInterval(function() {
     https.get("https://git.heroku.com/marcowabot.git");
-}, 30000); // every 5 minutes (300000) every 10 minutes (600000)
+}, 300000); // every 5 minutes (300000) every 10 minutes (600000)
 
 
 
