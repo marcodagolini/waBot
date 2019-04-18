@@ -158,16 +158,20 @@ echoAgent.on('error', body =>{
 
 
 
-
-echoAgent.on('closed', body =>{
-
-	console.log("");
-	console.log("");
-	console.log("");
-	console.log("*****closed")
-	console.log(JSON.stringify(body));
-
+echoAgent.on('closed', body => {
+	console.log('socket closed', body);
+	echoAgent.reconnect();
 });
+
+
+
+
+setInterval(function() {
+    https.get("https://git.heroku.com/marcowabot.git");
+}, 600000); // every 5 minutes (300000) every 10 minutes (600000)
+
+
+
 
 
 
