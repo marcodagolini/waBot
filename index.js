@@ -34,7 +34,7 @@ echoAgent.on('connected', body =>{
 	}, (e, resp) => console.log('subscribed successfully', echoAgent.conf.id || ''));
 	echoAgent.subscribeRoutingTasks({});
 	
-	setInterval(()=>{
+	setInterval(function(){
 		echoAgent.getClock({}, (e, resp) => {
 			if (e) { console.error(e) }
 			console.log(resp)
