@@ -46,9 +46,10 @@ echoAgent.on('routing.RoutingTaskNotification', body =>{
 			console.log("inside2");
 			if (c.type === "UPSERT") {
 				console.log("upsert");
-        echoAgent.getUserProfile(openConvs[c.result.conversationId].consumerID, (e, profileResp) => {
-          console.log(JSON.stringify(profileResp));
-        });
+				echoAgent.getUserProfile(c.result.consumerId, (e, profileResp) => {
+					console.log(JSON.stringify(profileResp));
+				});
+
 				
 				c.result.ringsDetails.forEach(r => {
 					if (r.ringState === 'WAITING') {
