@@ -1,3 +1,15 @@
+
+var miaVar = 0
+setInterval(function(){
+	console.log(miaVar);
+	miaVar = miaVar + 10;
+}, 10000);
+
+
+
+/****
+
+
 require('dotenv').config()
 
 
@@ -185,7 +197,7 @@ setInterval(function() {
 
 
 
-
+******/
 
 
 
