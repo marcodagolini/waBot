@@ -39,7 +39,7 @@ echoAgent.on('connected', body =>{
 			if (e) { console.error(e) }
 			console.log(resp)
 		});
-	}, 3000);
+	}, 30000);
 
 
 });
