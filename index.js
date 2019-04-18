@@ -33,6 +33,14 @@ echoAgent.on('connected', body =>{
 		'convState': ['OPEN']
 	}, (e, resp) => console.log('subscribed successfully', echoAgent.conf.id || ''));
 	echoAgent.subscribeRoutingTasks({});
+	
+	setInterval(()=>{
+		agent.getClock({}, (e, resp) => {
+			if (e) { console.error(e) }
+			console.log(resp)
+		});
+	}, 3000);
+
 
 });
 
