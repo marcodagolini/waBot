@@ -168,7 +168,7 @@ echoAgent.on('error', body =>{
 
 echoAgent.on('closed', body => {
 	console.log('socket closed', body);
-	echoAgent.reconnect();
+	echoAgent._reconnect();
 });
 
 
