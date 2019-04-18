@@ -1,13 +1,4 @@
 
-var miaVar = 0
-setInterval(function(){
-	console.log(miaVar);
-	miaVar = miaVar + 10;
-}, 10000);
-
-
-
-/****
 
 
 require('dotenv').config()
@@ -15,13 +6,37 @@ require('dotenv').config()
 
 
 
-// var events = require('events');
-// var emitter = new events.EventEmitter();
-
-
-
+var events = require('events');
+var emitter = new events.EventEmitter();
 var https = require('https');
 var express = require('express');
+
+
+
+var app = express();
+app.listen(process.env.PORT);
+app.set('port', (process.env.PORT || 5000));
+
+// Required to allow access to the service across different domains
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  res.header('Content-Type', 'text/plain');
+  next();
+});
+
+
+app.get('/add', checkValues);
+
+
+function checkValues(req, res, next) {
+	var telefono = req.query.telefono;
+}
+
+
+
+
 const Agent = require('node-agent-sdk').Agent;
 var echoAgent = new Agent({
 	accountId: '31554357',
@@ -197,7 +212,6 @@ setInterval(function() {
 
 
 
-******/
 
 
 
