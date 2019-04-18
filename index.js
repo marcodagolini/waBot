@@ -35,7 +35,7 @@ echoAgent.on('connected', body =>{
 	echoAgent.subscribeRoutingTasks({});
 	
 	setInterval(()=>{
-		agent.getClock({}, (e, resp) => {
+		echoAgent.getClock({}, (e, resp) => {
 			if (e) { console.error(e) }
 			console.log(resp)
 		});
