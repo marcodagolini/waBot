@@ -97,11 +97,7 @@ echoAgent.on('routing.RoutingTaskNotification', body =>{
 
 echoAgent.on('ms.MessagingEventNotification', body =>{
 
-	console.log("");
-	console.log("");
-	console.log("");
-	console.log("*****ms.MessagingEventNotification")
-	console.log(JSON.stringify(body));
+
 
 });
 
