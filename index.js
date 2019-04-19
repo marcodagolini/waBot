@@ -21,26 +21,22 @@ let fetchEverything = function () {
     };
     docClient.scan(params, function (err, data) {
         if (err) {
-            console.log("users::fetchOneByKey::error - " + JSON.stringify(err, null, 2));
+		console.log("users::fetchOneByKey::error - " + JSON.stringify(err, null, 2));
+		https.get("https://git.heroku.com/marcowabot.git");
         }
         else {
-
-		
-			echoAgent.setAgentState({availability: "ONLINE"});
-	echoAgent.subscribeExConversations({
-		'agentIds': [echoAgent.agentId],
-		'convState': ['OPEN']
-	}, (e, resp) => console.log('subscribed successfully', echoAgent.conf.id || ''));
-	echoAgent.subscribeRoutingTasks({});
-	
-	setInterval(function(){
-		echoAgent.getClock({}, (e, resp) => {
-			if (e) { console.log(e) }
-			console.log(resp)
-		});
-	}, 30000);
-		
-		
+		echoAgent.setAgentState({availability: "ONLINE"});
+		echoAgent.subscribeExConversations({
+			'agentIds': [echoAgent.agentId],
+			'convState': ['OPEN']
+		}, (e, resp) => console.log('subscribed successfully', echoAgent.conf.id || ''));
+		echoAgent.subscribeRoutingTasks({});
+		setInterval(function(){
+			echoAgent.getClock({}, (e, resp) => {
+				if (e) { console.log(e) }
+				console.log(resp)
+			});
+		}, 30000);
 		
 		console.log("users::fetchOneByKey::success - " + JSON.stringify(data, null, 2));
 		
