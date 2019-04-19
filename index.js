@@ -39,7 +39,7 @@ let fetchEverything = function () {
 		}, 30000);
 		
 		console.log("users::fetchOneByKey::success - " + JSON.stringify(data, null, 2));
-		renderObject(data);
+		addToObject(data);
 		
         }
     })
@@ -77,12 +77,16 @@ app.get('/add', checkValues);
 
 
 function checkValues(req, res, next) {
-	var telefono = req.query.telefono;
+	var tipeOfRequest = req.query.tipeOfRequest;
+	var myPayload = req.query.myPayload;
+	
+	console.log(" my tipeOfRequest --> " + tipeOfRequest);
+	console.log(" my myPayload --> " + myPayload);
 }
 
 
 
-function renderObject(data){
+function addToObject(data){
 	var myResponse = [];
 	data.Items.forEach(c => {
 		var phone = "";
