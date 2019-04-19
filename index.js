@@ -50,9 +50,6 @@ var echoAgent = new Agent({
 
 echoAgent.on('connected', body =>{
 
-	console.log("");
-	console.log("");
-	console.log("");
 	console.log("*****connected")
 	console.log(JSON.stringify(body));
 	echoAgent.setAgentState({availability: "ONLINE"});
@@ -79,7 +76,6 @@ echoAgent.on('routing.RoutingTaskNotification', body =>{
 	if(!(body.changes.length < 1 || body.changes == undefined)){
 
 		body.changes.forEach(c => {
-			console.log("inside2");
 			if (c.type === "UPSERT") {
 				console.log("upsert");
 				echoAgent.getUserProfile(c.result.consumerId, (e, profileResp) => {
@@ -135,7 +131,6 @@ echoAgent.on('routing.RoutingTaskNotification', body =>{
 echoAgent.on('ms.MessagingEventNotification', body =>{
 
 	if(!(body.changes.length < 1 || body.changes == undefined)){
-		console.log("inside1");
 		body.changes.forEach(c => {
 			if(c.hasOwnProperty('event')){
 				if(c.event.hasOwnProperty('type')){
@@ -162,13 +157,9 @@ echoAgent.on('cqm.ExConversationChangeNotification', body =>{
 
 
 	if(!(body.changes.length < 1 || body.changes == undefined)){
-
-		console.log("inside1");
-
 		body.changes.forEach(c => {
 
 			if (c.type === "UPSERT") {
-				console.log("upsert");
 				
 				var myLength = c.result.conversationDetails.participants.length;
 				for (var i = 0; i < myLength; i++){
