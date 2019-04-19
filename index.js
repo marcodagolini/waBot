@@ -82,6 +82,8 @@ function checkValues(req, res, next) {
 	
 	console.log(" my tipeOfRequest --> " + tipeOfRequest);
 	console.log(" my myPayload --> " + myPayload);
+	
+	res.send(["ok"]);
 }
 
 
