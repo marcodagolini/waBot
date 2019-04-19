@@ -73,18 +73,30 @@ app.use(function(req, res, next) {
 });
 
 
-app.get('/add', checkValues);
+app.get('/add', checkValuesGet);
+
+app.post('/add', checkValuesPost);
 
 
-function checkValues(req, res, next) {
-	console.log(req);
+function checkValuesGet(req, res, next) {
 	var tipeOfRequest = req.query.tipeOfRequest;
 	var myPayload = req.query.myPayload;
 	
 	console.log(" my tipeOfRequest --> " + tipeOfRequest);
-	console.log(" my myPayload --> " + myPayload);
+	console.log(" my myPayload --> " + JSON.stringify(myPayload));
 	
-	res.send(["ok"]);
+	res.send(["okGet"]);
+}
+
+
+function checkValuesPost(req, res, next) {
+	var tipeOfRequest = req.query.tipeOfRequest;
+	var myPayload = req.body;
+	
+	console.log(" my tipeOfRequest --> " + tipeOfRequest);
+	console.log(" my myPayload --> " + JSON.stringify(myPayload));
+	
+	res.send(["okPost"]);
 }
 
 
