@@ -3,7 +3,7 @@
 
 require('dotenv').config()
 
-var isAwsUp = false;
+
 
 var AWS = require("aws-sdk");
 let awsConfig = {
@@ -23,7 +23,24 @@ let fetchEverything = function () {
             console.log("users::fetchOneByKey::error - " + JSON.stringify(err, null, 2));
         }
         else {
-		isAwsUp =  true;
+
+		
+			echoAgent.setAgentState({availability: "ONLINE"});
+	echoAgent.subscribeExConversations({
+		'agentIds': [echoAgent.agentId],
+		'convState': ['OPEN']
+	}, (e, resp) => console.log('subscribed successfully', echoAgent.conf.id || ''));
+	echoAgent.subscribeRoutingTasks({});
+	
+	setInterval(function(){
+		echoAgent.getClock({}, (e, resp) => {
+			if (e) { console.log(e) }
+			console.log(resp)
+		});
+	}, 30000);
+		
+		
+		
 		console.log("users::fetchOneByKey::success - " + JSON.stringify(data, null, 2));
 		
         }
@@ -84,20 +101,9 @@ echoAgent.on('connected', body =>{
 	console.log("*****connected")
 	console.log(JSON.stringify(body));
 	
+	fetchEverything();
 	
-	echoAgent.setAgentState({availability: "ONLINE"});
-	echoAgent.subscribeExConversations({
-		'agentIds': [echoAgent.agentId],
-		'convState': ['OPEN']
-	}, (e, resp) => console.log('subscribed successfully', echoAgent.conf.id || ''));
-	echoAgent.subscribeRoutingTasks({});
-	
-	setInterval(function(){
-		echoAgent.getClock({}, (e, resp) => {
-			if (e) { console.log(e) }
-			console.log(resp)
-		});
-	}, 30000);
+
 
 
 });
@@ -251,7 +257,7 @@ setInterval(function() {
 
 
 
-fetchEverything();
+
 
 
 
