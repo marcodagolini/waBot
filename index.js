@@ -39,7 +39,7 @@ let fetchEverything = function () {
 		}, 30000);
 		
 		console.log("users::fetchOneByKey::success - " + JSON.stringify(data, null, 2));
-		// renderObject(data);
+		renderObject(data);
 		
         }
     })
@@ -84,9 +84,29 @@ function checkValues(req, res, next) {
 
 function renderObject(data){
 	var myResponse = [];
-	data.changes.forEach(c => {
-		
+	data.Items.forEach(c => {
+		var phone = "";
+		var name = "";
+		var customerID = "";
+		if(c.hasOwnProperty('phoneNumber')){
+			phone = c.phoneNumber;
+		} else{
+			phone = "";
+		}
+		if(c.hasOwnProperty('name')){
+			name = c.name;
+		} else{
+			name = "";
+		}
+		if(c.hasOwnProperty('customerID')){
+			customerID = c.customerID;
+		} else{
+			customerID = "";
+		}
+		var partialItem = {"phoneNumber": phone, "name": name, "customerID": customerID};
+		myDatabase.push(partialItem);
 	});
+	console.log("Here my DB --> " + JSON.stringify(myDatabase));
 	
 }
 
