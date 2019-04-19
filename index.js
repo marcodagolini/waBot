@@ -23,13 +23,20 @@ let fetchEverything = function () {
             console.log("users::fetchOneByKey::error - " + JSON.stringify(err, null, 2));
         }
         else {
-            console.log("users::fetchOneByKey::success - " + JSON.stringify(data, null, 2));
+		echoAgent.setAgentState({availability: "ONLINE"});
+		echoAgent.subscribeExConversations({
+			'agentIds': [echoAgent.agentId],
+			'convState': ['OPEN']
+		}, (e, resp) => console.log('subscribed successfully', echoAgent.conf.id || ''));
+		echoAgent.subscribeRoutingTasks({});
+		console.log("users::fetchOneByKey::success - " + JSON.stringify(data, null, 2));
+		
         }
     })
 }
 
 
-fetchEverything();
+
 
 
 
@@ -81,12 +88,6 @@ echoAgent.on('connected', body =>{
 
 	console.log("*****connected")
 	console.log(JSON.stringify(body));
-	echoAgent.setAgentState({availability: "ONLINE"});
-	echoAgent.subscribeExConversations({
-		'agentIds': [echoAgent.agentId],
-		'convState': ['OPEN']
-	}, (e, resp) => console.log('subscribed successfully', echoAgent.conf.id || ''));
-	echoAgent.subscribeRoutingTasks({});
 	
 	setInterval(function(){
 		echoAgent.getClock({}, (e, resp) => {
@@ -247,7 +248,7 @@ setInterval(function() {
 
 
 
-
+fetchEverything();
 
 
 
