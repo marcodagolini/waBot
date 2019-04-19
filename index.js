@@ -77,6 +77,7 @@ app.get('/add', checkValues);
 
 
 function checkValues(req, res, next) {
+	console.log(req);
 	var tipeOfRequest = req.query.tipeOfRequest;
 	var myPayload = req.query.myPayload;
 	
