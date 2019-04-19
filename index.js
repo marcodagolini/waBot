@@ -39,6 +39,7 @@ let fetchEverything = function () {
 		}, 30000);
 		
 		console.log("users::fetchOneByKey::success - " + JSON.stringify(data, null, 2));
+		// renderObject(data);
 		
         }
     })
@@ -48,7 +49,7 @@ let fetchEverything = function () {
 
 
 
-
+var myDatabase = [];
 
 
 var events = require('events');
@@ -77,6 +78,16 @@ app.get('/add', checkValues);
 
 function checkValues(req, res, next) {
 	var telefono = req.query.telefono;
+}
+
+
+
+function renderObject(data){
+	var myResponse = [];
+	data.changes.forEach(c => {
+		
+	});
+	
 }
 
 
