@@ -134,7 +134,24 @@ echoAgent.on('routing.RoutingTaskNotification', body =>{
 
 echoAgent.on('ms.MessagingEventNotification', body =>{
 
+	if(!(body.changes.length < 1 || body.changes == undefined)){
+		console.log("inside1");
+		body.changes.forEach(c => {
+			if(c.hasOwnProperty('event')){
+				if(c.event.hasOwnProperty('type')){
+					if(c.event.type === "ContentEvent"){
+							echoAgent.publishEvent({
+							dialogId: body.dialogId,
+							event: {type: "AcceptStatusEvent", status: "READ", sequenceList: c.sequence}
+						});
+					}
+				}
 
+			}
+
+		});
+
+	}
 
 });
 
