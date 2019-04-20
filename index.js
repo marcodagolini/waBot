@@ -94,14 +94,13 @@ function checkValuesGet(req, res, next) {
 
 function checkValuesPost(req, res, next) {
 	
-	console.log(req);
 	var tipeOfRequest = req.query.tipeOfRequest;
 	var myPayload = req.body;
 	
 	console.log(" my tipeOfRequest --> " + tipeOfRequest);
 	console.log(" my myPayload --> " + JSON.stringify(myPayload));
 	
-	res.send(["okPost"]);
+	res.send({"status":"okPost","tipeOfRequest":tipeOfRequest});
 }
 
 
