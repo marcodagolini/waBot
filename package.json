@@ -17,7 +17,8 @@
     "request": "^2.79.0",
     "events": "^3.0.0",
     "dotenv": "^6.2.0",
-    "aws-sdk": "^2.440.0"
+    "aws-sdk": "^2.440.0",
+    "body-parser": "^1.18.3"
   },
   "repository": {
     "type": "git",
