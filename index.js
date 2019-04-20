@@ -90,8 +90,9 @@ function checkValuesGet(req, res, next) {
 
 
 function checkValuesPost(req, res, next) {
+	
 	var tipeOfRequest = req.query.tipeOfRequest;
-	var myPayload = req.body;
+	var myPayload = res.body;
 	
 	console.log(" my tipeOfRequest --> " + tipeOfRequest);
 	console.log(" my myPayload --> " + JSON.stringify(myPayload));
