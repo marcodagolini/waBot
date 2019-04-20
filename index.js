@@ -56,6 +56,7 @@ var events = require('events');
 var emitter = new events.EventEmitter();
 var https = require('https');
 var express = require('express');
+var bodyParser = require("body-parser");
 
 
 
@@ -71,6 +72,8 @@ app.use(function(req, res, next) {
   res.header('Content-Type', 'text/plain');
   next();
 });
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 
 app.get('/add', checkValuesGet);
