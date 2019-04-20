@@ -99,8 +99,10 @@ function checkValuesPost(req, res, next) {
 	
 	console.log(" my tipeOfRequest --> " + tipeOfRequest);
 	console.log(" my myPayload --> " + JSON.stringify(myPayload));
+
+	var myAnswer = JSON.stringify({"status":"okPost","tipeOfRequest":tipeOfRequest});
 	
-	res.send({"status":"okPost","tipeOfRequest":tipeOfRequest});
+	res.send(myAnswer);
 }
 
 
