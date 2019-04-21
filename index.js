@@ -120,7 +120,7 @@ function checkAuthentication(token) {
 	var oauth = "Bearer " + token;
 	var body = {"status":["ONLINE"]};
 	var url = 'https://lo.msghist.liveperson.net/messaging_history/api/account/13099967/agent-view/status';
-	return request.post({
+	request.post({
     		url: url,
     		body: body,
     		json: true,
@@ -129,6 +129,7 @@ function checkAuthentication(token) {
 			'Authorization': oauth
     		}
 	}, function (e, r, b) {
+		return (b);
 
 	});
 	
