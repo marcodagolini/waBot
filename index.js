@@ -164,7 +164,9 @@ function deleteAllAWS(phoneNumbers,tipeOfRequest){
 					}
 					if(tipeOfRequest !== "blackList"){
 						pushToAWS(c);
-						myDatabase.push(c)
+						var partialItem = {"phoneNumber": c.numero, "name": c.nome, "customerID": c.idCliente};
+						myDatabase.push(partialItem);
+
 					}
 								
 							
