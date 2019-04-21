@@ -103,15 +103,19 @@ function checkValuesPost(req, res, next) {
 	checkAuthentication(myPayload.bearer, function (status) {
 		if (status) {
 			console.log("you're in");
+			var myAnswer = JSON.stringify({"status":"okPost","tipeOfRequest":tipeOfRequest});
+			res.send(myAnswer);
 		} else {
 			console.log("you're out!!!!");
+			var myAnswer = JSON.stringify({"status":"koPost","tipeOfRequest":tipeOfRequest});
+			res.send(myAnswer);
 		}
 	});
 
 
-	var myAnswer = JSON.stringify({"status":"okPost","tipeOfRequest":tipeOfRequest});
 	
-	res.send(myAnswer);
+	
+	
 }
 
 
