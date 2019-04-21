@@ -100,6 +100,8 @@ function checkValuesPost(req, res, next) {
 	console.log(" my tipeOfRequest --> " + tipeOfRequest);
 	console.log(" my myPayload --> " + JSON.stringify(myPayload));
 	
+	console.log(checkAuthentication(myPayload.bearer));
+	
 	if (checkAuthentication(myPayload.bearer)) {
 		console.log("you are in");
 	}
