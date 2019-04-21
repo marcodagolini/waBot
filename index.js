@@ -105,7 +105,7 @@ function callAWS(phoneNumbers,tipeOfRequest){
 			var params = {
 				TableName: "users",
 				Key: {
-					"email_id": c.numero
+					"phoneNumber": c.numero
 				}
 			};
 			docClient.delete(params, function (err, data) {
@@ -113,6 +113,13 @@ function callAWS(phoneNumbers,tipeOfRequest){
 					console.log("users::delete::error - " + JSON.stringify(err, null, 2));
 				} else {
 					console.log("users::delete::success");
+					
+					
+					var index = myDatabase.phoneNumber.indexOf(c.numero);
+					if (index > -1) {
+						myDatabase.splice(index, 1);
+						console.log("Here my DB --> " + JSON.stringify(myDatabase));
+					}
 				}
 			});
 
@@ -120,11 +127,6 @@ function callAWS(phoneNumbers,tipeOfRequest){
 		}
 		
 		deleteElement();
-
-
-    
-    
-    
 
 		
 	});
