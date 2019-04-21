@@ -163,11 +163,11 @@ function deleteAllAWS(phoneNumbers,tipeOfRequest){
 						pushToAWS(c);
 						var partialItem = {"phoneNumber": c.numero, "name": c.nome, "customerID": c.idCliente};
 						myDatabase.push(partialItem);
-						console.log("Here my DB --> " + JSON.stringify(myDatabase));
-
+						
 					}
 								
-							
+					console.log("Here my DB --> " + JSON.stringify(myDatabase));
+		
 					
 				}
 			});
