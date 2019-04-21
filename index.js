@@ -131,6 +131,7 @@ function checkAuthentication(token, callback) {
 			'Authorization': oauth
     		}
 	}, function (e, r, b) {
+		console.log(JSON.stringify(b));
 		if (b){
 			callback (true);
 		} else{
