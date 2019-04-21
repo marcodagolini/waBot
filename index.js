@@ -157,8 +157,6 @@ function deleteAllAWS(phoneNumbers,tipeOfRequest){
 					for (var index = 0; index < myLength; index ++){
 						if(myDatabase[index].phoneNumber === c.numero){
 							myDatabase.splice(index, 1);
-							
-							console.log("Here my DB --> " + JSON.stringify(myDatabase));
 							index = myLength;
 						}
 					}
@@ -166,6 +164,7 @@ function deleteAllAWS(phoneNumbers,tipeOfRequest){
 						pushToAWS(c);
 						var partialItem = {"phoneNumber": c.numero, "name": c.nome, "customerID": c.idCliente};
 						myDatabase.push(partialItem);
+						console.log("Here my DB --> " + JSON.stringify(myDatabase));
 
 					}
 								
