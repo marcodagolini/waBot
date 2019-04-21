@@ -115,8 +115,9 @@ function callAWS(phoneNumbers,tipeOfRequest){
 				} else {
 					console.log("users::delete::success");
 					
-					
-					var index = myDatabase.phoneNumber.indexOf(c.numero);
+					var myNumber = c.numero;
+					console.log("*****" + myNumber);
+					var index = myDatabase.phoneNumber.indexOf(myNumber);
 					if (index > -1) {
 						myDatabase.splice(index, 1);
 						console.log("Here my DB --> " + JSON.stringify(myDatabase));
