@@ -157,7 +157,8 @@ function deleteAllAWS(phoneNumbers,tipeOfRequest){
 					for (var index = 0; index < myLength; index ++){
 						if(myDatabase[index].phoneNumber === c.numero){
 							myDatabase.splice(index, 1);
-							console.log(tipeOfRequest);
+							console.log("inside");
+							console.log("tipeOfRequest --> " + tipeOfRequest);
 							if(tipeOfRequest !== "blackList"){
 								pushToAWS(c);
 							}
