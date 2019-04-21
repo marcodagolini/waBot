@@ -103,7 +103,7 @@ function callAWS(phoneNumbers,tipeOfRequest){
 		let docClient = new AWS.DynamoDB.DocumentClient();
 		let deleteElement = function () {
 			var params = {
-				TableName: "users",
+				TableName: "whatsappDB",
 				Key: {
 					"phoneNumber": c.numero
 				}
