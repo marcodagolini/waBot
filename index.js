@@ -99,10 +99,41 @@ function checkValuesPost(req, res, next) {
 	
 	console.log(" my tipeOfRequest --> " + tipeOfRequest);
 	console.log(" my myPayload --> " + JSON.stringify(myPayload));
+	
+	var oAuth = checkAuthentication(myPayload.bearer, function(err, resp) {
+		console.log(oAuth);
+	});
 
 	var myAnswer = JSON.stringify({"status":"okPost","tipeOfRequest":tipeOfRequest});
 	
 	res.send(myAnswer);
+}
+
+
+
+function checkAuthentication(token, callback) {
+	
+	var request = require('request');
+	var oauth = "Bearer " + token;
+	var body = {"status":["ONLINE"]};
+	var url = 'https://lo.msghist.liveperson.net/messaging_history/api/account/13099967/agent-view/status';
+	request.post({
+    		url: url,
+    		body: body,
+    		json: true,
+    		headers: {
+        		'Content-Type': 'application/json',
+			'Authorization': oauth
+    		}
+	}, function (e, r, b) {
+
+		if(b){
+			callback true;
+		}
+
+	});
+	
+
 }
 
 
