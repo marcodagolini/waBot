@@ -132,7 +132,7 @@ function checkAuthentication(token, callback) {
     		}
 	}, function (e, r, b) {
 		console.log(JSON.stringify(b));
-		if (b){
+		if(b.hasOwnProperty('_metadata')){
 			callback (true);
 		} else{
 			callback(false);
