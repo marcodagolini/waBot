@@ -117,7 +117,7 @@ function callAWS(phoneNumbers,tipeOfRequest){
 				} else {
 					console.log("users::delete::success");
 					
-					var myLength = myDatabase.lebgth;
+					var myLength = myDatabase.length;
 					for (var index = 0; index < myLength; index ++){
 						if(myDatabase[index].phoneNumber === c.numero){
 							myDatabase.splice(index, 1);
