@@ -92,7 +92,41 @@ function checkValuesGet(req, res, next) {
 	res.send(["okGet"]);
 }
 
-function callAWS(phoneNumbers,tipeOfRequest){
+
+function pushToAWS(c){
+	var AWS = require("aws-sdk");
+	let awsConfig = {
+		"region": "us-east-2",
+		"endpoint": "http://dynamodb.us-east-2.amazonaws.com",
+		"accessKeyId": process.env.accessKeyIdDynamo, "secretAccessKey": process.env.secretAccessKeyIdDynamo
+	};
+	AWS.config.update(awsConfig);
+	let docClient = new AWS.DynamoDB.DocumentClient();
+	let save = function () {
+		var input = {
+			"phoneNumber": c.numero, "name": c.name, "customerID": c.customerID
+		};
+		var params = {
+			TableName: "whatsappDB",
+			Item:  input
+		};
+		docClient.put(params, function (err, data) {
+			if (err) {
+				console.log("users::save::error - " + JSON.stringify(err, null, 2));
+			} else{
+				console.log("users::save::success" );
+			}
+		});
+	}
+	
+	save();
+
+
+}
+
+
+
+function deleteAllAWS(phoneNumbers,tipeOfRequest){
 	
 	phoneNumbers.forEach(c => {
 		console.log("*****" + c.numero);
@@ -121,6 +155,9 @@ function callAWS(phoneNumbers,tipeOfRequest){
 					for (var index = 0; index < myLength; index ++){
 						if(myDatabase[index].phoneNumber === c.numero){
 							myDatabase.splice(index, 1);
+							if(tipeOfRequest !== "whiteList"){
+								pushToAWS(c);
+							}
 							console.log("Here my DB --> " + JSON.stringify(myDatabase));
 							index = myLength;
 						}
@@ -151,7 +188,7 @@ function checkValuesPost(req, res, next) {
 	checkAuthentication(myPayload.bearer, function (status) {
 		if (status) {
 			console.log("you're in");
-			callAWS(myPayload.phoneNumbers,tipeOfRequest);
+			deleteAllAWS(myPayload.phoneNumbers,tipeOfRequest);
 			var myAnswer = JSON.stringify({"status":"okPost","tipeOfRequest":tipeOfRequest});
 			res.send(myAnswer);
 		} else {
