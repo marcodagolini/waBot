@@ -91,6 +91,46 @@ function checkValuesGet(req, res, next) {
 	res.send(["okGet"]);
 }
 
+function callAWS(phoneNumbers,tipeOfRequest){
+	
+	phoneNumbers.forEach(c => {
+		var AWS = require("aws-sdk");
+		let awsConfig = {
+			"region": "us-east-2",
+			"endpoint": "http://dynamodb.us-east-2.amazonaws.com",
+			"accessKeyId": process.env.accessKeyIdDynamo, "secretAccessKey": process.env.secretAccessKeyIdDynamo
+		};
+		let docClient = new AWS.DynamoDB.DocumentClient();
+		let deleteElement = function () {
+			var params = {
+				TableName: "users",
+				Key: {
+					"email_id": c.numero
+				}
+			};
+			docClient.delete(params, function (err, data) {
+				if (err) {
+					console.log("users::delete::error - " + JSON.stringify(err, null, 2));
+				} else {
+					console.log("users::delete::success");
+				}
+			});
+
+			
+		}
+		
+		deleteElement();
+
+
+    
+    
+    
+
+		
+	});
+	
+}
+
 
 function checkValuesPost(req, res, next) {
 	
@@ -103,6 +143,7 @@ function checkValuesPost(req, res, next) {
 	checkAuthentication(myPayload.bearer, function (status) {
 		if (status) {
 			console.log("you're in");
+			callAWS(myPayload.phoneNumbers,tipeOfRequest);
 			var myAnswer = JSON.stringify({"status":"okPost","tipeOfRequest":tipeOfRequest});
 			res.send(myAnswer);
 		} else {
