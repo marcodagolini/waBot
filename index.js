@@ -115,13 +115,15 @@ function callAWS(phoneNumbers,tipeOfRequest){
 				} else {
 					console.log("users::delete::success");
 					
-					var myNumber = c.numero;
-					console.log("*****" + myNumber);
-					var index = myDatabase.phoneNumber.indexOf(myNumber);
-					if (index > -1) {
-						myDatabase.splice(index, 1);
-						console.log("Here my DB --> " + JSON.stringify(myDatabase));
+					var myLength = myDatabase.lebgth;
+					for (var index = 0; index < myLength; index ++){
+						if(myDatabase[index].phoneNumber === c.numero){
+							myDatabase.splice(index, 1);
+							console.log("Here my DB --> " + JSON.stringify(myDatabase));
+							index = myLength;
+						}
 					}
+					
 				}
 			});
 
