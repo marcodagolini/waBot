@@ -105,7 +105,7 @@ function pushToAWS(c){
 	let docClient = new AWS.DynamoDB.DocumentClient();
 	let save = function () {
 		var input = {
-			"phoneNumber": c.numero, "name": c.name, "customerID": c.customerID
+			"phoneNumber": c.numero, "name": c.nome, "customerID": c.idCliente
 		};
 		var params = {
 			TableName: "whatsappDB",
