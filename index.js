@@ -100,11 +100,13 @@ function checkValuesPost(req, res, next) {
 	console.log(" my tipeOfRequest --> " + tipeOfRequest);
 	console.log(" my myPayload --> " + JSON.stringify(myPayload));
 	
-	console.log(checkAuthentication(myPayload.bearer));
-	
-	if (checkAuthentication(myPayload.bearer)) {
-		console.log("you are in");
-	}
+	checkAuthentication(myPayload.bearer, function (status) {
+		if (status) {
+			console.log("you're in");
+		} else {
+			console.log("you're out!!!!");
+		}
+	});
 
 
 	var myAnswer = JSON.stringify({"status":"okPost","tipeOfRequest":tipeOfRequest});
@@ -114,7 +116,7 @@ function checkValuesPost(req, res, next) {
 
 
 
-function checkAuthentication(token) {
+function checkAuthentication(token, callback) {
 	
 	var request = require('request');
 	var oauth = "Bearer " + token;
@@ -129,7 +131,11 @@ function checkAuthentication(token) {
 			'Authorization': oauth
     		}
 	}, function (e, r, b) {
-		return (b);
+		if (b){
+			callback (true);
+		} else{
+			callback(false);
+		}
 
 	});
 	
