@@ -94,6 +94,7 @@ function checkValuesGet(req, res, next) {
 function callAWS(phoneNumbers,tipeOfRequest){
 	
 	phoneNumbers.forEach(c => {
+		console.log("*****" + c.numero);
 		var AWS = require("aws-sdk");
 		let awsConfig = {
 			"region": "us-east-2",
@@ -108,6 +109,7 @@ function callAWS(phoneNumbers,tipeOfRequest){
 					"phoneNumber": c.numero
 				}
 			};
+			console.log(params);
 			docClient.delete(params, function (err, data) {
 				if (err) {
 					console.log("users::delete::error - " + JSON.stringify(err, null, 2));
