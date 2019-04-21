@@ -94,6 +94,7 @@ function checkValuesGet(req, res, next) {
 
 
 function pushToAWS(c){
+	console.log("pushing");
 	var AWS = require("aws-sdk");
 	let awsConfig = {
 		"region": "us-east-2",
@@ -115,6 +116,7 @@ function pushToAWS(c){
 				console.log("users::save::error - " + JSON.stringify(err, null, 2));
 			} else{
 				console.log("users::save::success" );
+				console.log("Here my DB --> " + JSON.stringify(myDatabase));
 			}
 		});
 	}
