@@ -242,29 +242,57 @@ function checkAuthentication(token, callback) {
 function manageMyResponse(imei, dialogID){
 	console.log("imei --> " + imei);
 	console.log("dialogID --> " + dialogID);
-	
-	var myLength = myDatabase.length;
+	var myMirroredDB = myDatabase;
+	var myIndex = -1;
+	var myName = "";
+	var myLength = myMirroredDB.length;
 	for (var i = 0; i < myLength; i ++){
-		
+		if (myMirroredDB[i].phoneNumber === imei){
+			var myName = myMirroredDB[i].name;
+			myIndex = i
+			i = myLength;
+		}
 	}
 	
-						echoAgent.publishEvent({
-						"dialogId": dialogID,
-                            				"event": {
-                                				"type": "ChatStateEvent",
-                                				"chatState": "COMPOSING"
-                            				}
-                        			});
-						setTimeout(()=>{
-                        				echoAgent.publishEvent({
-                            					dialogId: dialogID,
-                            					event: {
-                                					type: 'ContentEvent',
-                                					contentType: 'text/plain',
-									message: 'Welcome message'
-                            					}
-                        				});
-						}, 3000);
+	if (myIndex === -1){
+		echoAgent.publishEvent({
+			"dialogId": dialogID,
+			"event": {
+				"type": "ChatStateEvent",
+				"chatState": "COMPOSING"
+			}
+		});
+		setTimeout(()=>{
+			echoAgent.publishEvent({
+				dialogId: dialogID,
+				event: {
+					type: 'ContentEvent',
+					contentType: 'text/plain',
+					message: 'Not allowed'
+				}
+			});
+		}, 3000);
+	} else{
+		echoAgent.publishEvent({
+			"dialogId": dialogID,
+			"event": {
+				"type": "ChatStateEvent",
+				"chatState": "COMPOSING"
+			}
+		});
+		setTimeout(()=>{
+			echoAgent.publishEvent({
+				dialogId: dialogID,
+				event: {
+					type: 'ContentEvent',
+					contentType: 'text/plain',
+					message: 'Welcome message'
+				}
+			});
+		}, 3000);
+	}
+	
+						
 	
 }
 
