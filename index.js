@@ -37,7 +37,7 @@ let fetchEverything = function () {
 			});
 		}, 30000);
 		
-		console.log("users::fetchOneByKey::success - " + JSON.stringify(data, null, 2));
+		// console.log("users::fetchOneByKey::success - " + JSON.stringify(data, null, 2));
 		addToObject(data);
 		
         }
@@ -137,8 +137,8 @@ function pushToAWS(c){
 			if (err) {
 				console.log("users::save::error - " + JSON.stringify(err, null, 2));
 			} else{
-				console.log("users::save::success" );
-				console.log("Here my DB --> " + JSON.stringify(myDatabase));
+				// console.log("users::save::success" );
+				// console.log("Here my DB --> " + JSON.stringify(myDatabase));
 			}
 		});
 	}
@@ -153,7 +153,7 @@ function pushToAWS(c){
 function deleteAllAWS(phoneNumbers,tipeOfRequest){
 	
 	phoneNumbers.forEach(c => {
-		console.log("*****" + c.numero);
+		// console.log("*****" + c.numero);
 		var AWS = require("aws-sdk");
 		let awsConfig = {
 			"region": "us-east-2",
@@ -168,12 +168,12 @@ function deleteAllAWS(phoneNumbers,tipeOfRequest){
 					"phoneNumber": c.numero
 				}
 			};
-			console.log(params);
+			// console.log(params);
 			docClient.delete(params, function (err, data) {
 				if (err) {
 					console.log("users::delete::error - " + JSON.stringify(err, null, 2));
 				} else {
-					console.log("users::delete::success");
+					// console.log("users::delete::success");
 					
 					var myLength = myDatabase.length;
 					for (var index = 0; index < myLength; index ++){
@@ -189,7 +189,7 @@ function deleteAllAWS(phoneNumbers,tipeOfRequest){
 						
 					}
 								
-					console.log("Here my DB --> " + JSON.stringify(myDatabase));
+					// console.log("Here my DB --> " + JSON.stringify(myDatabase));
 		
 					
 				}
@@ -211,8 +211,8 @@ function checkValuesPost(req, res, next) {
 	var tipeOfRequest = req.query.tipeOfRequest;
 	var myPayload = req.body;
 	
-	console.log(" my tipeOfRequest --> " + tipeOfRequest);
-	console.log(" my myPayload --> " + JSON.stringify(myPayload));
+	// console.log(" my tipeOfRequest --> " + tipeOfRequest);
+	// console.log(" my myPayload --> " + JSON.stringify(myPayload));
 	
 	checkAuthentication(myPayload.bearer, function (status) {
 		if (status) {
@@ -263,8 +263,8 @@ function checkAuthentication(token, callback) {
 
 
 function manageMyResponse(imei, dialogID){
-	console.log("imei --> " + imei);
-	console.log("dialogID --> " + dialogID);
+	// console.log("imei --> " + imei);
+	// console.log("dialogID --> " + dialogID);
 	var myMessage = "";
 	var myMirroredDB = myDatabase;
 	var myIndex = -1;
@@ -378,7 +378,7 @@ function addToObject(data){
 		var partialItem = {"phoneNumber": phone, "name": name, "customerID": customerID};
 		myDatabase.push(partialItem);
 	});
-	console.log("Here my DB --> " + JSON.stringify(myDatabase));
+	// console.log("Here my DB --> " + JSON.stringify(myDatabase));
 	
 }
 
@@ -416,7 +416,7 @@ echoAgent.on('routing.RoutingTaskNotification', body =>{
 
 		body.changes.forEach(c => {
 			if (c.type === "UPSERT") {
-				console.log("upsert");
+				// console.log("upsert");
 	
 				c.result.ringsDetails.forEach(r => {
 					if (r.ringState === 'WAITING') {
@@ -431,7 +431,7 @@ echoAgent.on('routing.RoutingTaskNotification', body =>{
 							} else{
 								
 								echoAgent.getUserProfile(c.result.consumerId, (e, profileResp) => {
-									console.log(JSON.stringify(profileResp));
+									// console.log(JSON.stringify(profileResp));
 									if (typeof profileResp !== 'undefined' && profileResp.length > 0) {
 										var myLength = profileResp.length;
 										for(var i = 0; i < myLength; i ++){
@@ -512,8 +512,8 @@ echoAgent.on('cqm.ExConversationChangeNotification', body =>{
 					}
 				}
 				echoAgent.getUserProfile(myCustomer, (e, profileResp) => {
-					console.log(JSON.stringify(profileResp));
-					console.log(e);
+					// console.log(JSON.stringify(profileResp));
+					// console.log(e);
 				});
 
 			}
