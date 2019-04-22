@@ -217,7 +217,7 @@ function checkAuthentication(token, callback) {
 	var request = require('request');
 	var oauth = "Bearer " + token;
 	var body = {"status":["ONLINE"]};
-	var url = 'https://lo.msghist.liveperson.net/messaging_history/api/account/13099967/agent-view/status';
+	var url = 'https://lo.msghist.liveperson.net/messaging_history/api/account/31554357/agent-view/status';
 	request.post({
     		url: url,
     		body: body,
@@ -236,6 +236,12 @@ function checkAuthentication(token, callback) {
 	});
 	
 
+}
+
+
+function manageMyResponse(imei, dialogID){
+	console.log("imei --> " + imei);
+	console.log("dialogID --> " + dialogID)
 }
 
 
@@ -305,7 +311,20 @@ echoAgent.on('routing.RoutingTaskNotification', body =>{
 				console.log("upsert");
 				echoAgent.getUserProfile(c.result.consumerId, (e, profileResp) => {
 					console.log(JSON.stringify(profileResp));
-					console.log(e);
+					if (typeof profileResp !== 'undefined' && profileResp.length > 0) {
+						var myLength = profileResp.length;
+						for(var i = 0; i < myLength; i ++){
+							if (profileResp[i].hasOwnProperty('type')){
+								if (profileResp[i].type === "ctmrinfo"){
+									if (profileResp[i].hasOwnProperty('info')){
+										if (profileResp[i].info.hasOwnProperty('imei')){
+											
+										}
+									}
+								}
+							}
+						}
+					}
 				});
 
 				
@@ -316,7 +335,33 @@ echoAgent.on('routing.RoutingTaskNotification', body =>{
 						echoAgent.updateRingState({
 							"ringId": r.ringId,
 							"ringState": "ACCEPTED"
-						}, (e, resp) => console.log(resp));
+						}, (e, resp) =>
+							if(e){
+								console.log(e);
+							} else{
+								
+								echoAgent.getUserProfile(c.result.consumerId, (e, profileResp) => {
+									console.log(JSON.stringify(profileResp));
+									if (typeof profileResp !== 'undefined' && profileResp.length > 0) {
+										var myLength = profileResp.length;
+										for(var i = 0; i < myLength; i ++){
+											if (profileResp[i].hasOwnProperty('type')){
+												if (profileResp[i].type === "ctmrinfo"){
+													if (profileResp[i].hasOwnProperty('info')){
+														if (profileResp[i].info.hasOwnProperty('imei')){
+															manageMyResponse(profileResp[i].info.imei, c.result.dialogId);
+														}
+													}
+												}
+											}
+										}
+									}
+								});
+								
+							
+							}
+									 
+						);
 
                         			echoAgent.publishEvent({
                             				"dialogId": c.result.dialogId,
