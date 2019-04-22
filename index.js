@@ -265,6 +265,7 @@ function checkAuthentication(token, callback) {
 function manageMyResponse(imei, dialogID){
 	console.log("imei --> " + imei);
 	console.log("dialogID --> " + dialogID);
+	var myMessage = "";
 	var myMirroredDB = myDatabase;
 	var myIndex = -1;
 	var myName = "";
@@ -275,6 +276,12 @@ function manageMyResponse(imei, dialogID){
 			myIndex = i
 			i = myLength;
 		}
+	}
+	
+	if (myName === ""){
+		myMessage = "Buongiorno " + myName + "! A breve riceverai risposta da un nostro Agente!";
+	} else{
+		myMessage = "Buongiorno! A breve riceverai risposta da un nostro Agente!";
 	}
 	
 	if (myIndex === -1){
@@ -291,9 +298,19 @@ function manageMyResponse(imei, dialogID){
 				event: {
 					type: 'ContentEvent',
 					contentType: 'text/plain',
-					message: 'Not allowed'
+					message: "Questo servizio non e' disponibile"
 				}
 			});
+			
+			echoAgent.updateConversationField({
+				conversationId: dialogID,
+				conversationField: [{
+					field: "ConversationStateField",
+					conversationState: "CLOSE"
+				}]
+			});
+
+			
 		}, 3000);
 	} else{
 		echoAgent.publishEvent({
@@ -309,9 +326,25 @@ function manageMyResponse(imei, dialogID){
 				event: {
 					type: 'ContentEvent',
 					contentType: 'text/plain',
-					message: 'Welcome message'
+					message: myMessage
 				}
 			});
+			
+			echoAgent.updateConversationField({
+				conversationId: dialogID,
+				conversationField: [{
+					field: "ParticipantsChange",
+					type: "REMOVE",
+					role: "ASSIGNED_AGENT"
+				},{
+					field: "Skill",
+					type: "UPDATE",
+					skill: "1164294932"
+				}]
+			});
+			
+			
+			
 		}, 3000);
 	}
 	
