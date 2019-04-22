@@ -241,7 +241,31 @@ function checkAuthentication(token, callback) {
 
 function manageMyResponse(imei, dialogID){
 	console.log("imei --> " + imei);
-	console.log("dialogID --> " + dialogID)
+	console.log("dialogID --> " + dialogID);
+	
+	var myLength = myDatabase.length;
+	for (var i = 0; i < myLength; i ++){
+		
+	}
+	
+						echoAgent.publishEvent({
+						"dialogId": dialogID,
+                            				"event": {
+                                				"type": "ChatStateEvent",
+                                				"chatState": "COMPOSING"
+                            				}
+                        			});
+						setTimeout(()=>{
+                        				echoAgent.publishEvent({
+                            					dialogId: dialogID,
+                            					event: {
+                                					type: 'ContentEvent',
+                                					contentType: 'text/plain',
+									message: 'Welcome message'
+                            					}
+                        				});
+						}, 3000);
+	
 }
 
 
@@ -331,6 +355,7 @@ echoAgent.on('routing.RoutingTaskNotification', body =>{
 												if (profileResp[i].type === "ctmrinfo"){
 													if (profileResp[i].hasOwnProperty('info')){
 														if (profileResp[i].info.hasOwnProperty('imei')){
+															i = myLength;
 															manageMyResponse(profileResp[i].info.imei, c.result.dialogId);
 														}
 													}
@@ -345,23 +370,6 @@ echoAgent.on('routing.RoutingTaskNotification', body =>{
 									 
 						});
 
-                        			echoAgent.publishEvent({
-                            				"dialogId": c.result.dialogId,
-                            				"event": {
-                                				"type": "ChatStateEvent",
-                                				"chatState": "COMPOSING"
-                            				}
-                        			});
-						setTimeout(()=>{
-                        				echoAgent.publishEvent({
-                            					dialogId: c.result.dialogId,
-                            					event: {
-                                					type: 'ContentEvent',
-                                					contentType: 'text/plain',
-									message: 'Welcome message'
-                            					}
-                        				});
-						}, 3000);
 
 					}
 
