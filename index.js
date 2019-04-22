@@ -116,7 +116,7 @@ function checkValuesGet(req, res, next) {
 
 
 function pushToAWS(c){
-	console.log("pushing");
+	// console.log("pushing");
 	var AWS = require("aws-sdk");
 	let awsConfig = {
 		"region": "us-east-2",
