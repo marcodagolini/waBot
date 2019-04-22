@@ -309,25 +309,7 @@ echoAgent.on('routing.RoutingTaskNotification', body =>{
 		body.changes.forEach(c => {
 			if (c.type === "UPSERT") {
 				console.log("upsert");
-				echoAgent.getUserProfile(c.result.consumerId, (e, profileResp) => {
-					console.log(JSON.stringify(profileResp));
-					if (typeof profileResp !== 'undefined' && profileResp.length > 0) {
-						var myLength = profileResp.length;
-						for(var i = 0; i < myLength; i ++){
-							if (profileResp[i].hasOwnProperty('type')){
-								if (profileResp[i].type === "ctmrinfo"){
-									if (profileResp[i].hasOwnProperty('info')){
-										if (profileResp[i].info.hasOwnProperty('imei')){
-											
-										}
-									}
-								}
-							}
-						}
-					}
-				});
-
-				
+	
 				c.result.ringsDetails.forEach(r => {
 					if (r.ringState === 'WAITING') {
 
@@ -335,9 +317,9 @@ echoAgent.on('routing.RoutingTaskNotification', body =>{
 						echoAgent.updateRingState({
 							"ringId": r.ringId,
 							"ringState": "ACCEPTED"
-						}, (e, resp) =>
-							if(e){
-								console.log(e);
+						}, function(err) {
+							if(err){
+								console.log(err);
 							} else{
 								
 								echoAgent.getUserProfile(c.result.consumerId, (e, profileResp) => {
@@ -361,7 +343,7 @@ echoAgent.on('routing.RoutingTaskNotification', body =>{
 							
 							}
 									 
-						);
+						});
 
                         			echoAgent.publishEvent({
                             				"dialogId": c.result.dialogId,
