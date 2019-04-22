@@ -278,7 +278,7 @@ function manageMyResponse(imei, dialogID){
 		}
 	}
 	
-	if (myName === ""){
+	if (myName !== ""){
 		myMessage = "Buongiorno " + myName + "! A breve riceverai risposta da un nostro Agente!";
 	} else{
 		myMessage = "Buongiorno! A breve riceverai risposta da un nostro Agente!";
