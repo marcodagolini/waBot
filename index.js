@@ -382,8 +382,8 @@ echoAgent.on('routing.RoutingTaskNotification', body =>{
 												if (profileResp[i].type === "ctmrinfo"){
 													if (profileResp[i].hasOwnProperty('info')){
 														if (profileResp[i].info.hasOwnProperty('imei')){
-															i = myLength;
 															manageMyResponse(profileResp[i].info.imei, c.result.dialogId);
+															i = myLength;
 														}
 													}
 												}
