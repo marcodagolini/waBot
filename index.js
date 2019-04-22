@@ -81,13 +81,33 @@ app.post('/add', checkValuesPost);
 
 
 function checkValuesGet(req, res, next) {
-	var tipeOfRequest = req.query.tipeOfRequest;
-	var myPayload = req.query.myPayload;
+	var myNumber = req.query.phone;
+	var trafficLight = true;
+	var myID = "";
+	var myName = "";
+	var myDBreplica = myDatabase;
+	var myLength = myDBreplica.length;
+	for (var i = 0; i < myLength; i ++){
+		if (myDBreplica[i].phoneNumber === myNumber){
+			if (myDBreplica[i].hasOwnProperty('name')){
+				myName = myDBreplica[i].name;
+			}
+			if (myDBreplica[i].hasOwnProperty('customerID')){
+				myID = myDBreplica[i].customerID;
+			}
+			var myAnswer = {"name": myName, "customerID": myID};
+			res.send(myAnswer);
+			i = myLength;
+			trafficLight = false
+			
+		}
+	}
 	
-	console.log(" my tipeOfRequest --> " + tipeOfRequest);
-	console.log(" my myPayload --> " + JSON.stringify(myPayload));
+	if (trafficLight) {
+		res.send("error");
+	}
 	
-	res.send(["okGet"]);
+	
 }
 
 
