@@ -91,9 +91,13 @@ function checkValuesGet(req, res, next) {
 		if (myDBreplica[i].phoneNumber === myNumber){
 			if (myDBreplica[i].hasOwnProperty('name')){
 				myName = myDBreplica[i].name;
+			} else{
+				myName = "unknown";
 			}
 			if (myDBreplica[i].hasOwnProperty('customerID')){
 				myID = myDBreplica[i].customerID;
+			} else{
+				myID = "unknown";
 			}
 			var myAnswer = {"name": myName, "customerID": myID};
 			res.send(myAnswer);
