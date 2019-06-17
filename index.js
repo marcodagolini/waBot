@@ -74,6 +74,19 @@ app.use(function(req, res, next) {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+const allowedOrigins = ['https://marcodagolini.github.io'];
+app.use(cors({
+  origin: function(origin, callback){
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+
+}));
+
 
 app.get('/add', checkValuesGet);
 
