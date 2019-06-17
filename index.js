@@ -87,7 +87,7 @@ var corsOptions = {
   }
 }
  
-app.get('/add', cors(corsOptions), checkValuesPost)
+app.get('/add', cors(corsOptions), checkValuesGet)
 
 
 // app.get('/add', checkValuesGet);
