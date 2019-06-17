@@ -75,21 +75,22 @@ app.use(function(req, res, next) {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const allowedOrigins = ['https://marcodagolini.github.io'];
-app.use(cors({
-  origin: function(origin, callback){
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
+
+var whitelist = ['https://marcodagolini.github.io']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
     }
-    return callback(null, true);
   }
+}
+ 
+app.get('/add', cors(corsOptions), checkValuesPost)
 
-}));
 
-
-app.get('/add', checkValuesGet);
+// app.get('/add', checkValuesGet);
 
 app.post('/add', checkValuesPost);
 
