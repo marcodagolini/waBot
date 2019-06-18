@@ -76,7 +76,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-var whitelist = ['https://marcodagolini.github.io']
+var whitelist = ['https://marcodagolini.github.io','https://vodit-report.fs.liveperson.com']
 var corsOptions = {
   origin: function (origin, callback) {
 	  console.log(origin);
