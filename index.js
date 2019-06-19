@@ -85,6 +85,9 @@ var corsOptions = {
     } else {
       callback(new Error('Not allowed by CORS'))
     }
+  },
+  referer: function (referer, callback) {
+	  console.log(referer);
   }
 }
  
@@ -97,7 +100,7 @@ app.post('/add', checkValuesPost);
 
 
 function checkValuesGet(req, res, next) {
-	console.log(req);
+	// console.log(req);
 	var myNumber = req.query.phone;
 	var trafficLight = true;
 	var myID = "";
