@@ -78,7 +78,6 @@ app.use(bodyParser.json());
 
 var whitelist = ['https://marcodagolini.github.io','https://vodit-report.fs.liveperson.com']
 var corsOptions = {
-	/*******
   origin: function (origin, callback) {
 	  console.log(origin);
     if (whitelist.indexOf(origin) !== -1) {
@@ -86,11 +85,6 @@ var corsOptions = {
     } else {
       callback(new Error('Not allowed by CORS'))
     }
-  },
-  ******/
-  referer: function (referer, callback) {
-	  console.log(referer);
-	  callback(null, true)
   }
 }
  
@@ -103,7 +97,7 @@ app.post('/add', checkValuesPost);
 
 
 function checkValuesGet(req, res, next) {
-	// console.log(req);
+	console.log(req);
 	var myNumber = req.query.phone;
 	var trafficLight = true;
 	var myID = "";
