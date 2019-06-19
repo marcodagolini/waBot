@@ -78,6 +78,7 @@ app.use(bodyParser.json());
 
 var whitelist = ['https://marcodagolini.github.io','https://vodit-report.fs.liveperson.com']
 var corsOptions = {
+	/*******
   origin: function (origin, callback) {
 	  console.log(origin);
     if (whitelist.indexOf(origin) !== -1) {
@@ -86,8 +87,10 @@ var corsOptions = {
       callback(new Error('Not allowed by CORS'))
     }
   },
+  ******/
   referer: function (referer, callback) {
 	  console.log(referer);
+	  callback(null, true)
   }
 }
  
