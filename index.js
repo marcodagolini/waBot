@@ -320,15 +320,21 @@ function manageMyResponse(imei, dialogID){
 					contentType: 'text/plain',
 					message: "Questo servizio non e' disponibile"
 				}
+			}, (e, resp) => {
+   					if (e) { 
+						console.error(e);
+						console.error("error_sending_message");
+    					} else{
+						echoAgent.updateConversationField({
+							conversationId: dialogID,
+							conversationField: [{
+								field: "ConversationStateField",
+								conversationState: "CLOSE"
+							}]
+						});
+					}
 			});
-			
-			echoAgent.updateConversationField({
-				conversationId: dialogID,
-				conversationField: [{
-					field: "ConversationStateField",
-					conversationState: "CLOSE"
-				}]
-			});
+
 
 			
 		}, 3000);
@@ -348,21 +354,25 @@ function manageMyResponse(imei, dialogID){
 					contentType: 'text/plain',
 					message: myMessage
 				}
+			}, (e, resp) => {
+   					if (e) { 
+						console.error(e);
+						console.error("error_sending_message");
+    					} else{
+						echoAgent.updateConversationField({
+							conversationId: dialogID,
+							conversationField: [{
+								field: "ParticipantsChange",
+								type: "REMOVE",
+								role: "ASSIGNED_AGENT"
+							},{
+								field: "Skill",
+								type: "UPDATE",
+								skill: "1351654950"
+							}]
+						});
+					}
 			});
-			
-			echoAgent.updateConversationField({
-				conversationId: dialogID,
-				conversationField: [{
-					field: "ParticipantsChange",
-					type: "REMOVE",
-					role: "ASSIGNED_AGENT"
-				},{
-					field: "Skill",
-					type: "UPDATE",
-					skill: "1164294932"
-				}]
-			});
-			
 			
 			
 		}, 3000);
