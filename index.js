@@ -339,6 +339,7 @@ function manageMyResponse(imei, dialogID){
 			
 		}, 3000);
 	} else{
+		console.log(myMessage);
 		echoAgent.publishEvent({
 			"dialogId": dialogID,
 			"event": {
@@ -347,6 +348,7 @@ function manageMyResponse(imei, dialogID){
 			}
 		});
 		setTimeout(()=>{
+			console.log(myMessage);
 			echoAgent.publishEvent({
 				dialogId: dialogID,
 				event: {
