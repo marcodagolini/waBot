@@ -257,7 +257,7 @@ function checkAuthentication(token, callback) {
 	var request = require('request');
 	var oauth = "Bearer " + token;
 	var body = {"status":["ONLINE"]};
-	var url = 'https://lo.msghist.liveperson.net/messaging_history/api/account/31554357/agent-view/status';
+	var url = 'https://lo.msghist.liveperson.net/messaging_history/api/account/27419514/agent-view/status';
 	request.post({
     		url: url,
     		body: body,
@@ -404,8 +404,8 @@ function addToObject(data){
 
 const Agent = require('node-agent-sdk').Agent;
 var echoAgent = new Agent({
-	accountId: '31554357',
-	username: 'waBot',
+	accountId: '27419514',
+	username: 'wabot',
 	appKey: process.env.appKey,
 	secret: process.env.secret,
 	accessToken: process.env.accessToken,
