@@ -100,7 +100,7 @@ app.post('/add', checkValuesPost);
 
 
 function checkValuesGet(req, res, next) {
-	console.log(req);
+	// console.log(req);
 	var myNumber = req.query.phone;
 	var trafficLight = true;
 	var myID = "";
