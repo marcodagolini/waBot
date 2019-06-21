@@ -18,6 +18,9 @@ bcrypt.genSalt(saltRounds, function(err, salt) {
     bcrypt.hash(myPlaintextPassword, salt, function(err, hash) {
 	    console.log("myHash --> " + hash);
 	    console.log("%%%%%%%%%%%%");
+	    bcrypt.compare(myPlaintextPassword, hash, function(err, res) {
+		    console.log(res);
+	    });
     });
 });
 
