@@ -8,6 +8,7 @@ require('dotenv').config()
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const myPlaintextPassword2 = 'yrktjfyghykthfgpi';
 const someOtherPlaintextPassword = 'not_bacon';
 
 
@@ -19,6 +20,17 @@ bcrypt.genSalt(saltRounds, function(err, salt) {
 	    console.log("%%%%%%%%%%%%");
     });
 });
+
+
+bcrypt.genSalt(saltRounds, function(err, salt) {
+	console.log("mySalt --> " + salt);
+	console.log("%%%%%%%%%%%%");
+    bcrypt.hash(myPlaintextPassword2, salt, function(err, hash) {
+	    console.log("myHash --> " + hash);
+	    console.log("%%%%%%%%%%%%");
+    });
+});
+
 
 
 
