@@ -19,7 +19,8 @@
     "dotenv": "^6.2.0",
     "aws-sdk": "^2.440.0",
     "body-parser": "^1.18.3",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "bcrypt": "^3.0.6"
   },
   "repository": {
     "type": "git",
