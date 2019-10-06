@@ -125,7 +125,11 @@ var corsOptions = {
 // app.get('/add', cors(corsOptions), checkValuesGet);
 app.get('/add', checkValuesGet)
 
-app.post('/add', checkValuesPost);
+app.post('/add1', checkValuesPost);
+app.post('/add2', checkValuesPost);
+app.post('/add3', checkValuesPost);
+app.post('/add4', checkValuesPost);
+app.post('/add5', checkValuesPost);
 
 
 function checkValuesGet(req, res, next) {
