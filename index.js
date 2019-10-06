@@ -262,6 +262,7 @@ function checkValuesPost(req, res, next) {
 	var tipeOfRequest = req.query.tipeOfRequest;
 	var myPayload = req.body;
 	
+	console.log(req.originalUrl);
 	console.log("post request --> " + JSON.stringify(myPayload));
 	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
 	
