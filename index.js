@@ -131,7 +131,8 @@ app.post('/add', checkValuesPost);
 function checkValuesGet(req, res, next) {
 	// console.log(req);
 	var myNumber = req.query.phone;
-	console.log(req.ip);
+	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] 
+        || req.connection.remoteAddress);
 	var trafficLight = true;
 	var myID = "";
 	var myName = "";
