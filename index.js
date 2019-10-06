@@ -131,8 +131,7 @@ app.post('/add', checkValuesPost);
 function checkValuesGet(req, res, next) {
 	// console.log(req);
 	var myNumber = req.query.phone;
-	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] 
-        || req.connection.remoteAddress);
+	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
 	var trafficLight = true;
 	var myID = "";
 	var myName = "";
@@ -262,8 +261,12 @@ function checkValuesPost(req, res, next) {
 	var tipeOfRequest = req.query.tipeOfRequest;
 	var myPayload = req.body;
 	
+	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
+	
 	// console.log(" my tipeOfRequest --> " + tipeOfRequest);
 	// console.log(" my myPayload --> " + JSON.stringify(myPayload));
+	
+	/******
 	
 	checkAuthentication(myPayload.bearer, function (status) {
 		if (status) {
@@ -277,6 +280,9 @@ function checkValuesPost(req, res, next) {
 			res.send(myAnswer);
 		}
 	});
+	
+	
+	******/
 
 
 	
