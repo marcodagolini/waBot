@@ -148,12 +148,12 @@ function loginSFDC(phone) {
         		'Content-Type': 'application/json',
     		}
 	}, function (e, r, b) {
-		if(b){
-			console.log(JSON.stringify(b));
-			return(b);
-		} else{
+		if(e){
 			console.log(JSON.stringify(e));
 			return("error");
+		} else{
+			console.log(JSON.stringify(b));
+			return(b);
 		}
 
 	});
