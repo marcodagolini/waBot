@@ -149,8 +149,10 @@ function loginSFDC(phone) {
     		}
 	}, function (e, r, b) {
 		if(b){
+			console.log(JSON.stringify(b));
 			return(b);
 		} else{
+			console.log(JSON.stringify(e));
 			return("error");
 		}
 
