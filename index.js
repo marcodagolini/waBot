@@ -132,11 +132,56 @@ app.post('/add4', checkValuesPost);
 app.post('/add5', checkValuesPost);
 
 
+
+
+function loginSFDC(phone) {
+	
+	var request = require('request');
+	var body = {};
+	var url = 'https://login.salesforce.com/services/oauth2/token?grant_type=password&client_id=3MVG9fTLmJ60pJ5JK9RRpb91nRTT1WQHmz_ADCLVSSUfIoPhTTzOWhXEe.5RIs_ByFYfUTC3QpTS1UOuEIskC&client_secret=289736B3E84183AC51552AC5F1610AE21B0B21B9D3148ACD85DC939DAC783C96&username=mdagolini@me.com&password=Mypassword12345!!!ayOXfKWkSn9fSphsnMbNuUZA';
+	var url = 'https://login.salesforce.com/services/oauth2/token?grant_type=password&client_id=3MVG9fTLmJ60pJ5JK9RRpb91nRTT1WQHmz_ADCLVSSUfIoPhTTzOWhXEe.5RIs_ByFYfUTC3QpTS1UOuEIskC&client_secret=289736B3E84183AC51552AC5F1610AE21B0B21B9D3148ACD85DC939DAC783C96&username=mdagolini@me.com&password=Mypassword12345!ayOXfKWkSn9fSphsnMbNuUZA';
+	request.post({
+    		url: url,
+    		body: body,
+    		json: true,
+    		headers: {
+        		'Content-Type': 'application/json',
+    		}
+	}, function (e, r, b) {
+		if(b){
+			return(b);
+		} else{
+			return("error");
+		}
+
+	});
+	
+
+}
+
+
+
 function checkValuesGet(req, res, next) {
 	// console.log(req);
 	var myNumber = req.query.phone;
 	console.log("get request");
 	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
+	
+	var myGet = loginSFDC(myNumber);
+	if (myGet === "error"){
+		res.send("error");
+	} else {
+		console.log(JSON.stringify(myGet));
+		res.send(myGet);
+	}
+	
+	
+	
+	
+	
+	
+	/**********
+	
 	var trafficLight = true;
 	var myID = "";
 	var myName = "";
@@ -154,7 +199,7 @@ function checkValuesGet(req, res, next) {
 			} else{
 				myID = "unknown";
 			}
-			var myAnswer = {"name": myName, "customerID": myID};
+			var myAnswer = {"name": myName, "customerType": myID};
 			res.send(myAnswer);
 			i = myLength;
 			trafficLight = false
@@ -165,6 +210,9 @@ function checkValuesGet(req, res, next) {
 	if (trafficLight) {
 		res.send("error");
 	}
+	
+	
+	******/
 	
 	
 }
@@ -270,6 +318,7 @@ function checkValuesPost(req, res, next) {
 	console.log("post request --> " + JSON.stringify(myPayload));
 	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
 	
+	
 	res.send("ok");
 	
 	// console.log(" my tipeOfRequest --> " + tipeOfRequest);
@@ -298,6 +347,9 @@ function checkValuesPost(req, res, next) {
 	
 	
 }
+
+
+
 
 
 
