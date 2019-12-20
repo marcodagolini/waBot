@@ -139,7 +139,7 @@ function loginSFDC(phone, callback) {
 	var request = require('request');
 	var body = {};
 	var url = 'https://login.salesforce.com/services/oauth2/token?grant_type=password&client_id=3MVG9fTLmJ60pJ5JK9RRpb91nRTT1WQHmz_ADCLVSSUfIoPhTTzOWhXEe.5RIs_ByFYfUTC3QpTS1UOuEIskC&client_secret=289736B3E84183AC51552AC5F1610AE21B0B21B9D3148ACD85DC939DAC783C96&username=mdagolini@me.com&password=Mypassword12345!!!ayOXfKWkSn9fSphsnMbNuUZA';
-	var url = 'https://login.salesforce.com/services/oauth2/token?grant_type=password&client_id=3MVG9fTLmJ60pJ5JK9RRpb91nRTT1WQHmz_ADCLVSSUfIoPhTTzOWhXEe.5RIs_ByFYfUTC3QpTS1UOuEIskC&client_secret=289736B3E84183AC51552AC5F1610AE21B0B21B9D3148ACD85DC939DAC783C96&username=mdagolini@me.com&password=Mypassword12345!ayOXfKWkSn9fSphsnMbNuUZA';
+
 	request.post({
     		url: url,
     		body: body,
