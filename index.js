@@ -170,6 +170,7 @@ function checkValuesGet(req, res, next) {
 	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
 	
 	var myGet = loginSFDC(myNumber);
+	console.log(JSON.stringify(myGet));
 	if (myGet === "error"){
 		res.send("error");
 	} else {
