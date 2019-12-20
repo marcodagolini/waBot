@@ -134,7 +134,7 @@ app.post('/add5', checkValuesPost);
 
 
 
-function loginSFDC(phone) {
+function loginSFDC(phone, callback) {
 	
 	var request = require('request');
 	var body = {};
@@ -150,10 +150,10 @@ function loginSFDC(phone) {
 	}, function (e, r, b) {
 		if(e){
 			console.log("first level --> " +  JSON.stringify(e));
-			return("error");
+			callback ("error");
 		} else{
 			console.log("first level --> " +  JSON.stringify(b));
-			return(b);
+			callback (b);
 		}
 
 	});
@@ -169,14 +169,17 @@ function checkValuesGet(req, res, next) {
 	console.log("get request");
 	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
 	
-	var myGet = loginSFDC(myNumber);
-	console.log("second level --> " + JSON.stringify(myGet));
-	if (myGet === "error"){
-		res.send("error");
-	} else {
-		console.log(JSON.stringify(myGet));
-		res.send(myGet);
-	}
+	loginSFDC(myNumber, function (response) {
+		
+		console.log("second level --> " + JSON.stringify(response));
+		if (response === "error"){
+			res.send("error");
+		} else {
+			res.send(response);
+		}
+		
+	});
+
 	
 	
 	
