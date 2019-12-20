@@ -150,10 +150,10 @@ function loginSFDC(phone) {
 	}, function (e, r, b) {
 		if(e){
 			console.log(JSON.stringify(e));
-			return("error");
+			return("first level --> " +  "error");
 		} else{
 			console.log(JSON.stringify(b));
-			return(b);
+			return("first level --> " +  b);
 		}
 
 	});
@@ -170,7 +170,7 @@ function checkValuesGet(req, res, next) {
 	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
 	
 	var myGet = loginSFDC(myNumber);
-	console.log(JSON.stringify(myGet));
+	console.log("second level --> " + JSON.stringify(myGet));
 	if (myGet === "error"){
 		res.send("error");
 	} else {
