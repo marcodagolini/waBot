@@ -149,11 +149,11 @@ function loginSFDC(phone) {
     		}
 	}, function (e, r, b) {
 		if(e){
-			console.log(JSON.stringify(e));
-			return("first level --> " +  "error");
+			console.log("first level --> " +  JSON.stringify(e));
+			return("error");
 		} else{
-			console.log(JSON.stringify(b));
-			return("first level --> " +  b);
+			console.log("first level --> " +  JSON.stringify(b));
+			return(b);
 		}
 
 	});
