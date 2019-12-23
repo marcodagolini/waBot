@@ -133,6 +133,36 @@ app.post('/add5', checkValuesPost);
 
 
 
+function updaterSpecificContactSFDC(myJSON, oAuth, url, callback) {
+	
+	var request = require('request');
+	var url = url;
+	var body = JSON.stringify(myJSON);
+
+	request.patch({
+    		url: url,
+		body: body,
+    		json: true,
+    		headers: {
+        		'Content-Type': 'application/json',
+			'Authorization': oAuth
+    		}
+	}, function (e, r, b) {
+		if(e){
+			console.log("third level --> " +  JSON.stringify(e));
+			callback ("error");
+		} else{
+			console.log("third level --> " +  JSON.stringify(b));
+			callback (b);
+		}
+
+	});
+	
+	
+}
+
+
+
 function retrieveSpecificContactSFDC(oAuth, url, callback) {
 	
 	var request = require('request');
@@ -305,8 +335,9 @@ function checkValuesPostPush(req, res, next) {
 	console.log("post request");
 	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
 	console.log(req.body);
+	var myBody = req.body;
 	res.send("ok");
-	/****
+	
 	
 	loginSFDC(myNumber, function (response) {
 		
@@ -322,7 +353,7 @@ function checkValuesPostPush(req, res, next) {
 					res.send("error");
 				} else {
 					var myUrl = "https://eu16.salesforce.com" + response.records[0].attributes.url;
-					retrieveSpecificContactSFDC(oAuth, myUrl, function (response) {
+					updaterSpecificContactSFDC(myBody, oAuth, myUrl, function (response) {
 						console.log("main level --> " + JSON.stringify(response));
 						if (response.totalSize === 0){
 							res.send("error");
@@ -338,7 +369,7 @@ function checkValuesPostPush(req, res, next) {
 	});
 	
 	
-	*****/
+	
 
 
 	
