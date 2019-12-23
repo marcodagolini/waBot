@@ -147,7 +147,7 @@ function updaterSpecificContactSFDC(myJSON, oAuth, url, callback) {
 
 	request.patch({
     		url: url,
-		body: body,
+		body: myNewBody,
     		json: true,
     		headers: {
         		'Content-Type': 'application/json',
