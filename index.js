@@ -304,7 +304,7 @@ function checkValuesPostPush(req, res, next) {
 	
 	console.log("post request");
 	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
-	console.log(JSON.stringify(req));
+	console.log(req.body);
 	res.send("ok");
 	/****
 	
