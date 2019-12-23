@@ -105,7 +105,7 @@ app.use(function(req, res, next) {
   res.header('Content-Type', 'text/plain');
   next();
 });
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
