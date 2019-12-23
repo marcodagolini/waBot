@@ -203,7 +203,7 @@ function checkValuesGet(req, res, next) {
 		if (response.hasOwnProperty('error')){
 			res.send("error");
 		} else {
-			var oAuth = response.access_token;
+			var oAuth = "Bearer " + response.access_token;
 			console.log("oAuth --> " + oAuth)
 			retrieveContactSFDC(oAuth, myNumber, function (response) {
 				console.log("main level --> " + JSON.stringify(response));
