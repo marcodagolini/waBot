@@ -244,7 +244,7 @@ function checkValuesGet(req, res, next) {
 						if (response.totalSize === 0){
 							res.send("error");
 						} else {
-							var responseToSend = {"name": response.Name, "status": response.Title};
+							var responseToSend = {"name": response.Name, "status": response.Title, "facebookID": response.OtherStreet};
 							res.send(responseToSend);
 						}
 					});
