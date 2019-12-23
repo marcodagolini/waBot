@@ -204,7 +204,7 @@ function checkValuesGet(req, res, next) {
 			res.send("error");
 		} else {
 			var oAuth = response.access_token;
-			retrieveContactSFDC((oAuth, myNumber, function (response) {
+			retrieveContactSFDC(oAuth, myNumber, function (response) {
 				console.log("second level --> " + JSON.stringify(response));
 				if (response.totalSize === 0){
 					res.send("error");
