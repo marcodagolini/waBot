@@ -342,7 +342,7 @@ function checkValuesPostPush(req, res, next) {
 	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
 	console.log(req.body);
 	var myBody = req.body;
-	res.send("ok");
+	var myNumber = myBody.phone;
 	
 	
 	loginSFDC(myNumber, function (response) {
