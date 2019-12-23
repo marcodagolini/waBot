@@ -138,6 +138,9 @@ function updaterSpecificContactSFDC(myJSON, oAuth, url, callback) {
 	var request = require('request');
 	var url = url;
 	var body = JSON.stringify(myJSON);
+	callback (body);
+	
+	/******
 
 	request.patch({
     		url: url,
@@ -157,6 +160,9 @@ function updaterSpecificContactSFDC(myJSON, oAuth, url, callback) {
 		}
 
 	});
+	
+	
+	*****/
 	
 	
 }
