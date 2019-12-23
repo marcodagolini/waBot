@@ -140,10 +140,10 @@ function retrieveContactSFDC(oAuth, phone, callback) {
 
 	request.get({
     		url: url,
-		oauth: oAuth,
     		json: true,
     		headers: {
-        		'Content-Type': 'application/json'
+        		'Content-Type': 'application/json',
+			'Authorization': oAuth
     		}
 	}, function (e, r, b) {
 		if(e){
