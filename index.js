@@ -143,7 +143,7 @@ function retrieveContactSFDC(oAuth, phone, callback) {
     		json: true,
     		headers: {
         		'Content-Type': 'application/json',
-			'Authorization": oAuth
+			'Authorization': oAuth
     		}
 	}, function (e, r, b) {
 		if(e){
