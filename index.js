@@ -137,10 +137,13 @@ function updaterSpecificContactSFDC(myJSON, oAuth, url, callback) {
 	
 	var request = require('request');
 	var url = url;
-	var body = JSON.stringify(myJSON);
-	callback (body);
 	
-	/******
+	var name = myJSON.name;
+	var phone = myJSON.phone;
+	var facebookID = myJSON.facebookID;
+	var status = myJSON.status;
+	
+	var myNewBody = JSON.stringify({"Name": name, "OtherStreet": facebookID, "Phone": phone, "Title": status});
 
 	request.patch({
     		url: url,
@@ -162,7 +165,7 @@ function updaterSpecificContactSFDC(myJSON, oAuth, url, callback) {
 	});
 	
 	
-	*****/
+
 	
 	
 }
