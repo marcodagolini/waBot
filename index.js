@@ -124,6 +124,7 @@ var corsOptions = {
  
 // app.get('/add', cors(corsOptions), checkValuesGet);
 app.get('/add', checkValuesGet)
+app.post('/push', checkValuesPostPush);
 
 app.post('/add1', checkValuesPost);
 app.post('/add2', checkValuesPost);
@@ -294,6 +295,53 @@ function checkValuesGet(req, res, next) {
 	
 	******/
 	
+	
+}
+
+
+
+function checkValuesPostPush(req, res, next) {
+
+	
+	console.log("post request");
+	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
+	console.log(JSON.stringify(req));
+	res.send("ok");
+	/****
+	
+	loginSFDC(myNumber, function (response) {
+		
+		console.log("second level --> " + JSON.stringify(response));
+		if (response.hasOwnProperty('error')){
+			res.send("error");
+		} else {
+			var oAuth = "Bearer " + response.access_token;
+			console.log("oAuth --> " + oAuth)
+			retrieveContactSFDC(oAuth, myNumber, function (response) {
+				console.log("main level --> " + JSON.stringify(response));
+				if (response.totalSize === 0){
+					res.send("error");
+				} else {
+					var myUrl = "https://eu16.salesforce.com" + response.records[0].attributes.url;
+					retrieveSpecificContactSFDC(oAuth, myUrl, function (response) {
+						console.log("main level --> " + JSON.stringify(response));
+						if (response.totalSize === 0){
+							res.send("error");
+						} else {
+							var responseToSend = {"name": response.Name, "status": response.Title, "facebookID": response.OtherStreet};
+							res.send(responseToSend);
+						}
+					});
+				}
+			});
+		}
+		
+	});
+	
+	
+	*****/
+
+
 	
 }
 
