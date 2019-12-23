@@ -136,7 +136,7 @@ app.post('/add5', checkValuesPost);
 function retrieveContactSFDC(oAuth, phone, callback) {
 	
 	var request = require('request');
-	var url = "https://eu16.salesforce.com/services/data/v45.0/query/?q=SELECT+Phone+FROM+Contact+WHERE+Phone+=+" + phone;
+	var url = "https://eu16.salesforce.com/services/data/v45.0/query/?q=SELECT+Phone+FROM+Contact+WHERE+Phone+=+'" + phone + "'";
 
 	request.get({
     		url: url,
