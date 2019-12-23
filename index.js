@@ -133,6 +133,33 @@ app.post('/add5', checkValuesPost);
 
 
 
+function retrieveContactSFDC(oAuth, phone, callback) {
+	
+	var request = require('request');
+	var url = "https://eu16.salesforce.com/services/data/v45.0/query/?q=SELECT+Phone+FROM+Contact+WHERE+Phone+=+" + phone;
+
+	request.get({
+    		url: url,
+    		json: true,
+    		headers: {
+        		'Content-Type': 'application/json',
+			'Authorization": oAuth
+    		}
+	}, function (e, r, b) {
+		if(e){
+			console.log("second level --> " +  JSON.stringify(e));
+			callback ("error");
+		} else{
+			console.log("second level --> " +  JSON.stringify(b));
+			callback (b);
+		}
+
+	});
+	
+	
+}
+
+
 
 function loginSFDC(phone, callback) {
 	
@@ -173,10 +200,18 @@ function checkValuesGet(req, res, next) {
 	loginSFDC(myNumber, function (response) {
 		
 		console.log("second level --> " + JSON.stringify(response));
-		if (response === "error"){
+		if (response.hasOwnProperty('error')){
 			res.send("error");
 		} else {
-			res.send(response);
+			var oAuth = response.access_token;
+			retrieveContactSFDC((oAuth, myNumber, function (response) {
+				console.log("second level --> " + JSON.stringify(response));
+				if (response.totalSize === 0){
+					res.send("error");
+				} else {
+					res.send(response);
+				}
+			});
 		}
 		
 	});
