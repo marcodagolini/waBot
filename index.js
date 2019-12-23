@@ -133,6 +133,34 @@ app.post('/add5', checkValuesPost);
 
 
 
+function retrieveSpecificContactSFDC(oAuth, url, callback) {
+	
+	var request = require('request');
+	var url = url;
+
+	request.get({
+    		url: url,
+    		json: true,
+    		headers: {
+        		'Content-Type': 'application/json',
+			'Authorization': oAuth
+    		}
+	}, function (e, r, b) {
+		if(e){
+			console.log("third level --> " +  JSON.stringify(e));
+			callback ("error");
+		} else{
+			console.log("third level --> " +  JSON.stringify(b));
+			callback (b);
+		}
+
+	});
+	
+	
+}
+
+
+
 function retrieveContactSFDC(oAuth, phone, callback) {
 	
 	var request = require('request');
@@ -210,7 +238,15 @@ function checkValuesGet(req, res, next) {
 				if (response.totalSize === 0){
 					res.send("error");
 				} else {
-					res.send(response);
+					var myUrl = "https://eu16.salesforce.com" + response.records[0].attributes.url;
+					retrieveSpecificContactSFDC(oAuth, myUrl, function (response) {
+						console.log("main level --> " + JSON.stringify(response));
+						if (response.totalSize === 0){
+							res.send("error");
+						} else {
+							res.send(response);
+						}
+					});
 				}
 			});
 		}
