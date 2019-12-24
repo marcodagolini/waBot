@@ -133,7 +133,7 @@ app.post('/add5', checkValuesPost);
 
 
 
-function updaterSpecificContactSFDC(myJSON, oAuth, url, callback) {
+function updateSpecificContactSFDC(myJSON, oAuth, url, callback) {
 	
 	var request = require('request');
 	var url = url;
@@ -143,7 +143,7 @@ function updaterSpecificContactSFDC(myJSON, oAuth, url, callback) {
 	var facebookID = myJSON.facebookID;
 	var status = myJSON.status;
 	
-	var myNewBody = {"LastName": name, "OtherStreet": facebookID, "Phone": phone, "Title": status};
+	var myNewBody = {"Name": name, "FacebookID__c": facebookID, "phone__c": phone, "Type__c": status};
 	console.log(myNewBody);
 
 	request.patch({
@@ -204,7 +204,7 @@ function retrieveSpecificContactSFDC(oAuth, url, callback) {
 function retrieveContactSFDC(oAuth, phone, callback) {
 	
 	var request = require('request');
-	var url = "https://eu16.salesforce.com/services/data/v45.0/query/?q=SELECT+Phone+FROM+Contact+WHERE+Phone+=+'" + phone + "'";
+	var url = "https://eu16.salesforce.com/services/data/v45.0/query/?q=SELECT+Phone__c+FROM+Contact+WHERE+Phone++c+=+'" + phone + "'";
 
 	request.get({
     		url: url,
@@ -284,7 +284,7 @@ function checkValuesGet(req, res, next) {
 						if (response.totalSize === 0){
 							res.send("error");
 						} else {
-							var responseToSend = {"name": response.Name, "status": response.Title, "facebookID": response.OtherStreet};
+							var responseToSend = {"name": response.Name, "status": response.Type__c, "facebookID": response.FacebookID__c};
 							res.send(responseToSend);
 						}
 					});
@@ -363,7 +363,7 @@ function checkValuesPostPush(req, res, next) {
 					res.send("error");
 				} else {
 					var myUrl = "https://eu16.salesforce.com" + response.records[0].attributes.url;
-					updaterSpecificContactSFDC(myBody, oAuth, myUrl, function (response) {
+					updateSpecificContactSFDC(myBody, oAuth, myUrl, function (response) {
 						console.log("main level --> " + JSON.stringify(response));
 						if (response === 'undefined'){
 							res.send("ok");
