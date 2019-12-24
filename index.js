@@ -368,7 +368,7 @@ function checkValuesPostPush(req, res, next) {
 						if (response === 'undefined'){
 							res.send("ok");
 						} else {
-							res.send("error);
+							res.send("error");
 						}
 					});
 				}
