@@ -143,7 +143,7 @@ function updaterSpecificContactSFDC(myJSON, oAuth, url, callback) {
 	var facebookID = myJSON.facebookID;
 	var status = myJSON.status;
 	
-	var myNewBody = {"Name": name, "OtherStreet": facebookID, "Phone": phone, "Title": status};
+	var myNewBody = {"FirstName": name, "OtherStreet": facebookID, "Phone": phone, "Title": status};
 	console.log(myNewBody);
 
 	request.patch({
