@@ -365,11 +365,10 @@ function checkValuesPostPush(req, res, next) {
 					var myUrl = "https://eu16.salesforce.com" + response.records[0].attributes.url;
 					updaterSpecificContactSFDC(myBody, oAuth, myUrl, function (response) {
 						console.log("main level --> " + JSON.stringify(response));
-						if (response.totalSize === 0){
-							res.send("error");
+						if (response === 'undefined'){
+							res.send("ok");
 						} else {
-							var responseToSend = {"name": response.Name, "status": response.Title, "facebookID": response.OtherStreet};
-							res.send(responseToSend);
+							res.send("error);
 						}
 					});
 				}
