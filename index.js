@@ -204,7 +204,7 @@ function retrieveSpecificContactSFDC(oAuth, url, callback) {
 function retrieveContactSFDC(oAuth, phone, callback) {
 	
 	var request = require('request');
-	var url = "https://eu16.salesforce.com/services/data/v45.0/query/?q=SELECT+Phone__c+FROM+Contact+WHERE+Phone++c+=+'" + phone + "'";
+	var url = "https://eu16.salesforce.com/services/data/v45.0/query/?q=SELECT+Phone__c+FROM+Contact+WHERE+Phone__c+=+'" + phone + "'";
 
 	request.get({
     		url: url,
