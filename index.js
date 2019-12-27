@@ -124,6 +124,7 @@ var corsOptions = {
 // app.get('/add', cors(corsOptions), checkValuesGet);
 app.get('/add', checkValuesGet)
 app.post('/push', checkValuesPostPush);
+app.post('/bind', checkValuesPostBind);
 
 app.post('/add1', checkValuesPost);
 app.post('/add2', checkValuesPost);
@@ -131,6 +132,41 @@ app.post('/add3', checkValuesPost);
 app.post('/add4', checkValuesPost);
 app.post('/add5', checkValuesPost);
 
+
+
+function updateFacebookSFDC(facebookID, oAuth, url, callback) {
+	
+	var request = require('request');
+	var url = url;
+	
+	
+	var myNewBody = {"FacebookID__c": facebookID};
+	console.log(myNewBody);
+
+	request.patch({
+    		url: url,
+		body: myNewBody,
+    		json: true,
+    		headers: {
+        		'Content-Type': 'application/json',
+			'Authorization': oAuth
+    		}
+	}, function (e, r, b) {
+		if(e){
+			console.log("third level --> " +  JSON.stringify(e));
+			callback ("error");
+		} else{
+			console.log("third level --> " +  JSON.stringify(b));
+			callback (b);
+		}
+
+	});
+	
+	
+
+	
+	
+}
 
 
 function updateSpecificContactSFDC(myJSON, oAuth, url, callback) {
@@ -383,6 +419,57 @@ function checkValuesPostPush(req, res, next) {
 
 	
 }
+
+
+
+function checkValuesPostBind(req, res, next) {
+
+	
+	console.log("bind request");
+	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
+	console.log(req.body);
+	var myBody = req.body;
+	var visitorID = myBody.visitorID;
+	var myNumber = myBody.phone;
+	
+	
+	loginSFDC(myNumber, function (response) {
+		
+		console.log("second level --> " + JSON.stringify(response));
+		if (response.hasOwnProperty('error')){
+			res.send("error");
+		} else {
+			var oAuth = "Bearer " + response.access_token;
+			console.log("oAuth --> " + oAuth)
+			retrieveContactSFDC(oAuth, myNumber, function (response) {
+				console.log("main level --> " + JSON.stringify(response));
+				if (response.totalSize === 0){
+					res.send("error");
+				} else {
+					var myUrl = "https://eu16.salesforce.com" + response.records[0].attributes.url;
+					updateFacebookSFDC(visitorID, oAuth, myUrl, function (response) {
+						console.log("main level --> " + JSON.stringify(response));
+						if (response === 'undefined'){
+							res.send("ok");
+						} else {
+							res.send("error");
+						}
+					});
+				}
+			});
+		}
+		
+	});
+	
+	
+	
+
+
+	
+}
+
+
+
 
 
 function pushToAWS(c){
