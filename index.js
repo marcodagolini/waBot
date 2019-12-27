@@ -401,7 +401,7 @@ function checkValuesPostPush(req, res, next) {
 					var myUrl = "https://eu16.salesforce.com" + response.records[0].attributes.url;
 					updateSpecificContactSFDC(myBody, oAuth, myUrl, function (response) {
 						console.log("main level --> " + JSON.stringify(response));
-						if (response === 'undefined'){
+						if (JSON.stringify(response) === 'undefined'){
 							res.send("ok");
 						} else {
 							res.send("error");
@@ -449,7 +449,7 @@ function checkValuesPostBind(req, res, next) {
 					var myUrl = "https://eu16.salesforce.com" + response.records[0].attributes.url;
 					updateFacebookSFDC(visitorID, oAuth, myUrl, function (response) {
 						console.log("main level --> " + JSON.stringify(response));
-						if (response === 'undefined'){
+						if (JSON.stringify(response) === 'undefined'){
 							res.send("ok");
 						} else {
 							res.send("error");
