@@ -402,7 +402,16 @@ function checkValuesPostPush(req, res, next) {
 					updateSpecificContactSFDC(myBody, oAuth, myUrl, function (response) {
 						console.log("main level --> " + JSON.stringify(response));
 						if (!JSON.stringify(response) || (JSON.stringify(response) === 'undefined')){
-							res.send("ok");
+							retrieveSpecificContactSFDC(oAuth, myUrl, function (response) {
+								console.log("main level --> " + JSON.stringify(response));
+									if (response.totalSize === 0){
+										res.send("error");
+									} else {
+										var responseToSend = {"name": response.Name, "status": response.Type__c, "facebookID": response.FacebookID__c};
+										res.send(responseToSend);
+									}
+								});
+							
 						} else {
 							res.send("error");
 						}
