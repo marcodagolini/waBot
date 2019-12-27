@@ -348,7 +348,7 @@ function checkValuesGetApp(req, res, next) {
 						if (response.totalSize === 0){
 							res.send("error");
 						} else {
-							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.Phone__c, "facebookID": response.FacebookID__c};
+							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.phone__c, "facebookID": response.FacebookID__c};
 							res.send(responseToSend);
 						}
 					});
@@ -429,7 +429,7 @@ function checkValuesGetFB(req, res, next) {
 						if (response.totalSize === 0){
 							res.send("error");
 						} else {
-							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.Phone__c, "facebookID": response.FacebookID__c};
+							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.phone__c, "facebookID": response.FacebookID__c};
 							res.send(responseToSend);
 						}
 					});
