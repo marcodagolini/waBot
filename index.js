@@ -122,7 +122,8 @@ var corsOptions = {
 }
  
 // app.get('/add', cors(corsOptions), checkValuesGet);
-app.get('/add', checkValuesGet)
+app.get('/getApp', checkValuesGetApp)
+app.get('/getFB', checkValuesGetFB)
 app.post('/push', checkValuesPostPush);
 app.post('/bind', checkValuesPostBind);
 
@@ -264,6 +265,33 @@ function retrieveContactSFDC(oAuth, phone, callback) {
 }
 
 
+function retrieveContactSFDCviaFB(oAuth, facebookID, callback) {
+	
+	var request = require('request');
+	var url = "https://eu16.salesforce.com/services/data/v45.0/query/?q=SELECT+FacebookID__c+FROM+myContact__c+WHERE+FacebookID__c+=+'" + facebookID + "'";
+
+	request.get({
+    		url: url,
+    		json: true,
+    		headers: {
+        		'Content-Type': 'application/json',
+			'Authorization': oAuth
+    		}
+	}, function (e, r, b) {
+		if(e){
+			console.log("second level --> " +  JSON.stringify(e));
+			callback ("error");
+		} else{
+			console.log("second level --> " +  JSON.stringify(b));
+			callback (b);
+		}
+
+	});
+	
+	
+}
+
+
 
 function loginSFDC(phone, callback) {
 	
@@ -295,7 +323,7 @@ function loginSFDC(phone, callback) {
 
 
 
-function checkValuesGet(req, res, next) {
+function checkValuesGetApp(req, res, next) {
 	// console.log(req);
 	var myNumber = req.query.phone;
 	console.log("get request");
@@ -320,7 +348,7 @@ function checkValuesGet(req, res, next) {
 						if (response.totalSize === 0){
 							res.send("error");
 						} else {
-							var responseToSend = {"name": response.Name, "status": response.Type__c, "facebookID": response.FacebookID__c};
+							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.Phone__c, "facebookID": response.FacebookID__c};
 							res.send(responseToSend);
 						}
 					});
@@ -372,6 +400,51 @@ function checkValuesGet(req, res, next) {
 	
 	
 }
+
+
+
+
+function checkValuesGetFB(req, res, next) {
+	// console.log(req);
+	var facebookID = req.query.facebookID;
+	console.log("get request");
+	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
+	
+	loginSFDC(facebookID, function (response) {
+		
+		console.log("second level --> " + JSON.stringify(response));
+		if (response.hasOwnProperty('error')){
+			res.send("error");
+		} else {
+			var oAuth = "Bearer " + response.access_token;
+			console.log("oAuth --> " + oAuth)
+			retrieveContactSFDCviaFB(oAuth, facebookID, function (response) {
+				console.log("main level --> " + JSON.stringify(response));
+				if (response.totalSize === 0){
+					res.send("error");
+				} else {
+					var myUrl = "https://eu16.salesforce.com" + response.records[0].attributes.url;
+					retrieveSpecificContactSFDC(oAuth, myUrl, function (response) {
+						console.log("main level --> " + JSON.stringify(response));
+						if (response.totalSize === 0){
+							res.send("error");
+						} else {
+							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.Phone__c, "facebookID": response.FacebookID__c};
+							res.send(responseToSend);
+						}
+					});
+				}
+			});
+		}
+		
+	});
+
+
+	
+	
+}
+
+
 
 
 
