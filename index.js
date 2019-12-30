@@ -401,12 +401,12 @@ function checkValuesGetApp(req, res, next) {
 						if (response.totalSize === 0){
 							res.send("error");
 						} else {
-							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.phone__c, "facebookID": response.FacebookID__c, "isThereConv": false};
+							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.phone__c, "facebookID": response.FacebookID__c, "isThereConv": "none"};
 							if(response.FacebookID__c){
 								isThereAnyOpenConversation(responseToSend, response.FacebookID__c, function (response) {
 									if(response){
 										console.log("main level --> " + JSON.stringify(response));
-										responseToSend.isThereConv = true;
+										responseToSend.isThereConv = "FaceBook";
 										res.send(responseToSend);
 									} else{
 										console.log("main level --> " + JSON.stringify(response));
