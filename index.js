@@ -147,6 +147,7 @@ function isThereAnyOpenConversation(myJSON, myCustomerID, callback) {
         	token_secret: process.env.secretToken	
 		
     	};
+	console.log(myCustomerID);
 	var body = {"consumer":myCustomerID,"status":["OPEN"]};
 	var url = 'https://lo.msghist.liveperson.net/messaging_history/api/account/31554357/conversations/consumer/search';
 
