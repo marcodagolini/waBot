@@ -167,7 +167,6 @@ function isThereAnyOpenConversation(myJSON, myCustomerID, callback) {
 			console.log("third level --> " +  JSON.stringify(e));
 			callback ("error");
 		} else{
-			console.log("third level --> " +  JSON.stringify(b));
 			if (b._metadata.count > 0){
 				console.log("****** found conversation!");
 				callback ("true");
