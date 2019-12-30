@@ -135,6 +135,56 @@ app.post('/add5', checkValuesPost);
 
 
 
+
+
+function isThereAnyOpenConversation(myJSON, myCustomerID, callback) {
+	
+	var request = require('request');
+	var oauth = {
+        	consumer_key: process.env.appKey,
+        	consumer_secret: process.env.secret,
+        	token: process.env.accessToken,
+        	token_secret: process.env.secretToken	
+		
+    	};
+	var body = {"consumer":myCustomerID,"status":["OPEN"]};
+	var url = 'https://lo.msghist.liveperson.net/messaging_history/api/account/31554357/conversations/consumer/search';
+
+
+
+	request.post({
+    		url: url,
+		body: body,
+    		json: true,
+    		headers: {
+        		'Content-Type': 'application/json',
+			'Authorization': oauth
+    		}
+	}, function (e, r, b) {
+		if(e){
+			console.log("third level --> " +  JSON.stringify(e));
+			callback ("error");
+		} else{
+			if (b._metadata.count > 0){
+				console.log("****** found conversation!");
+				callback ("true");
+			} else{
+				console.log("****** not found conversation!");
+				callback ("false");
+			}
+		}
+
+	});
+	
+	
+
+	
+	
+}
+
+
+
+
 function updateFacebookSFDC(facebookID, oAuth, url, callback) {
 	
 	var request = require('request');
@@ -348,8 +398,22 @@ function checkValuesGetApp(req, res, next) {
 						if (response.totalSize === 0){
 							res.send("error");
 						} else {
-							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.phone__c, "facebookID": response.FacebookID__c};
-							res.send(responseToSend);
+							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.phone__c, "facebookID": response.FacebookID__c, "isThereConv": false};
+							if(response.FacebookID__c){
+								isThereAnyOpenConversation(responseToSend, response.FacebookID__c, function (response) {
+									if(response){
+										console.log("main level --> " + JSON.stringify(response));
+										responseToSend.isThereConv = true;
+										res.send(responseToSend);
+									} else{
+										console.log("main level --> " + JSON.stringify(response));
+										res.send(responseToSend);
+									}
+									
+								});
+							} else{
+								res.send(responseToSend);
+							}
 						}
 					});
 				}
@@ -848,7 +912,7 @@ function addToObject(data){
 }
 
 
-
+/*******
 
 const Agent = require('node-agent-sdk').Agent;
 var echoAgent = new Agent({
@@ -1018,6 +1082,8 @@ echoAgent.on('closed', body => {
 	echoAgent.reconnect();
 });
 
+
+******/
 
 
 
