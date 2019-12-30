@@ -137,7 +137,59 @@ app.post('/add5', checkValuesPost);
 
 
 
-function isThereAnyOpenConversation(myJSON, myCustomerID, callback) {
+function isThereAnyOpenConversationViaApp(myJSON, myPhoneNumber, callback) {
+	
+	var request = require('request');
+	var oauth = {
+        	consumer_key: process.env.appKey,
+        	consumer_secret: process.env.secret,
+        	token: process.env.accessToken,
+        	token_secret: process.env.secretToken	
+		
+    	};
+	console.log(myPhoneNumber);
+	var now = Date.now();
+	var before = (Date.now() - (1000*60*60*24*30));    // only the conversation of the last 60 days will be fetched
+	var body = {"start":{"from":before,"to":now},"status":["OPEN"], "sdeSearch":{"personalInfo":myPhoneNumber}}
+	var url = 'https://lo.msghist.liveperson.net/messaging_history/api/account/31554357/conversations/search?offset=0&limit=100';
+
+
+
+	request.post({
+    		url: url,
+		body: body,
+		oauth: oauth,
+    		json: true,
+    		headers: {
+        		'Content-Type': 'application/json',
+			'Accept': 'application/json'
+    		}
+	}, function (e, r, b) {
+		if(e){
+			console.log("third level --> " +  JSON.stringify(e));
+			callback ("error");
+		} else{
+			if (b._metadata.count > 0){
+				console.log("****** found conversation!");
+				callback (true);
+			} else{
+				console.log("****** not found conversation!");
+				callback (false);
+			}
+		}
+
+	});
+	
+	
+
+	
+	
+}
+
+
+
+
+function isThereAnyOpenConversationViaFB(myJSON, myCustomerID, callback) {
 	
 	var request = require('request');
 	var oauth = {
@@ -402,7 +454,7 @@ function checkValuesGetApp(req, res, next) {
 						} else {
 							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.phone__c, "facebookID": response.FacebookID__c, "isThereConv": "none"};
 							if(response.FacebookID__c){
-								isThereAnyOpenConversation(responseToSend, response.FacebookID__c, function (response) {
+								isThereAnyOpenConversationViaFB(responseToSend, response.FacebookID__c, function (response) {
 									if(response){
 										console.log("main level --> " + JSON.stringify(response));
 										responseToSend.isThereConv = "FaceBook";
@@ -495,8 +547,22 @@ function checkValuesGetFB(req, res, next) {
 						if (response.totalSize === 0){
 							res.send("error");
 						} else {
-							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.phone__c, "facebookID": response.FacebookID__c};
-							res.send(responseToSend);
+							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.phone__c, "facebookID": response.FacebookID__c, "isThereConv": "none"};
+							if(response.phone__c){
+								isThereAnyOpenConversationViaFB(responseToSend, response.phone__c, function (response) {
+									if(response){
+										console.log("main level --> " + JSON.stringify(response));
+										responseToSend.isThereConv = "inApp";
+										res.send(responseToSend);
+									} else{
+										console.log("main level --> " + JSON.stringify(response));
+										res.send(responseToSend);
+									}
+									
+								});
+							} else{
+								res.send(responseToSend);
+							}
 						}
 					});
 				}
