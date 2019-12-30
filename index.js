@@ -156,10 +156,11 @@ function isThereAnyOpenConversation(myJSON, myCustomerID, callback) {
 	request.post({
     		url: url,
 		body: body,
+		oauth: oauth,
     		json: true,
     		headers: {
         		'Content-Type': 'application/json',
-			'Authorization': oauth
+			'Accept': 'application/json'
     		}
 	}, function (e, r, b) {
 		if(e){
