@@ -169,10 +169,10 @@ function isThereAnyOpenConversation(myJSON, myCustomerID, callback) {
 		} else{
 			if (b._metadata.count > 0){
 				console.log("****** found conversation!");
-				callback ("true");
+				callback (true);
 			} else{
 				console.log("****** not found conversation!");
-				callback ("false");
+				callback (false);
 			}
 		}
 
