@@ -549,7 +549,7 @@ function checkValuesGetFB(req, res, next) {
 						} else {
 							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.phone__c, "facebookID": response.FacebookID__c, "isThereConv": "none"};
 							if(response.phone__c){
-								isThereAnyOpenConversationViaFB(responseToSend, response.phone__c, function (response) {
+								isThereAnyOpenConversationViaApp(responseToSend, response.phone__c, function (response) {
 									if(response){
 										console.log("main level --> " + JSON.stringify(response));
 										responseToSend.isThereConv = "inApp";
