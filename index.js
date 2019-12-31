@@ -438,6 +438,22 @@ function checkValuesGetMap(req, res, next) {
 	console.log("get request");
 	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
 	
+	var myGoogleKey = process.env.myGoogleKey;
+	var myHost = "https://www.google.com/maps/embed/v1/place?key=" + myGoogleKey + "&q=45.464211,9.191383&zoom=15"
+	
+	
+	var myRequest = require("https");
+	var options = {
+		host: myHost
+	};
+	myRequest.get(options, function (http_res) {
+		// initialize the container for our data
+		var data = "";
+		http_res.on("end", function () {
+			console.log(data);
+			res.send(data);
+		});
+	});
 	
 	
 	
