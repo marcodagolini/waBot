@@ -124,7 +124,7 @@ var corsOptions = {
 // app.get('/add', cors(corsOptions), checkValuesGet);
 app.get('/getApp', checkValuesGetApp)
 app.get('/getFB', checkValuesGetFB)
-app.get('/getMap', checkValuesGetMap)
+app.get('/getGoogleMapKey', getGoogleMapKey)
 app.post('/push', checkValuesPostPush);
 app.post('/bind', checkValuesPostBind);
 
@@ -431,31 +431,14 @@ function loginSFDC(phone, callback) {
 
 
 
-function checkValuesGetMap(req, res, next) {
-	// console.log(req);
-	var myLatitude = req.query.lat;
-	var myLongitude = req.query.long;
+function getGoogleMapKey(req, res, next) {
+
 	console.log("get request");
 	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
 	
 	var myGoogleKey = process.env.myGoogleKey;
-	var myHost = "https://www.google.com/maps/embed/v1/place?key=" + myGoogleKey + "&q=45.464211,9.191383&zoom=15"
 	
-	
-	var myRequest = require("https");
-	var options = {
-		host: myHost
-	};
-	myRequest.get(options, function (http_res) {
-		// initialize the container for our data
-		var data = "";
-		http_res.on("end", function () {
-			console.log(data);
-			res.send(data);
-		});
-	});
-	
-	
+	res.send(myGoogleKey);
 	
 }
 
