@@ -124,6 +124,7 @@ var corsOptions = {
 // app.get('/add', cors(corsOptions), checkValuesGet);
 app.get('/getApp', checkValuesGetApp)
 app.get('/getFB', checkValuesGetFB)
+app.get('/getMap', checkValuesGetMap)
 app.post('/push', checkValuesPostPush);
 app.post('/bind', checkValuesPostBind);
 
@@ -425,6 +426,23 @@ function loginSFDC(phone, callback) {
 	
 
 }
+
+
+
+
+
+function checkValuesGetMap(req, res, next) {
+	// console.log(req);
+	var myLatitude = req.query.lat;
+	var myLongitude = req.query.long;
+	console.log("get request");
+	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
+	
+	
+	
+	
+}
+
 
 
 
