@@ -151,7 +151,7 @@ function isThereAnyOpenConversationViaApp(myJSON, myPhoneNumber, callback) {
 	console.log(myPhoneNumber);
 	var now = Date.now();
 	var before = (Date.now() - (1000*60*60*24*30));    // only the conversation of the last 60 days will be fetched
-	var body = {"start":{"from":before,"to":now},"status":["OPEN"], "sdeSearch":{"personalInfo":myPhoneNumber}}
+	var body = {"start":{"from":before,"to":now},"status":["OPEN"], "sdeSearch":{"personalContact":myPhoneNumber}}
 	var url = 'https://lo.msghist.liveperson.net/messaging_history/api/account/31554357/conversations/search?offset=0&limit=100';
 
 
