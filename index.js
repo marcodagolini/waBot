@@ -470,7 +470,7 @@ function checkValuesGetApp(req, res, next) {
 						if (response.totalSize === 0){
 							res.send("error");
 						} else {
-							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.phone__c, "facebookID": response.FacebookID__c, "isThereConv": "none"};
+							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.phone__c, "facebookID": response.FacebookID__c, "isThereConv": "none", "url": response.attributes.url};
 							if(response.FacebookID__c){
 								isThereAnyOpenConversationViaFB(responseToSend, response.FacebookID__c, function (response) {
 									if(response){
@@ -565,7 +565,7 @@ function checkValuesGetFB(req, res, next) {
 						if (response.totalSize === 0){
 							res.send("error");
 						} else {
-							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.phone__c, "facebookID": response.FacebookID__c, "isThereConv": "none"};
+							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.phone__c, "facebookID": response.FacebookID__c, "isThereConv": "none", "url": response.attributes.url};
 							if(response.phone__c){
 								isThereAnyOpenConversationViaApp(responseToSend, response.phone__c, function (response) {
 									if(response){
