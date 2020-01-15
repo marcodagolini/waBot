@@ -155,10 +155,10 @@ function retrieveAgentData(agentId, callback) {
 	request.get({
     		url: url,
     		json: true,
+		oauth: oauth,
     		headers: {
         		'Content-Type': 'application/json',
-			'If-Match': '-1',
-			'Authorization': oauth
+			'Accept': 'application/json'
     		}
 	}, function (e, r, b) {
 		if(b){
