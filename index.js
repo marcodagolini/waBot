@@ -151,6 +151,7 @@ function retrieveAgentData(agentId, callback) {
     	};
 	// var body = {"status":["ONLINE"]};
 	var url = 'https://lo.ac.liveperson.net/api/account/31554357/configuration/le-users/users/' + agentId + '?v=4.0';
+	console.log(url);
 	request.get({
     		url: url,
     		json: true,
