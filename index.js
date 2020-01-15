@@ -140,6 +140,7 @@ app.post('/add5', checkValuesPost);
 
 function retrieveAgentData(agentId, callback) {
 	
+	console.log("agentId --> " + agentId);
 	var request = require('request');
 	var oauth = {
         	consumer_key: process.env.appKey,
