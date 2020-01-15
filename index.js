@@ -158,6 +158,7 @@ function retrieveAgentData(agentId, callback) {
     		headers: {
         		'Content-Type': 'application/json',
 			'Accept': 'application/json',
+			'If-Match': '-1',
 			'Authorization': oauth
     		}
 	}, function (e, r, b) {
