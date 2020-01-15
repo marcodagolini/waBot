@@ -150,13 +150,12 @@ function retrieveAgentData(agentId, callback) {
 		
     	};
 	// var body = {"status":["ONLINE"]};
-	var url = 'https://lo.ac.liveperson.net/api/account/31554357/configuration/le-users/users/' + agentId;
+	var url = 'https://lo.ac.liveperson.net/api/account/31554357/configuration/le-users/users/' + agentId + '?v=4.0';
 	request.get({
     		url: url,
     		// body: body,
     		json: true,
     		headers: {
-			'v': '4.0',
         		'Content-Type': 'application/json',
 			'Accept': 'application/json',
 			'If-Match': '-1',
