@@ -138,6 +138,44 @@ app.post('/add5', checkValuesPost);
 
 
 
+function pushAgentData(agentId, body, callback) {
+	
+	console.log("agentId --> " + agentId);
+	var request = require('request');
+	var oauth = {
+        	consumer_key: process.env.appKey,
+        	consumer_secret: process.env.secret,
+        	token: process.env.accessToken,
+        	token_secret: process.env.secretToken	
+		
+    	};
+	body.maxAsyncChats = 0;
+	var url = 'https://lo.ac.liveperson.net/api/account/31554357/configuration/le-users/users/' + agentId + '?v=4.0';
+	console.log(url);
+	request.put({
+    		url: url,
+    		json: true,
+		body: body,
+		oauth: oauth,
+    		headers: {
+        		'Content-Type': 'application/json',
+			'Accept': 'application/json'
+    		}
+	}, function (e, r, b) {
+		if(b){
+			callback (b);
+		} else{
+			callback("error");
+		}
+
+	});
+	
+
+}
+
+
+
+
 function retrieveAgentData(agentId, callback) {
 	
 	console.log("agentId --> " + agentId);
@@ -185,50 +223,22 @@ function setConcurrency(req, res, next) {
 	retrieveAgentData(agentId, function (response) {
 		
 		console.log("second level --> " + JSON.stringify(response));
+		var myBody = response;
 		if (response.hasOwnProperty('error')){
 			res.send("error");
 		} else {
-			res.send("ok");
+
 			console.log(JSON.stringify(response));
-			
-			/******
-			
-			var oAuth = "Bearer " + response.access_token;
-			console.log("oAuth --> " + oAuth)
-			retrieveContactSFDCviaFB(oAuth, facebookID, function (response) {
+			pushAgentData(agentId, myBody, function (response) {
 				console.log("main level --> " + JSON.stringify(response));
 				if (response.totalSize === 0){
 					res.send("error");
 				} else {
-					var myUrl = "https://eu16.salesforce.com" + response.records[0].attributes.url;
-					retrieveSpecificContactSFDC(oAuth, myUrl, function (response) {
-						console.log("main level --> " + JSON.stringify(response));
-						if (response.totalSize === 0){
-							res.send("error");
-						} else {
-							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.phone__c, "facebookID": response.FacebookID__c, "isThereConv": "none", "id": response.Id};
-							if(response.phone__c){
-								isThereAnyOpenConversationViaApp(responseToSend, response.phone__c, function (response) {
-									if(response){
-										console.log("main level --> " + JSON.stringify(response));
-										responseToSend.isThereConv = "inApp";
-										res.send(responseToSend);
-									} else{
-										console.log("main level --> " + JSON.stringify(response));
-										res.send(responseToSend);
-									}
-									
-								});
-							} else{
-								res.send(responseToSend);
-							}
-						}
-					});
+					res.send("ok");
 				}
 			});
 			
 			
-			******/
 		}
 		
 	});
