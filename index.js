@@ -180,6 +180,7 @@ function retrieveAgentData(agentId, callback) {
 function setConcurrency(req, res, next) {
 	// console.log(req);
 	var agentId = req.query.agentId;
+	console.log(agentId);
 	console.log("get request");
 	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
 	
