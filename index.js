@@ -153,12 +153,9 @@ function retrieveAgentData(agentId, callback) {
 	var url = 'https://lo.ac.liveperson.net/api/account/31554357/configuration/le-users/users/' + agentId + '?v=4.0';
 	request.get({
     		url: url,
-    		// body: body,
     		json: true,
     		headers: {
         		'Content-Type': 'application/json',
-			'Accept': 'application/json',
-			'If-Match': '-1',
 			'Authorization': oauth
     		}
 	}, function (e, r, b) {
