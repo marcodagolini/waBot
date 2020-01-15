@@ -159,7 +159,8 @@ function pushAgentData(agentId, body, callback) {
 		oauth: oauth,
     		headers: {
         		'Content-Type': 'application/json',
-			'Accept': 'application/json'
+			'Accept': 'application/json',
+			'If-Match': '-1'
     		}
 	}, function (e, r, b) {
 		if(b){
