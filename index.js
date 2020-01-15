@@ -127,12 +127,113 @@ app.get('/getFB', checkValuesGetFB)
 app.get('/getGoogleMapKey', getGoogleMapKey)
 app.post('/push', checkValuesPostPush);
 app.post('/bind', checkValuesPostBind);
+app.post('/concurrency', setConcurrency);
 
 app.post('/add1', checkValuesPost);
 app.post('/add2', checkValuesPost);
 app.post('/add3', checkValuesPost);
 app.post('/add4', checkValuesPost);
 app.post('/add5', checkValuesPost);
+
+
+
+
+function retrieveAgentData(agentId, callback) {
+	
+	var request = require('request');
+	var oauth = {
+        	consumer_key: process.env.appKey,
+        	consumer_secret: process.env.secret,
+        	token: process.env.accessToken,
+        	token_secret: process.env.secretToken	
+		
+    	};
+	// var body = {"status":["ONLINE"]};
+	var url = 'https://lo.ac.liveperson.net/api/account/31554357/configuration/le-users/users/' + agentId;
+	request.get({
+    		url: url,
+    		// body: body,
+    		json: true,
+    		headers: {
+			'v': '4.0',
+        		'Content-Type': 'application/json',
+			'Authorization': oauth
+    		}
+	}, function (e, r, b) {
+		if(b){
+			callback (true);
+		} else{
+			callback(false);
+		}
+
+	});
+	
+
+}
+
+
+
+
+function setConcurrency(req, res, next) {
+	// console.log(req);
+	var agentId = req.query.agentId;
+	console.log("get request");
+	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
+	
+	retrieveAgentData(agentId, function (response) {
+		
+		console.log("second level --> " + JSON.stringify(response));
+		if (response.hasOwnProperty('error')){
+			res.send("error");
+		} else {
+			res.send("ok");
+			
+			/******
+			
+			var oAuth = "Bearer " + response.access_token;
+			console.log("oAuth --> " + oAuth)
+			retrieveContactSFDCviaFB(oAuth, facebookID, function (response) {
+				console.log("main level --> " + JSON.stringify(response));
+				if (response.totalSize === 0){
+					res.send("error");
+				} else {
+					var myUrl = "https://eu16.salesforce.com" + response.records[0].attributes.url;
+					retrieveSpecificContactSFDC(oAuth, myUrl, function (response) {
+						console.log("main level --> " + JSON.stringify(response));
+						if (response.totalSize === 0){
+							res.send("error");
+						} else {
+							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.phone__c, "facebookID": response.FacebookID__c, "isThereConv": "none", "id": response.Id};
+							if(response.phone__c){
+								isThereAnyOpenConversationViaApp(responseToSend, response.phone__c, function (response) {
+									if(response){
+										console.log("main level --> " + JSON.stringify(response));
+										responseToSend.isThereConv = "inApp";
+										res.send(responseToSend);
+									} else{
+										console.log("main level --> " + JSON.stringify(response));
+										res.send(responseToSend);
+									}
+									
+								});
+							} else{
+								res.send(responseToSend);
+							}
+						}
+					});
+				}
+			});
+			
+			
+			******/
+		}
+		
+	});
+
+
+	
+	
+}
 
 
 
