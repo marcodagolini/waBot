@@ -161,9 +161,9 @@ function retrieveAgentData(agentId, callback) {
     		}
 	}, function (e, r, b) {
 		if(b){
-			callback (true);
+			callback (b);
 		} else{
-			callback(false);
+			callback("error");
 		}
 
 	});
@@ -187,6 +187,7 @@ function setConcurrency(req, res, next) {
 			res.send("error");
 		} else {
 			res.send("ok");
+			console.log(JSON.stringify(response));
 			
 			/******
 			
