@@ -259,6 +259,8 @@ function outboundCall(req, res, next) {
 	var AWS = require("aws-sdk");
 	AWS.config.update({ region: 'us-east-1' });
 	
+	console.log("calling");
+	
 	exports.handler = (event, context, callback) => {
 		let connect = new AWS.Connect();
 		const customerName = event.name;
