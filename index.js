@@ -128,6 +128,9 @@ app.get('/getGoogleMapKey', getGoogleMapKey)
 app.post('/push', checkValuesPostPush);
 app.post('/bind', checkValuesPostBind);
 app.post('/concurrency', setConcurrency);
+app.post('/outboundCall', outboundCall);
+
+
 
 app.post('/add1', checkValuesPost);
 app.post('/add2', checkValuesPost);
@@ -245,6 +248,50 @@ function setConcurrency(req, res, next) {
 	});
 
 
+	
+	
+}
+
+
+
+function outboundCall(req, res, next) {
+	
+	var AWS = require("aws-sdk");
+	AWS.config.update({ region: 'us-east-1' });
+	
+	exports.handler = (event, context, callback) => {
+		let connect = new AWS.Connect();
+		const customerName = event.name;
+		const customerPhoneNumber = event.number;
+		const dayOfWeek = event.day;
+		
+		let params = {
+			"InstanceId" : '469d4b90-f0e5-4aed-9f1e-46c5234ca491',
+			"region": 'eu-west-2',
+			"ContactFlowId" : 'c747a579-aa50-4007-93d2-7c14f8468811',
+			"SourcePhoneNumber" : '+442073656117',
+			"DestinationPhoneNumber" : '+447766367842',
+			"Attributes" : {
+				'name' : 'Marco'
+			}
+		}
+		
+		connect.startOutboundVoiceContact(
+			params, function (error, response){
+				
+				if(error) {
+					console.log(error)
+					callback("Error", null);
+					res.send("error");
+					
+				} else {
+					console.log('Initiated an outbound call with Contact Id ' + JSON.stringify(response.ContactId));
+					callback(null, 'Success');
+					res.send("ok");
+				}
+			}
+		);
+	};
 	
 	
 }
