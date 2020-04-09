@@ -269,12 +269,9 @@ function outboundCall(req, res, next) {
 		
 		let params = {
 			"InstanceId" : '469d4b90-f0e5-4aed-9f1e-46c5234ca491',
-			"ContactFlowId" : 'c747a579-aa50-4007-93d2-7c14f8468811',
+			"ContactFlowId" : 'b738d667-7c90-48ef-acb9-48db2c806777',
 			"SourcePhoneNumber" : '+442073656117',
-			"DestinationPhoneNumber" : '+447766367842',
-			"Attributes" : {
-				'name' : 'Marco'
-			}
+			"DestinationPhoneNumber" : '+447766367842'
 		}
 		
 		connect.startOutboundVoiceContact(
