@@ -257,19 +257,22 @@ function setConcurrency(req, res, next) {
 function outboundCall(req, res, next) {
 	
 	var AWS = require("aws-sdk");
-	AWS.config.update({ region: 'eu-west-2' });
+	let awsConfig = {
+		"region": "us-east-2",
+		"endpoint": "http://dynamodb.us-east-2.amazonaws.com",
+		"accessKeyId": process.env.accessKeyIdDynamo, "secretAccessKey": process.env.secretAccessKeyIdDynamo
+	};
+	
+	AWS.config.update(awsConfig);
 	
 	console.log("calling");
 	
-	exports.handler = (event, context, callback) => {
+
 		let connect = new AWS.Connect();
-		const customerName = event.name;
-		const customerPhoneNumber = event.number;
-		const dayOfWeek = event.day;
+
 		
 		let params = {
-			"accessKeyId": process.env.accessKeyIdDynamo,
-			"secretAccessKey": process.env.secretAccessKeyIdDynamo,
+			
 			"InstanceId" : '469d4b90-f0e5-4aed-9f1e-46c5234ca491',
 			"ContactFlowId" : 'b738d667-7c90-48ef-acb9-48db2c806777',
 			"SourcePhoneNumber" : '+442073656117',
@@ -281,17 +284,15 @@ function outboundCall(req, res, next) {
 				
 				if(error) {
 					console.log(error)
-					callback("Error", null);
 					res.send("error");
 					
 				} else {
 					console.log('Initiated an outbound call with Contact Id ' + JSON.stringify(response.ContactId));
-					callback(null, 'Success');
 					res.send("ok");
 				}
 			}
 		);
-	};
+
 	
 	
 }
