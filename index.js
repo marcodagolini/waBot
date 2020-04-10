@@ -257,15 +257,16 @@ function setConcurrency(req, res, next) {
 function outboundCall(req, res, next) {
 	
 	var AWS = require("aws-sdk");
-	/****
+
+
 	let awsConfig = {
 		"region": "eu-west-2",
-		"endpoint": "http://dynamodb.us-east-2.amazonaws.com",
+		"endpoint": "https://marcodagolini.awsapps.com/connect/login",
 		"accessKeyId": process.env.accessKeyIdDynamo, "secretAccessKey": process.env.secretAccessKeyIdDynamo
 	};
 	
 	AWS.config.update(awsConfig);
-	******/
+
 	
 	console.log("calling");
 	
