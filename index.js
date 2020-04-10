@@ -287,7 +287,7 @@ function outboundCall(req, res, next) {
 			params, function (error, response){
 				
 				if(error) {
-					console.log(error)
+					console.log(JSON.stringify(error))
 					res.send("error");
 					
 				} else {
