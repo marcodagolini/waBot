@@ -292,7 +292,7 @@ function stopOutboundCall(req, res, next) {
 			"ContactId" : contactId
 		}
 		
-		connect.StopContact(
+		connect.stopContact(
 			params, function (error, response){
 				
 				if(error) {
