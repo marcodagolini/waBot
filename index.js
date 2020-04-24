@@ -264,7 +264,7 @@ function outboundCall(req, res, next) {
 	let awsConfig = {
 		"region": "eu-west-2",
 		"endpoint": "https://marcodagolini.awsapps.com/connect/login",
-		"accessKeyId": process.env.accessKeyIdDynamo, "secretAccessKey": process.env.secretAccessKeyIdDynamo
+		"accessKeyId": process.env.accessKeyIdConnect, "secretAccessKey": process.env.secretAccessKeyIdConnect
 	};
 	
 	AWS.config.update(awsConfig);
