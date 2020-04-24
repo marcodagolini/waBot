@@ -269,8 +269,6 @@ function stopOutboundCall(req, res, next) {
 	
 	var myPhone = req.body.myPhone;
 	
-	console.log("myContactId --> " + myContactId);
-	
 	var AWS = require("aws-sdk");
 
 
