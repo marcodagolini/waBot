@@ -264,7 +264,7 @@ function outboundCall(req, res, next) {
 
 	let awsConfig = {
 		"region": "eu-west-2",
-		"endpoint": "https://marcodagolini.awsapps.com/connect/login",
+		"endpoint": "https://connect.eu-west-2.amazonaws.com",
 		"accessKeyId": process.env.accessKeyIdConnect, "secretAccessKey": process.env.secretAccessKeyIdConnect
 	};
 	
