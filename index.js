@@ -258,6 +258,7 @@ function setConcurrency(req, res, next) {
 function outboundCall(req, res, next) {
 	
 	var phoneNumber = req.body.phone;
+	console.log("phone number --> " + phoneNumber);
 	
 	var AWS = require("aws-sdk");
 
@@ -295,7 +296,7 @@ function outboundCall(req, res, next) {
 					res.send("error");
 					
 				} else {
-					console.log('Initiated an outbound call with Contact Id ' + JSON.stringify(response.ContactId));
+					console.log('Initiated an outbound call --> ' + JSON.stringify(response));
 					res.send("ok");
 				}
 			}
