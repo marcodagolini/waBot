@@ -130,6 +130,7 @@ app.post('/push', checkValuesPostPush);
 app.post('/bind', checkValuesPostBind);
 app.post('/concurrency', setConcurrency);
 app.post('/outboundCall', outboundCall);
+app.post('/stopOutboundCall', stopOutboundCall);
 
 
 
@@ -260,6 +261,57 @@ function setConcurrency(req, res, next) {
 	
 	
 }
+
+
+
+
+function stopOutboundCall(req, res, next) {
+	
+	var myContactId = req.body.myContact;
+	
+	console.log("myContactId --> " + myContactId);
+	
+	var AWS = require("aws-sdk");
+
+
+	let awsConfig = {
+		"region": "eu-west-2",
+		"endpoint": "https://connect.eu-west-2.amazonaws.com",
+		"accessKeyId": process.env.accessKeyIdConnect, "secretAccessKey": process.env.secretAccessKeyIdConnect
+	};
+	
+	AWS.config.update(awsConfig);
+
+	
+	console.log("stop calling");
+	
+
+		let connect = new AWS.Connect();
+
+		
+		let params = {
+			"InstanceId" : '469d4b90-f0e5-4aed-9f1e-46c5234ca491',
+			"ContactId" : myContactId
+		}
+		
+		connect.startOutboundVoiceContact(
+			params, function (error, response){
+				
+				if(error) {
+					console.log(JSON.stringify(error))
+					res.send("error");
+					
+				} else {
+					console.log('Stop outbound call --> ' + JSON.stringify(response));
+					res.send("ok");
+				}
+			}
+		);
+
+	
+	
+}
+
 
 
 
