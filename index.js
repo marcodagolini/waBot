@@ -293,7 +293,8 @@ function getMetrics(req, res, next) {
 			CurrentMetrics: [{"Name": "AGENTS_ON_CALL",
 					  "Unit": "COUNT"}],
 			"Filters": {
-				"Channels": ["VOICE"]
+				"Channels": ["VOICE"],
+				"Queues": ["*"]
 			},
 			"InstanceId": "469d4b90-f0e5-4aed-9f1e-46c5234ca491",
 			"MaxResults": "100"
