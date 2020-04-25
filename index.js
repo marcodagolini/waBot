@@ -284,6 +284,8 @@ function getMetrics(req, res, next) {
 	
 	console.log("get metrics");
 	
+	let connect = new AWS.Connect();
+	
 
 		
 		
