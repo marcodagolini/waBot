@@ -296,8 +296,7 @@ function getMetrics(req, res, next) {
 				"Channels": ["VOICE"]
 			},
 			"InstanceId": "469d4b90-f0e5-4aed-9f1e-46c5234ca491",
-			"MaxResults": "100",
-			"NextToken": "0"
+			"MaxResults": "100"
 		};
 		
 		
