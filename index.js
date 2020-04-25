@@ -128,7 +128,6 @@ app.get('/getFB', checkValuesGetFB)
 app.get('/getGoogleMapKey', getGoogleMapKey)
 app.post('/push', checkValuesPostPush);
 app.post('/bind', checkValuesPostBind);
-app.post('/concurrency', setConcurrency);
 app.post('/outboundCall', outboundCall);
 app.post('/stopOutboundCall', stopOutboundCall);
 app.post('/getMetrics', getMetrics);
@@ -152,7 +151,7 @@ function uuidv4() {
 
 
 
-function pushAgentData(agentId, body, callback) {
+function pushAgentData(agentId, concurrency, body, callback) {
 	
 	console.log("agentId --> " + agentId);
 	var request = require('request');
@@ -163,7 +162,7 @@ function pushAgentData(agentId, body, callback) {
         	token_secret: process.env.secretToken	
 		
     	};
-	body.maxAsyncChats = 0;
+	body.maxAsyncChats = concurrency;
 	var url = 'https://lo.ac.liveperson.net/api/account/31554357/configuration/le-users/users/' + agentId + '?v=4.0';
 	console.log(url);
 	request.put({
@@ -228,28 +227,25 @@ function retrieveAgentData(agentId, callback) {
 
 
 
-function setConcurrency(req, res, next) {
-	// console.log(req);
-	var agentId = req.body.agentId;
-	console.log(agentId);
-	console.log("get request");
-	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
+function setConcurrency(agentId, concurrency) {
+
+
 	
 	retrieveAgentData(agentId, function (response) {
 		
 		console.log("second level --> " + JSON.stringify(response));
 		var myBody = response;
 		if (response.hasOwnProperty('error')){
-			res.send("error");
+			console.log("error");
 		} else {
 
 			console.log(JSON.stringify(response));
-			pushAgentData(agentId, myBody, function (response) {
+			pushAgentData(agentId, concurrency, myBody, function (response) {
 				console.log("main level --> " + JSON.stringify(response));
 				if (response.totalSize === 0){
-					res.send("error");
+					console.log("error");
 				} else {
-					res.send("ok");
+					console.log("ok");
 				}
 			});
 			
@@ -323,7 +319,9 @@ function getMetrics(req, res, next) {
 
 function stopOutboundCall(req, res, next) {
 	
+
 	var contactId = req.body.contactId;
+	var myAgent = req.body.agentId;
 	
 	var AWS = require("aws-sdk");
 
@@ -357,6 +355,7 @@ function stopOutboundCall(req, res, next) {
 					
 				} else {
 					console.log('Stop outbound call --> ' + JSON.stringify(response));
+					setConcurrency(myAgent, 4);
 					res.send("ok");
 				}
 			}
@@ -373,6 +372,7 @@ function stopOutboundCall(req, res, next) {
 function outboundCall(req, res, next) {
 	
 	var phoneNumber = req.body.phone;
+	var myAgent = req.body.agentId;
 	var clientToken = uuidv4();
 	console.log("phone number --> " + phoneNumber);
 	
@@ -413,7 +413,8 @@ function outboundCall(req, res, next) {
 					
 				} else {
 					console.log('Initiated an outbound call --> ' + JSON.stringify(response));
-					res.send("ok");
+					setConcurrency(myAgent, 0);
+					res.send(response.ContactId);
 				}
 			}
 		);
