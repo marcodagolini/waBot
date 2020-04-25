@@ -294,7 +294,7 @@ function getMetrics(req, res, next) {
 					  "Unit": "COUNT"}],
 			"Filters": {
 				"Channels": ["VOICE"],
-				"Queues": ["*"]
+				"Queues": ["a17e3d42-a477-4a82-ae3d-208666131e45"]
 			},
 			"InstanceId": "469d4b90-f0e5-4aed-9f1e-46c5234ca491",
 			"MaxResults": "100"
