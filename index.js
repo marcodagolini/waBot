@@ -131,6 +131,7 @@ app.post('/bind', checkValuesPostBind);
 app.post('/concurrency', setConcurrency);
 app.post('/outboundCall', outboundCall);
 app.post('/stopOutboundCall', stopOutboundCall);
+app.post('/getMetrics', getMetrics);
 
 
 
@@ -265,6 +266,59 @@ function setConcurrency(req, res, next) {
 
 
 
+function getMetrics(req, res, next) {
+	
+	var contactId = req.body.contactId;
+	
+	var AWS = require("aws-sdk");
+
+
+	let awsConfig = {
+		"region": "eu-west-2",
+		"endpoint": "https://connect.eu-west-2.amazonaws.com",
+		"accessKeyId": process.env.accessKeyIdConnect, "secretAccessKey": process.env.secretAccessKeyIdConnect
+	};
+	
+	AWS.config.update(awsConfig);
+
+	
+	console.log("get metrics");
+	
+
+		
+		
+		var params = {CurrentMetrics: [
+			{"Name": "AGENTS_ON_CALL",
+			 "Unit": "COUNT"}],
+			      "Filters": {
+				      "Channels": ["VOICE"]
+			      },
+			      "InstanceId": '469d4b90-f0e5-4aed-9f1e-46c5234ca491'
+			      "MaxResults": '100',
+			      "NextToken": '0
+			     };
+		
+		
+		
+		connect.getCurrentMetricData(
+			params, function (error, response){
+				
+				if(error) {
+					console.log(JSON.stringify(error))
+					res.send("error");
+					
+				} else {
+					console.log('Your metrics --> ' + JSON.stringify(response));
+					res.send("ok");
+				}
+			}
+		);
+
+	
+	
+}
+
+
 function stopOutboundCall(req, res, next) {
 	
 	var contactId = req.body.contactId;
@@ -309,6 +363,7 @@ function stopOutboundCall(req, res, next) {
 	
 	
 }
+
 
 
 
