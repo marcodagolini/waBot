@@ -290,7 +290,7 @@ function getMetrics(req, res, next) {
 		
 		
 		var params = {
-			CurrentMetrics: [{"Name": "AGENTS_ON_CALL",
+			CurrentMetrics: [{"Name": "AGENTS_AVAILABLE",
 					  "Unit": "COUNT"}],
 			"Filters": {
 				"Channels": ["VOICE"],
