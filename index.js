@@ -373,6 +373,10 @@ function outboundCall(req, res, next) {
 	
 	var phoneNumber = req.body.phone;
 	var myAgent = req.body.agentId;
+	var attributes = {}
+	if(myAgent){
+		attributes = {"myAgent":myAgent};
+	}
 	var clientToken = uuidv4();
 	console.log("phone number --> " + phoneNumber);
 	
@@ -399,7 +403,7 @@ function outboundCall(req, res, next) {
 			"ContactFlowId" : '9cc6b87e-65c8-47c2-be5e-01c55ce43aa0',
 			"SourcePhoneNumber" : '+442073656117',
 			"DestinationPhoneNumber" : phoneNumber,
-			"Attributes": {},
+			"Attributes": attributes,
 			"ClientToken":clientToken,
 			"QueueId": '',
 		}
