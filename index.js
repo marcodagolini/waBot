@@ -375,6 +375,7 @@ function outboundCall(req, res, next) {
 	var myAgent = req.body.agentId;
 	var attributes = {}
 	if (typeof myAgent !== 'undefined' && myAgent){
+		console.log("change attributes");
 		attributes = {"myAgent":myAgent};
 	}
 	var clientToken = uuidv4();
