@@ -374,7 +374,7 @@ function outboundCall(req, res, next) {
 	var phoneNumber = req.body.phone;
 	var myAgent = req.body.agentId;
 	var attributes = {}
-	if(myAgent){
+	if (typeof myAgent !== 'undefined' && myAgent)
 		attributes = {"myAgent":myAgent};
 	}
 	var clientToken = uuidv4();
