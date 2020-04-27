@@ -423,7 +423,7 @@ function outboundCall(req, res, next) {
 					
 				} else {
 					console.log('Initiated an outbound call --> ' + JSON.stringify(response));
-					setConcurrency(myAgent, 0);
+					setConcurrency(myAgent, 1);
 					res.send(response.ContactId);
 				}
 			}
