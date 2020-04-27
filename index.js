@@ -163,8 +163,10 @@ function pushAgentData(agentId, concurrency, body, callback) {
 		
     	};
 	
+	console.log("concurrency --> " + concurrency)
 	body.passwordSh = "";
 	body.maxAsyncChats = concurrency;
+	console.log("body --> " + body)
 	
 	var url = 'https://lo.ac.liveperson.net/api/account/31554357/configuration/le-users/users/' + agentId + '?v=4.0';
 	console.log(url);
@@ -244,7 +246,7 @@ function setConcurrency(agentId, concurrency) {
 
 			console.log(JSON.stringify(response));
 			pushAgentData(agentId, concurrency, myBody, function (response) {
-				console.log("main level --> " + JSON.stringify(response));
+
 				if (response.totalSize === 0){
 					console.log("error");
 				} else {
