@@ -164,7 +164,7 @@ function pushAgentData(agentId, concurrency, body, callback) {
     	};
 	
 	console.log("concurrency --> " + concurrency)
-	body.passwordSh = "";
+	delete body.passwordSh
 	body.maxAsyncChats = concurrency;
 	console.log("body --> " + JSON.stringify(body))
 	
@@ -423,7 +423,7 @@ function outboundCall(req, res, next) {
 					
 				} else {
 					console.log('Initiated an outbound call --> ' + JSON.stringify(response));
-					setConcurrency(myAgent, 1);
+					setConcurrency(myAgent, 0);
 					res.send(response.ContactId);
 				}
 			}
