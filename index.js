@@ -162,7 +162,10 @@ function pushAgentData(agentId, concurrency, body, callback) {
         	token_secret: process.env.secretToken	
 		
     	};
+	
+	body = delete body['passwordSh']
 	body.maxAsyncChats = concurrency;
+	
 	var url = 'https://lo.ac.liveperson.net/api/account/31554357/configuration/le-users/users/' + agentId + '?v=4.0';
 	console.log(url);
 	request.put({
