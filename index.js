@@ -866,6 +866,7 @@ function checkValuesGetFB(req, res, next) {
 							res.send("error");
 						} else {
 							var responseToSend = {"name": response.Name, "status": response.Type__c, "phone": response.phone__c, "facebookID": response.FacebookID__c, "isThereConv": "none", "id": response.Id};
+							console.log(response.phone__c);
 							if(response.phone__c){
 								isThereAnyOpenConversationViaApp(responseToSend, response.phone__c, function (response) {
 									if(response){
