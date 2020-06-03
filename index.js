@@ -108,8 +108,9 @@ app.use(function(req, res, next) {
 });
 // app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(bodyParser.json());
-app.use(express.json({limit: '50mb'}));
-app.use(express.urlencoded({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(bodyParser.json({limit: '50mb', extended: true}));
+
 
 
 var whitelist = ['https://marcodagolini.github.io','https://vodit-report.fs.liveperson.com']
