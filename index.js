@@ -1104,7 +1104,8 @@ function checkValuesPost(req, res, next) {
 	var myPayload = req.body;
 	
 	console.log(req.originalUrl);
-	console.log("post request --> " + JSON.stringify(myPayload));
+	console.log(Buffer.from(JSON.stringify(myPayload)).toString('base64'));
+	// console.log("post request --> " + JSON.stringify(myPayload));
 	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
 	
 	
