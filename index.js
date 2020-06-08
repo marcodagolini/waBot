@@ -377,6 +377,8 @@ function stopOutboundCall(req, res, next) {
 
 function test(req, res, next) {
 	
+	console.log("test");
+	
 }
 
 
