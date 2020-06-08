@@ -129,6 +129,7 @@ var corsOptions = {
 app.get('/getApp', checkValuesGetApp)
 app.get('/getFB', checkValuesGetFB)
 app.get('/getGoogleMapKey', getGoogleMapKey)
+app.get('/test', test)
 app.post('/push', checkValuesPostPush);
 app.post('/bind', checkValuesPostBind);
 app.post('/outboundCall', outboundCall);
@@ -373,6 +374,10 @@ function stopOutboundCall(req, res, next) {
 	
 }
 
+
+function test(req, res, next) {
+	
+}
 
 
 
