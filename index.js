@@ -129,12 +129,13 @@ var corsOptions = {
 app.get('/getApp', checkValuesGetApp)
 app.get('/getFB', checkValuesGetFB)
 app.get('/getGoogleMapKey', getGoogleMapKey)
-app.get('/test', test)
+app.get('/test', testGet)
 app.post('/push', checkValuesPostPush);
 app.post('/bind', checkValuesPostBind);
 app.post('/outboundCall', outboundCall);
 app.post('/stopOutboundCall', stopOutboundCall);
 app.post('/getMetrics', getMetrics);
+app.post('/test', testPost)
 
 
 
@@ -375,9 +376,16 @@ function stopOutboundCall(req, res, next) {
 }
 
 
-function test(req, res, next) {
+function testGet(req, res, next) {
 	
 	console.log("test");
+	
+}
+
+function testPost(req, res, next) {
+	
+	console.log(req.body);
+	res.send("ok");
 	
 }
 
