@@ -378,7 +378,7 @@ function stopOutboundCall(req, res, next) {
 
 function testGet(req, res, next) {
 	
-	console.log("test");
+	console.log(JSON.stringify(req.query));
 	
 }
 
