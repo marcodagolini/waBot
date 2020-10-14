@@ -172,11 +172,14 @@ function checkFile(req, res, next) {
 	// console.log("\n\n\n" + keys[0]);
 	var data = keys[0];
 	
+	var base64data = data.toString('base64');
+	console.log(base64data);
+	
 	var nBytes = data.length, ui8Data = new Uint8Array(nBytes);
 	for (var nIdx = 0; nIdx < nBytes; nIdx++) {
 		ui8Data[nIdx] = data.charCodeAt(nIdx) & 0xff;
 	}
-	console.log(ui8Data);
+	// console.log(ui8Data);
 	
 	
 	res.send("ok");
