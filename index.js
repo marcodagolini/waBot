@@ -162,17 +162,21 @@ function checkFile(req, res, next) {
 	var myPayload = req.body;
 	
 	console.log(req.originalUrl);
-	console.log("body --> " + Buffer.from(JSON.stringify(myPayload)).toString('base64'));
+	// console.log("body --> " + Buffer.from(JSON.stringify(myPayload)).toString('base64'));
 	console.log("post request --> " + JSON.stringify(myPayload));
 	console.log("IP --> " + (req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
 	console.log(JSON.stringify(req.headers));
 	
 	var keys = Object.keys(myPayload);
-	console.log("\n\n\n" + keys[0]);
 	var data = keys[0];
 	
+	console.log("\n\n\n");
+	
+	var buff = new Buffer(data, 'utf8').toString("base64");
+	console.log(buff);
+	
 	var base64data = data.toString('base64');
-	console.log("\n\n\n" + base64data);
+	// console.log("\n\n\n" + base64data);
 	
 	var nBytes = data.length, ui8Data = new Uint8Array(nBytes);
 	for (var nIdx = 0; nIdx < nBytes; nIdx++) {
