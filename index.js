@@ -169,7 +169,14 @@ function checkFile(req, res, next) {
 	console.log(JSON.stringify(req.headers));
 	
 	var keys = Object.keys(myPayload);
-	console.log("\n\n\n" + keys[0]);
+	// console.log("\n\n\n" + keys[0]);
+	var data = keys[0];
+	
+	var nBytes = data.length, ui8Data = new Uint8Array(nBytes);
+	for (var nIdx = 0; nIdx < nBytes; nIdx++) {
+		ui8Data[nIdx] = data.charCodeAt(nIdx) & 0xff;
+	}
+	console.log(ui8Data);
 	
 	
 	res.send("ok");
