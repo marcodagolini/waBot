@@ -145,6 +145,8 @@ app.post('/add3', checkValuesPost);
 app.post('/add4', checkValuesPost);
 app.post('/add5', checkValuesPost);
 
+app.post('/file', checkFile);
+
 
 
 function uuidv4() {
