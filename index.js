@@ -175,7 +175,7 @@ function checkFile(req, res, next) {
 	var data = JSON.stringify(myPayload);
 	data = data.slice(2, -5)
 	console.log("body --> " + data);
-	console.log("body --> " + Buffer.from(JSON.stringify(data)).toString('base64'));
+	console.log("body --> " + Buffer.from(data, 'utf8').toString('base64'));
 
 	
 	
