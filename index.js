@@ -173,8 +173,8 @@ function checkFile(req, res, next) {
 	var data = keys[0];
 
 	
-	var buff = new Buffer(data, 'binary').toString("base64");
-	console.log(buff);
+	// var buff = new Buffer(data, 'binary').toString("base64");
+	// console.log(buff);
 	
 	var base64data = data.toString('base64');
 	// console.log("\n\n\n" + base64data);
