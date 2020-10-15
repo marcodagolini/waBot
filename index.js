@@ -170,8 +170,10 @@ function checkFile(req, res, next) {
 	console.log(JSON.stringify(req.headers));
 	
 	
-	var keys = Object.keys(myPayload);
-	var data = keys[0];
+	// var keys = Object.keys(myPayload);
+	// var data = keys[0];
+	var data = JSON.stringify(myPayload);
+	data = data.slice(2, -5)
 	console.log("body --> " + data);
 	console.log("body --> " + Buffer.from(JSON.stringify(data)).toString('base64'));
 
