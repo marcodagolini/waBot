@@ -169,12 +169,14 @@ function checkFile(req, res, next) {
 	console.log("IP --> " + (req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
 	console.log(JSON.stringify(req.headers));
 	
+	var buff = new Buffer(myPayload, 'binary').toString("base64");
+	console.log(buff);
+	
 	var keys = Object.keys(myPayload);
 	var data = keys[0];
 
 	
-	var buff = new Buffer(data, 'binary').toString("base64");
-	console.log(buff);
+	
 	
 	var base64data = data.toString('base64');
 	// console.log("\n\n\n" + base64data);
