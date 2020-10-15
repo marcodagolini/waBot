@@ -170,11 +170,7 @@ function checkFile(req, res, next) {
 	
 	var keys = Object.keys(myPayload);
 	var data = keys[0];
-	
-	var rawData =  data.getBytes()
-	var encoded = rawData.encodeBase64().toString()
-	
-	// console.log("\n\n\n" + encoded);
+
 	
 	var buff = new Buffer(data, 'binary').toString("base64");
 	console.log(buff);
