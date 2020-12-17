@@ -171,36 +171,20 @@ function checkFile(req, res, next) {
 	// console.log(Buffer.from(binary).toString('base64'));
 	// console.log(Buffer.from(binary, 'base64').toString('binary'))
 	
+	var atob = require('atob');
+	var base64 = atob(binary);
 	
+	console.log(base64);
 	
 	
 	
 	console.log(req.originalUrl);
-	console.log(binary);
+	// console.log(binary);
 	// console.log("body --> " + Buffer.from(JSON.stringify(myPayload)).toString('base64'));
 	// console.log("post request --> " + JSON.stringify(myPayload));
 	console.log("IP --> " + (req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
 	console.log(JSON.stringify(req.headers));
 	
-	
-	// var keys = Object.keys(myPayload);
-	// var data = keys[0];
-	var data = JSON.stringify(myPayload);
-	data = data.slice(2, -5)
-	// console.log("body --> " + data);
-	// console.log("body --> " + Buffer.from(data).toString('base64'));
-
-	
-	
-	
-	var base64data = data.toString('base64');
-	// console.log("\n\n\n" + base64data);
-	
-	var nBytes = data.length, ui8Data = new Uint8Array(nBytes);
-	for (var nIdx = 0; nIdx < nBytes; nIdx++) {
-		ui8Data[nIdx] = data.charCodeAt(nIdx) & 0xff;
-	}
-	// console.log(ui8Data);
 	
 	
 	res.send("ok");
