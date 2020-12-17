@@ -161,7 +161,9 @@ function checkFile(req, res, next) {
 	
 	var tipeOfRequest = req.query.tipeOfRequest;
 	var myPayload = req.body;
-	var binary = new Buffer(JSON.stringify(myPayload)).toString('binary')
+	// var binary = new Buffer(JSON.stringify(myPayload)).toString('binary')
+	
+	var binary = Buffer.from(myPayload.split('.')[1], 'base64').toString()
 	
 	
 	
