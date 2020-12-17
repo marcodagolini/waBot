@@ -166,13 +166,15 @@ function checkFile(req, res, next) {
 	
 	// console.log(JSON.stringify(myPayload));
 	
-	var binary = new Buffer(JSON.stringify(myPayload)).toString('base64');
+	var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
 	
 	// console.log(Buffer.from(binary).toString('base64'));
 	// console.log(Buffer.from(binary, 'base64').toString('binary'))
 	
 	var atob = require('atob');
 	var base64 = atob(binary);
+	
+	console.log(binary)
 	
 	console.log(base64);
 	
