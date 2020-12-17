@@ -161,12 +161,12 @@ function checkFile(req, res, next) {
 	
 	var tipeOfRequest = req.query.tipeOfRequest;
 	var myPayload = req.body;
-	// var binary = new Buffer(JSON.stringify(myPayload)).toString('binary')
+	var binary = new Buffer(JSON.stringify(myPayload)).toString('binary')
 	
-	console.log(JSON.stringify(myPayload));
+	
 	
 	console.log(req.originalUrl);
-	// console.log(binary);
+	console.log(binary);
 	// console.log("body --> " + Buffer.from(JSON.stringify(myPayload)).toString('base64'));
 	// console.log("post request --> " + JSON.stringify(myPayload));
 	console.log("IP --> " + (req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
