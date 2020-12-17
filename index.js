@@ -171,8 +171,8 @@ function checkFile(req, res, next) {
 	// console.log(Buffer.from(binary).toString('base64'));
 	// console.log(Buffer.from(binary, 'base64').toString('binary'))
 	
-	var atob = require('atob');
-	var base64 = atob(binary);
+	var btoa = require('btoa');
+	var base64 = btoa(binary);
 	
 	console.log(binary)
 	
