@@ -167,16 +167,13 @@ function checkFile(req, res, next) {
 	// console.log(JSON.stringify(myPayload));
 	
 	var binary = new Buffer(JSON.stringify(myPayload)).toString('binary')
-	// var binary = new Buffer(JSON.stringify(myPayload)).toString('base64')
 	
-	
-	console.log(Buffer.from(JSON.stringify(myPayload), 'base64').toString());
 	
 	
 	
 	
 	console.log(req.originalUrl);
-	// console.log(binary);
+	console.log(binary);
 	// console.log("body --> " + Buffer.from(JSON.stringify(myPayload)).toString('base64'));
 	// console.log("post request --> " + JSON.stringify(myPayload));
 	console.log("IP --> " + (req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
