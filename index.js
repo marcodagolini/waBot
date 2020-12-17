@@ -166,7 +166,7 @@ function checkFile(req, res, next) {
 	
 	// console.log(JSON.stringify(myPayload));
 	
-	var binary = new Buffer(JSON.stringify(myPayload)).toString(64);
+	var binary = new Buffer(JSON.stringify(myPayload)).toString(8);
 	binary = binary.substring(2, binary.length - 5);
 	
 	// console.log(Buffer.from(binary).toString('base64'));
