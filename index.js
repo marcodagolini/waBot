@@ -156,17 +156,32 @@ function uuidv4() {
 }
 
 
+function decodeBase64(s) {
+    var e={},i,b=0,c,x,l=0,a,r='',w=String.fromCharCode,L=s.length;
+    var A="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    for(i=0;i<64;i++){e[A.charAt(i)]=i;}
+    for(x=0;x<L;x++){
+        c=e[s.charAt(x)];b=(b<<6)+c;l+=6;
+        while(l>=8){((a=(b>>>(l-=8))&0xff)||(x<(L-2)))&&(r+=w(a));}
+    }
+    return r;
+};
+
+
 function checkFile(req, res, next) {
 	
 	var tipeOfRequest = req.query.tipeOfRequest;
 	var myPayload = req.body;
-	// var binary = new Buffer(JSON.stringify(myPayload)).toString('binary')
-	var binary = new Buffer(JSON.stringify(JSON.parse(myPayload))).toString('base64')
+	
+	var binary = new Buffer(JSON.stringify(myPayload)).toString('binary')
+	// var binary = new Buffer(JSON.stringify(myPayload)).toString('base64')
+	
+	console.log(decodeBase64(binary));
 	
 	
 	
 	console.log(req.originalUrl);
-	console.log(binary);
+	// console.log(binary);
 	// console.log("body --> " + Buffer.from(JSON.stringify(myPayload)).toString('base64'));
 	// console.log("post request --> " + JSON.stringify(myPayload));
 	console.log("IP --> " + (req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
