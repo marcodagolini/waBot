@@ -243,7 +243,7 @@ function checkFile(req, res, next) {
 	
 
 	
-	
+	console.log(response);
 	
 	res.send(response);
 	
