@@ -164,15 +164,15 @@ function checkFile(req, res, next) {
 	var tipeOfRequest = req.query.tipeOfRequest;
 	var myPayload = req.body;
 	
-	console.log(myPayload);
+	// console.log(myPayload);
 	var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
 	
 	let objJsonStr = JSON.stringify(myPayload);
-	let objJsonB64 = Buffer.from(objJsonStr).toString("base64");
+	// let objJsonB64 = Buffer.from(objJsonStr).toString("base64");
 	// console.log("\n\n\n\n\n\n");
-	console.log(objJsonB64)
+	// console.log(objJsonB64)
 	var btoa = require('btoa');
-	// console.log(btoa(unescape(encodeURIComponent(binary))));
+	console.log(btoa(objJsonStr));
 	
 	// var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
 	// binary = binary.substring(2, binary.length - 5);
