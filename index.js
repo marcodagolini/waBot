@@ -176,9 +176,10 @@ function uuidv4() {
 
 function checkFile(req, res, next) {
 	
-	const StringDecoder = require('string_decoder').StringDecoder;
 	
-	var tipeOfRequest = req.query.tipeOfRequest;
+	/*****
+	
+	// var tipeOfRequest = req.query.tipeOfRequest;
 	var myPayload = req.body;
 	
 	console.log(JSON.stringify(myPayload));
@@ -224,7 +225,7 @@ function checkFile(req, res, next) {
 	
 	// console.log(base64);
 	
-	
+	*****/
 	
 	console.log(req.originalUrl);
 	// console.log(binary);
@@ -234,8 +235,25 @@ function checkFile(req, res, next) {
 	console.log(JSON.stringify(req.headers));
 	
 	
+	const StringDecoder = require('string_decoder').StringDecoder;
+	const decoder = new StringDecoder('utf-8');
+  let buffer = '';
+
+  req.on('data', (chunk) => {
+    buffer += decoder.write(chunk);
+  });
+
+  req.on('end', () => {
+    buffer += decoder.end();
+    res.writeHead(200, 'OK', { 'Content-Type': 'text/plain'});
+    res.write('the response:\n\n');
+    res.write(buffer + '\n\n');
+    res.end('End of message to browser');
+  });
 	
-	res.send("ok");
+	
+	
+	// res.send("ok");
 	
 	
 	
