@@ -237,24 +237,15 @@ function checkFile(req, res, next) {
 	
 	const StringDecoder = require('string_decoder').StringDecoder;
 	const decoder = new StringDecoder('utf-8');
-  let buffer = '';
+	
+	let response = decoder.write(req.body)
+	
+	
 
-  req.on('data', (chunk) => {
-	  console.log("inside");
-    buffer += decoder.write(chunk);
-  });
-
-  req.on('end', () => {
-    buffer += decoder.end();
-    res.writeHead(200, 'OK', { 'Content-Type': 'text/plain'});
-    res.write('the response:\n\n');
-    res.write(buffer + '\n\n');
-    res.end('End of message to browser');
-  });
 	
 	
 	
-	// res.send("ok");
+	res.send(response);
 	
 	
 	
