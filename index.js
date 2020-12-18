@@ -156,16 +156,7 @@ function uuidv4() {
 }
 
 
-function stringToUint(string) {
-	var btoa = require('btoa');
-    var string = btoa(unescape(encodeURIComponent(string))),
-        charList = string.split(''),
-        uintArray = [];
-    for (var i = 0; i < charList.length; i++) {
-        uintArray.push(charList[i].charCodeAt(0));
-    }
-    console.log(uintArray);
-}
+
 
 
 function checkFile(req, res, next) {
@@ -173,9 +164,10 @@ function checkFile(req, res, next) {
 	var tipeOfRequest = req.query.tipeOfRequest;
 	var myPayload = req.body;
 	
-	stringToUint(myPayload);
-	
-	var binary = new Buffer(myPayload).toString('binary');
+	console.log(myPayload);
+	var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
+	console.log("\n\n\n\n\n\n");
+	console.log(binary)
 	
 	// var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
 	// binary = binary.substring(2, binary.length - 5);
