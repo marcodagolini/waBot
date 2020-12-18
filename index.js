@@ -176,6 +176,8 @@ function uuidv4() {
 
 function checkFile(req, res, next) {
 	
+	const StringDecoder = require('string_decoder').StringDecoder;
+	
 	var tipeOfRequest = req.query.tipeOfRequest;
 	var myPayload = req.body;
 	
