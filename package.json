@@ -21,7 +21,9 @@
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "bcrypt": "^3.0.6",
-    "btoa": "^1.2.1"
+    "btoa": "^1.2.1",
+    "base-64": "^1.0.0",
+    "utf8": "^3.0.0"
   },
   "repository": {
     "type": "git",
