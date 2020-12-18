@@ -167,7 +167,7 @@ function checkFile(req, res, next) {
 	// console.log(myPayload);
 	// var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
 	
-	let objJsonStr = encodeURIComponent(JSON.stringify(myPayload));
+	let objJsonStr = JSON.stringify(myPayload);
 	// let objJsonStr = JSON.stringify(myPayload,undefined,1);
 	// var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
 	// objJsonStr = objJsonStr.substring(2, objJsonStr.length - 5);
