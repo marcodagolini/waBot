@@ -167,15 +167,16 @@ function checkFile(req, res, next) {
 	// console.log(myPayload);
 	// var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
 	
-	let objJsonStr = JSON.stringify(myPayload,undefined,1);
+	let objJsonStr = JSON.stringify(myPayload);
+	// let objJsonStr = JSON.stringify(myPayload,undefined,1);
 	// var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
 	objJsonStr = objJsonStr.substring(2, objJsonStr.length - 5);
 	// console.log(objJsonStr)
-	// let objJsonB64 = Buffer.from(objJsonStr).toString("base64");
+	objJsonStr = Buffer.from(objJsonStr, 'binary').toString("base64");
 	// console.log("\n\n\n\n\n\n");
 	// console.log(objJsonB64)
 	// var btoa = require('btoa');
-	// console.log(btoa(objJsonStr));
+	console.log(btoa(objJsonStr));
 	
 	var base64 = require('base-64');
 	var utf8 = require('utf8');
