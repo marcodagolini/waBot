@@ -176,7 +176,7 @@ function checkFile(req, res, next) {
 	// console.log("\n\n\n\n\n\n");
 	// console.log(objJsonB64)
 	// var btoa = require('btoa');
-	console.log(btoa(objJsonStr));
+	console.log(objJsonStr);
 	
 	var base64 = require('base-64');
 	var utf8 = require('utf8');
