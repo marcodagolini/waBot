@@ -166,8 +166,11 @@ function checkFile(req, res, next) {
 	
 	console.log(myPayload);
 	var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
-	console.log("\n\n\n\n\n\n");
-	console.log(binary)
+	
+	let objJsonStr = JSON.stringify(myPayload);
+	let objJsonB64 = Buffer.from(objJsonStr).toString("base64");
+	// console.log("\n\n\n\n\n\n");
+	console.log(objJsonB64)
 	var btoa = require('btoa');
 	// console.log(btoa(unescape(encodeURIComponent(binary))));
 	
