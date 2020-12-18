@@ -176,7 +176,7 @@ function checkFile(req, res, next) {
 	var tipeOfRequest = req.query.tipeOfRequest;
 	var myPayload = req.body;
 	
-	console.log(myPayload);
+	console.log(JSON.stringify(myPayload));
 	// var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
 	
 	let objJsonStr = JSON.stringify(myPayload);
@@ -188,7 +188,7 @@ function checkFile(req, res, next) {
 	// console.log("\n\n\n\n\n\n");
 	// console.log(objJsonB64)
 	// var btoa = require('btoa');
-	console.log(objJsonStr);
+	// console.log(objJsonStr);
 	
 	var base64 = require('base-64');
 	var utf8 = require('utf8');
