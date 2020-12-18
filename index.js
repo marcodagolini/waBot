@@ -179,7 +179,7 @@ function checkFile(req, res, next) {
 	// console.log(Buffer.from(binary, 'base64').toString('binary'))
 	
 	var a = "iVBORw0KGgoAAAANSUhEUgAAASQAAAEICAYAAAD2l4mhAAAMSWlDQ1BJQ0MgUHJvZmlsZQAASImVVwdYU8kWnltSSWiBCEgJvYkiSJcSQosgIFWwEZJAQokxIYjYkWUVXLuIgLqiqyKKrgWQtWIvi2J3LS8WVFbWxYINlTcpoKvfe+97J9/c+98zZ/5TMnfuDAB6tTypNA/VByBfUiBLiAxljU9LZ5EeARQQgR78ufH4cik7Pj4GQBm4/1PeXAeI6n7FTcX1ff9/FQOBUM4HAImHOFMg5+dDvA8AvJQvlRUAQPSFetvpBVIVngixkQwGCLFUhbM1uFSFMzW4Sm2TlMCBeAcAZBqPJ8sGQLcF6lmF/GzIo3sTYneJQCwBQI8McRBfxBNAHAXxsPz8qSoM7YBT5lc82f/gzBzk5PGyB7EmF7WQw8RyaR5vxv9Zjv8t+XmKAR8OsNFEsqgEVc6wbjdzp0arMA3ibklmbBzEhhC/EwvU9hCjVJEiKlljj5rz5RxYM8CE2F3AC4uG2BziCElebIxWn5kljuBCDGcIWiQu4CZpxy4UysMTtZy1sqkJcQM4S8Zha8c28mRqvyr7E4rcZLaW/6ZIyB3gf10sSkrVxIxRC8Up"
-	console.log(Buffer.from(a, 'base64').toString('binary'))
+	console.log(Buffer.from(a).toString('binary'))
 	binary = toBinary(binary);
 	
 	var btoa = require('btoa');
