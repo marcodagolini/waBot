@@ -109,6 +109,18 @@ app.use(function(req, res, next) {
 // app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(bodyParser.json({limit: '50mb', extended: true}));
+app.use(
+  bodyParser.raw({ type : 'application/x-www-form-urlencoded' }),
+  function(req, res, next) {
+    try {
+      req.body = JSON.parse(req.body)
+    } catch(e) {
+      req.body = require('qs').parse(req.body.toString());
+    }
+    next();
+  }
+);
+
 
 
 
@@ -164,7 +176,7 @@ function checkFile(req, res, next) {
 	var tipeOfRequest = req.query.tipeOfRequest;
 	var myPayload = req.body;
 	
-	// console.log(myPayload);
+	console.log(myPayload);
 	// var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
 	
 	let objJsonStr = JSON.stringify(myPayload);
