@@ -219,7 +219,10 @@ function checkFile(req, res, next) {
 	 text = buff.toString('utf8');
 	console.log(text);
 	console.log("\n\n\n\n\n\n");
-	 text = buff.toString('utf16le/ucs2');
+	 text = buff.toString('utf16le');
+	console.log(text);
+	console.log("\n\n\n\n\n\n");
+	 text = buff.toString('ucs2');
 	console.log(text);
 	console.log("\n\n\n\n\n\n");
 	 text = buff.toString('binary');
