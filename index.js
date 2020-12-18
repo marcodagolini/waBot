@@ -186,7 +186,8 @@ function checkFile(req, res, next) {
 	
 	let objJsonStr = JSON.stringify(myPayload);
 	// let objJsonStr = JSON.stringify(myPayload,undefined,1);
-	var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
+	// var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
+	var binary = new Buffer(JSON.stringify(myPayload))
 	// objJsonStr = objJsonStr.substring(2, objJsonStr.length - 5);
 	console.log("\n\n\n\n\n\n");
 	console.log(binary)
