@@ -240,6 +240,7 @@ function checkFile(req, res, next) {
   let buffer = '';
 
   req.on('data', (chunk) => {
+	  console.log("inside");
     buffer += decoder.write(chunk);
   });
 
