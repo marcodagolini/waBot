@@ -213,7 +213,7 @@ function checkFile(req, res, next) {
 	
 	let buff = new Buffer(data, 'base64');
 	let text = buff.toString('ascii');
-	console.log(text);
+	// console.log(text);
 	// console.log(Buffer.from(a).toString('binary'))
 	
 	
