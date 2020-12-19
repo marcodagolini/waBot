@@ -192,14 +192,15 @@ function checkFile(req, res, next) {
 	
 	let objJsonStr = JSON.stringify(myPayload);
 	var encoded = encode_utf8(objJsonStr);
-	console.log(encoded);
+	encoded = encoded.substring(2, encoded.length - 5);
+	// console.log(encoded);
 	// let objJsonStr = JSON.stringify(myPayload,undefined,1);
 	// var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
 	var binary = new Buffer(encoded).toString("base64");
 	// objJsonStr = objJsonStr.substring(2, objJsonStr.length - 5);
 	console.log("\n\n\n\n\n\n");
 	console.log(binary)
-	objJsonStr = Buffer.from(objJsonStr, 'binary').toString("base64");
+	// objJsonStr = Buffer.from(objJsonStr, 'binary').toString("base64");
 	// console.log("\n\n\n\n\n\n");
 	// console.log(objJsonStr)
 	// var btoa = require('btoa');
