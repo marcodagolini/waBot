@@ -183,7 +183,7 @@ function checkFile(req, res, next) {
 	// var tipeOfRequest = req.query.tipeOfRequest;
 	var myPayload = req.body;
 	
-	// console.log(JSON.stringify(myPayload));
+	console.log(JSON.stringify(myPayload));
 	// var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
 	
 	let objJsonStr = JSON.stringify(myPayload);
