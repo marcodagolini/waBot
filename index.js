@@ -180,6 +180,16 @@ function encode_utf8(s) {
 }
 
 
+function fromWindows1252(binaryString) {
+	
+	var WINDOWS_1252 = '\u0000\u0001\u0002\u0003\u0004\u0005\u0006\u0007\b\t\n\u000b\f\r\u000e\u000f\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001a\u001b\u001c\u001d\u001e\u001f !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~€�‚ƒ„…†‡ˆ‰Š‹Œ�Ž��‘’“”•–—˜™š›œ�žŸ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ';
+	var text = '';
+	for (var i = 0; i < binaryString.length; i++) {
+		text += WINDOWS_1252.charAt(binaryString.charCodeAt(i));
+	}
+	return text;
+}
+
 function checkFile(req, res, next) {
 	
 	
@@ -190,8 +200,9 @@ function checkFile(req, res, next) {
 	console.log(JSON.stringify(myPayload));
 	// var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
 	
-	let objJsonStr = JSON.stringify(myPayload);
-	objJsonStr = objJsonStr.substring(1, objJsonStr.length - 5);
+	var objJsonStr = JSON.stringify(myPayload);
+	// objJsonStr = fromWindows1252(objJsonStr);
+	objJsonStr = objJsonStr.substring(2, objJsonStr.length - 5);
 	var binary = new Buffer(objJsonStr, 'utf8').toString('base64');
 	console.log("\n\n\n\n\n\n");
 	
