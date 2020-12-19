@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "POC",
   "engines": {
-    "node": "6.11.3"
+    "node": "15"
   },
   "main": "index.js",
   "scripts": {
