@@ -235,7 +235,7 @@ function checkFile(req, res, next) {
 	console.log("\n\n\n\n\n\n");
 	console.log(binary)
 	
-	*****/
+	
 	
 	console.log("\n\n\n\n\n\n");
 	
