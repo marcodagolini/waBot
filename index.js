@@ -201,8 +201,12 @@ function checkFile(req, res, next) {
 	// var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
 	
 	var objJsonStr = JSON.stringify(myPayload);
-	// objJsonStr = fromWindows1252(objJsonStr);
-	objJsonStr = objJsonStr.substring(2, objJsonStr.length - 5);
+	objJsonStr = fromWindows1252(objJsonStr);
+	console.log("\n\n\n\n\n\n");
+	
+	console.log(objJsonStr);
+	
+	// objJsonStr = objJsonStr.substring(2, objJsonStr.length - 5);
 	var binary = new Buffer(objJsonStr, 'utf8').toString('base64');
 	console.log("\n\n\n\n\n\n");
 	
