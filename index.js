@@ -171,7 +171,9 @@ function uuidv4() {
 }
 
 
-
+function decode_utf8(s) {
+	return decodeURIComponent(escape(s));
+}
 
 
 function checkFile(req, res, next) {
@@ -185,12 +187,14 @@ function checkFile(req, res, next) {
 	// var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
 	
 	let objJsonStr = JSON.stringify(myPayload);
+	var decoded = decode_utf8(objJsonStr);
+	console.log(decoded);
 	// let objJsonStr = JSON.stringify(myPayload,undefined,1);
 	// var binary = new Buffer(JSON.stringify(myPayload)).toString('binary');
 	var binary = new Buffer(JSON.stringify(myPayload)).toString("base64");
 	// objJsonStr = objJsonStr.substring(2, objJsonStr.length - 5);
 	// console.log("\n\n\n\n\n\n");
-	console.log(binary)
+	// console.log(binary)
 	objJsonStr = Buffer.from(objJsonStr, 'binary').toString("base64");
 	// console.log("\n\n\n\n\n\n");
 	// console.log(objJsonStr)
