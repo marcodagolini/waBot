@@ -208,8 +208,8 @@ function checkFile(req, res, next) {
         		'X-My-App-Auth-Token': '76j0lEi7d7oj7JZolE4K80ckMMCtK9EG'
     		}
 	}, function (e, r, b) {
+		console.log(JSON.stringify(b));
 		if(b){
-			console.log(JSON.stringify(b));
 			if(JSON.stringify(b).indexOf("Error") > -1){
 				res.send('{"error":"file not supported"}');
 			} else{
