@@ -207,15 +207,15 @@ function str2ab(str) {
 
 function checkFile(req, res, next) {
 	
-	// console.log(req.body);
+	console.log(req.body);
 	
-	var Bson = require('bson');
 	
-	var myBuffer = new Uint8Array(Bson.serialize(req.body).buffer)
+	console.log("\n\n\n\n\n\n");
 	
-	// var myImage = Object.keys(req.body)[0];
 	
-	console.log(myBuffer);
+	console.log(JSON.stringify(req.body));
+	
+	
 	
 	
 	/****
