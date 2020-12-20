@@ -209,7 +209,12 @@ function checkFile(req, res, next) {
     		}
 	}, function (e, r, b) {
 		if(b){
-			res.send(JSON.stringify(b));
+			if(JSON.stringify(b).indexOf("Error")){
+				res.send("error");
+			} else{
+				res.send(JSON.stringify(b));
+			}
+			
 		} else{
 			res.send("error");
 		}
