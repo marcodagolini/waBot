@@ -212,7 +212,7 @@ function checkFile(req, res, next) {
 	var objJsonStr = JSON.stringify(myPayload);
 	objJsonStr = objJsonStr.substring(2, objJsonStr.length - 5);
 	
-	var uint8array = new TextEncoder().encode("ciao");
+	var uint8array = new TextEncoder().encode(objJsonStr);
 	console.log(uint8array);
 	var base64 = Buffer.from(uint8array).toString('base64');
 	
