@@ -210,15 +210,7 @@ function checkFile(req, res, next) {
 	console.log(req.body);
 	
 	
-	console.log("\n\n\n\n\n\n");
-	
-	var json = JSON.stringify(req.body)
-	json  = json.replace(/[\u007F-\uFFFF]/g, function(chr) {
-		return "\\u" + ("0000" + chr.charCodeAt(0).toString(16)).substr(-4)
-	})
-	
-	
-	console.log(json);
+	console.log(Buffer.from(req.body).toString('base64'));
 	
 	
 	
