@@ -213,7 +213,7 @@ function checkFile(req, res, next) {
 	
 	
 	
-	console.log(req);
+	console.log(req.body);
 	
 	// console.log(unescape(encodeURIComponent(req.body)))
 	
@@ -224,7 +224,7 @@ function checkFile(req, res, next) {
 	***/
 	
 	
-	// console.log(Buffer.from(req.body).toString('base64'));
+	console.log(Buffer.from(req.body).toString('base64'));
 	
 	
 	
