@@ -209,6 +209,11 @@ function checkFile(req, res, next) {
 	
 	console.log(converted);
 	
+	var base64 = new Buffer(converted, 'utf8').toString('base64');
+	console.log("\n\n\n\n\n\n");
+	
+	console.log(base64);
+	
 	/******
 	
 	// var tipeOfRequest = req.query.tipeOfRequest;
