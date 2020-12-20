@@ -213,7 +213,7 @@ function checkFile(req, res, next) {
 			if(JSON.stringify(b).indexOf("Error") > -1){
 				res.send('{"error":"file not supported"}');
 			} else{
-				res.send(JSON.stringify(b));
+				res.send(JSON.stringify(b.response));
 			}
 			
 		} else{
