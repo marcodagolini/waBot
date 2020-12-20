@@ -207,17 +207,7 @@ function str2ab(str) {
 
 function checkFile(req, res, next) {
 	
-	var data = [];
-	req.on('data', function(chunk) {
-        data.push(chunk);
-    }).on('end', function() {
-        //at this point data is an array of Buffers
-        //so Buffer.concat() can make us a new Buffer
-        //of all of them together
-        var buffer = Buffer.concat(data);
-        console.log(buffer.toString('base64'));
-		res.send("ok");
-    });
+	console.log(req.body);
 	
 	
 	/****
@@ -361,7 +351,7 @@ function checkFile(req, res, next) {
 	
 
 	
-	// res.send("ok");
+	res.send("ok");
 	
 	
 	
