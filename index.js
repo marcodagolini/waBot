@@ -207,9 +207,11 @@ function str2ab(str) {
 
 function checkFile(req, res, next) {
 	
-	/***
+	
 	
 	console.log(req.body);
+	
+	/****
 	console.log("\n\n\n\n\n\n");
 	console.log(JSON.stringify(req.body));
 	
