@@ -225,6 +225,7 @@ function checkFile(req, res, next) {
 	
 	
 	console.log(Buffer.from(req.body).toString('base64'));
+	console.log(Buffer.from(req.body).toString('binary'));
 	
 	
 	
