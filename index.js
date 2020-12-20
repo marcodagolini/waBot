@@ -199,6 +199,7 @@ function checkFile(req, res, next) {
 	var request = require('request');
 	
 	var url = 'http://52.166.95.161:5002/api/server';
+	var body = {"type":"predict", "image":myImage};
 	request.post({
     		url: url,
     		json: true,
