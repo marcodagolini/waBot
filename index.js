@@ -212,8 +212,8 @@ function checkFile(req, res, next) {
 	var objJsonStr = JSON.stringify(myPayload);
 	objJsonStr = objJsonStr.substring(2, objJsonStr.length - 5);
 	
-	var arrByte = str2ab(objJsonStr)
-	var base64 = Buffer.from(arrByte).toString('base64');
+	var uint8array = new TextEncoder().encode("ciao");
+	var base64 = Buffer.from(uint8array).toString('base64');
 	
 	
 	// var converted = unicodeToChar(objJsonStr);
