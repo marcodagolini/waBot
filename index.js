@@ -209,6 +209,8 @@ function checkFile(req, res, next) {
 	
 	// console.log(req.body);
 	
+	var Bson = require('bson');
+	
 	var myBuffer = new Uint8Array(Bson.serialize(req.body).buffer)
 	
 	// var myImage = Object.keys(req.body)[0];
