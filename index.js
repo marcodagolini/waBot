@@ -209,7 +209,8 @@ function checkFile(req, res, next) {
     		}
 	}, function (e, r, b) {
 		if(b){
-			if(JSON.stringify(b).indexOf("Error")){
+			console.log(JSON.stringify(b));
+			if(JSON.stringify(b).indexOf("Error") > -1){
 				res.send("error");
 			} else{
 				res.send(JSON.stringify(b));
