@@ -213,7 +213,7 @@ function checkFile(req, res, next) {
 	console.log("\n\n\n\n\n\n");
 	
 	
-	console.log(JSON.stringify(req.body));
+	console.log(JSON.stringify(req.body), undefined, 2);
 	
 	
 	
