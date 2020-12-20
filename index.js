@@ -196,6 +196,15 @@ function unicodeToChar(text) {
           });
 }
 
+function str2ab(str) {
+  var buf = new ArrayBuffer(str.length*2); // 2 bytes for each char
+  var bufView = new Uint16Array(buf);
+  for (var i=0, strLen=str.length; i<strLen; i++) {
+    bufView[i] = str.charCodeAt(i);
+  }
+  return buf;
+}
+
 function checkFile(req, res, next) {
 	
 	var myPayload = req.body;
@@ -203,7 +212,7 @@ function checkFile(req, res, next) {
 	var objJsonStr = JSON.stringify(myPayload);
 	objJsonStr = objJsonStr.substring(2, objJsonStr.length - 5);
 	
-	var arrByte = Uint8Array.from(objJsonStr)
+	var arrByte = str2ab(objJsonStr)
 	var base64 = Buffer.from(arrByte).toString('base64');
 	
 	
