@@ -209,6 +209,10 @@ function checkFile(req, res, next) {
 	
 	console.log(req.body);
 	
+	console.log(req.body.toString());
+	
+	
+	
 	
 	// console.log(Buffer.from(req.body).toString('base64'));
 	
