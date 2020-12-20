@@ -209,7 +209,9 @@ function checkFile(req, res, next) {
 	
 	
 	
-	console.log(req.body);
+	// console.log(req.body);
+	
+	console.log(unescape(encodeURIComponent(req.body)))
 	
 	/****
 	console.log("\n\n\n\n\n\n");
