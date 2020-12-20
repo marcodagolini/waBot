@@ -108,6 +108,10 @@ app.use(function(req, res, next) {
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(bodyParser.json({limit: '50mb', extended: true}));
+app.use(bodyParser.raw({
+    type: 'application/x-www-form-urlencoded',
+    limit: '50mb'
+}));
 
 /****
 app.use(
