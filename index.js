@@ -209,7 +209,7 @@ function checkFile(req, res, next) {
 	
 	console.log(req.body);
 	
-	console.log(req.body.toString());
+	console.log(JSON.parse(req.body.toString()));
 	
 	
 	
