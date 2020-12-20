@@ -209,7 +209,7 @@ function checkFile(req, res, next) {
 	
 	
 	
-	console.log(req.body);
+	console.log(req);
 	
 	// console.log(unescape(encodeURIComponent(req.body)))
 	
