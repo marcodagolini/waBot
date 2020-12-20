@@ -189,6 +189,13 @@ function fromWindows1252(binaryString) {
 	return text;
 }
 
+function unicodeToChar(text) {
+   return text.replace(/\\u[\dA-F]{4}/gi, 
+          function (match) {
+               return String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
+          });
+}
+
 function checkFile(req, res, next) {
 	
 	var myPayload = req.body;
@@ -197,10 +204,8 @@ function checkFile(req, res, next) {
 	objJsonStr = objJsonStr.substring(2, objJsonStr.length - 5);
 	
 	
-	var Iconv  = require('iconv').Iconv;
-	var iconv = new Iconv('windows-1251', 'utf8');
 	
-	var converted = iconv.convert(objJsonStr);
+	var converted = unicodeToChar(objJsonStr);
 	
 	console.log(converted);
 	
