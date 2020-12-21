@@ -3,6 +3,7 @@
 require('dotenv').config()
 
 var myStoredResponse = {
+	"light":"red",
 	"error":"",
 	"value1":"",
 	"value2":"",
@@ -191,12 +192,23 @@ function getValues(req, res, next) {
 	console.log("IP --> " + (req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
 	console.log(JSON.stringify(req.headers));
 	
+	var myCounter = 0;
 	
-	
-	
-	res.send(myStoredResponse);
-	
-
+	var refreshIntervalId = setInterval(function(){
+		console.log("inside loop");
+		myCounter = myCounter + 1
+		if(myStoredResponse.light === "green"){
+			clearInterval(refreshIntervalId);
+			res.send(myStoredResponse);
+			myStoredResponse.light = "red";
+		}
+		if(myCounter > 5){
+			clearInterval(refreshIntervalId);
+			myStoredResponse.error = "server error";
+			myStoredResponse.light = "red";
+			res.send(myStoredResponse);
+		}
+	}, 5000);
 	
 	
 }
@@ -227,6 +239,7 @@ function checkFile(req, res, next) {
 	
 	var request = require('request');
 	
+	
 	var url = 'http://52.166.95.161:5002/api/server';
 	var body = {"type":"predict", "image":myImage};
 	request.post({
@@ -240,9 +253,11 @@ function checkFile(req, res, next) {
 		console.log(JSON.stringify(b));
 		if(b){
 			if(JSON.stringify(b).indexOf("Error") > -1){
+				myStoredResponse.light = "green";
 				myStoredResponse.error = "file not supported";
 				res.send({"error":"file not supported"});
 			} else{
+				myStoredResponse.light = "green";
 				myStoredResponse.error = "";
 				myStoredResponse.value1 = b.response["pigmented benign keratosis"];
 				myStoredResponse.value2 = b.response.nevus;
@@ -251,6 +266,7 @@ function checkFile(req, res, next) {
 			}
 			
 		} else{
+			myStoredResponse.light = "green";
 			myStoredResponse.error = "file not supported";
 			res.send({"error":"file not supported"})
 		}
