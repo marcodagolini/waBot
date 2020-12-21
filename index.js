@@ -246,7 +246,7 @@ function checkFile(req, res, next) {
 				myStoredResponse.error = "";
 				myStoredResponse.value1 = b.response["pigmented benign keratosis"];
 				myStoredResponse.value2 = b.response.nevus;
-				myStoredResponse.value2 = b.response.melanoma;
+				myStoredResponse.value3 = b.response.melanoma;
 				res.send(b.response);
 			}
 			
