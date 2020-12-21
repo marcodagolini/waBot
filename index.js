@@ -192,6 +192,7 @@ function getValues(req, res, next) {
 	console.log("IP --> " + (req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
 	console.log(JSON.stringify(req.headers));
 	
+	myStoredResponse.light = "red";
 	var myCounter = 0;
 	
 	var refreshIntervalId = setInterval(function(){
