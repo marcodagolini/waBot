@@ -2,6 +2,13 @@
 
 require('dotenv').config()
 
+var myStoredResponse = {
+	"error":"",
+	"value1:"",
+	"value2:"",
+	"value3":""
+}
+
 
 
 const bcrypt = require('bcrypt');
@@ -147,6 +154,7 @@ app.get('/getApp', checkValuesGetApp)
 app.get('/getFB', checkValuesGetFB)
 app.get('/getGoogleMapKey', getGoogleMapKey)
 app.get('/test', testGet)
+app.get('/getValues', getValues)
 app.post('/push', checkValuesPostPush);
 app.post('/bind', checkValuesPostBind);
 app.post('/outboundCall', outboundCall);
@@ -172,6 +180,27 @@ function uuidv4() {
 		return v.toString(16);
 	});
 }
+
+
+function getValues(req, res, next) {
+	
+	console.log(req.originalUrl);
+	// console.log(binary);
+	// console.log("body --> " + Buffer.from(JSON.stringify(myPayload)).toString('base64'));
+	// console.log("post request --> " + JSON.stringify(myPayload));
+	console.log("IP --> " + (req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
+	console.log(JSON.stringify(req.headers));
+	
+	
+	
+	
+	res.send(myStoredResponse);
+	
+
+	
+	
+}
+
 
 
 
@@ -211,27 +240,25 @@ function checkFile(req, res, next) {
 		console.log(JSON.stringify(b));
 		if(b){
 			if(JSON.stringify(b).indexOf("Error") > -1){
+				myStoredResponse.error = "file not supported";
 				res.send({"error":"file not supported"});
 			} else{
+				myStoredResponse.error = "";
+				myStoredResponse.value1 = b.response["pigmented benign keratosis"];
+				myStoredResponse.value2 = b.response.nevus;
+				myStoredResponse.value2 = b.response.melanoma;
 				res.send(b.response);
 			}
 			
 		} else{
-			res.send({"error":"file not supported"});
+			myStoredResponse.error = "file not supported";
+			res.send({"error":"file not supported"})
 		}
+		
 
 	});
 	
-	
-	
-	
-	
-	
-	
 
-	
-	
-	
 	
 	
 }
