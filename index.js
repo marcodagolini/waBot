@@ -4,8 +4,8 @@ require('dotenv').config()
 
 var myStoredResponse = {
 	"error":"",
-	"value1:"",
-	"value2:"",
+	"value1":"",
+	"value2":"",
 	"value3":""
 }
 
