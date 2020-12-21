@@ -194,18 +194,22 @@ function getValues(req, res, next) {
 	
 	var myCounter = 0;
 	
-	var refreshIntervalId = setInterval(function(){
+	var refreshIntervalId = setInterval(function(res){
 		console.log("inside loop");
 		myCounter = myCounter + 1
 		if(myStoredResponse.light === "green"){
+			console.log("i got an answer!!!");
 			clearInterval(refreshIntervalId);
 			res.send(myStoredResponse);
 			myStoredResponse.light = "red";
+		} else{
+			console.log("i dont have an answer");
 		}
 		if(myCounter > 4){
-			clearInterval(refreshIntervalId);
+			console.log("exiting loop");
 			myStoredResponse.error = "server error";
 			myStoredResponse.light = "red";
+			clearInterval(refreshIntervalId);
 			res.send(myStoredResponse);
 		}
 	}, 5000);
