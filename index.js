@@ -202,7 +202,7 @@ function getValues(req, res, next) {
 			res.send(myStoredResponse);
 			myStoredResponse.light = "red";
 		}
-		if(myCounter > 5){
+		if(myCounter > 4){
 			clearInterval(refreshIntervalId);
 			myStoredResponse.error = "server error";
 			myStoredResponse.light = "red";
