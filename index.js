@@ -194,7 +194,7 @@ function getValues(req, res, next) {
 	
 	var myCounter = 0;
 	
-	var refreshIntervalId = setInterval(function(res){
+	var refreshIntervalId = setInterval(function(){
 		console.log("inside loop");
 		myCounter = myCounter + 1
 		if(myStoredResponse.light === "green"){
