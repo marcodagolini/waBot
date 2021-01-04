@@ -162,7 +162,7 @@ app.post('/outboundCall', outboundCall);
 app.post('/stopOutboundCall', stopOutboundCall);
 app.post('/getMetrics', getMetrics);
 app.post('/test', testPost)
-
+app.post('/checkFile', checkFile);
 
 
 app.post('/add1', checkValuesPost);
@@ -171,7 +171,7 @@ app.post('/add3', checkValuesPost);
 app.post('/add4', checkValuesPost);
 app.post('/add5', checkValuesPost);
 
-app.post('/file', checkFile);
+
 
 
 
