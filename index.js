@@ -535,6 +535,13 @@ function testPost(req, res, next) {
 	console.log(req.body);
 	console.log(myImage);
 	console.log(myImage2);
+	
+	var SignedXml = require('xml-crypto').SignedXml;
+	var sig = new SignedXml();
+	var res = sig.checkSignature(req.body);
+	console.log(res);
+	
+	
 	res.send("ok");
 	
 }
