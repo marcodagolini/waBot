@@ -101,6 +101,7 @@ var bodyParser = require("body-parser");
 
 
 var app = express();
+const formidable = require('express-formidable');
 app.listen(process.env.PORT);
 app.set('port', (process.env.PORT || 5000));
 
@@ -120,6 +121,7 @@ app.use(bodyParser.raw({
     type: 'application/x-www-form-urlencoded',
     limit: '50mb'
 }));
+app.use(formidable());
 
 /****
 app.use(
@@ -513,6 +515,12 @@ function testGet(req, res, next) {
 }
 
 function testPost(req, res, next) {
+	
+	
+	console.log(req.fields);
+	console.log("********");
+	console.log(req.files);
+	console.log("********");
 	
 	console.log(req.originalUrl);
 	// console.log(binary);
