@@ -530,9 +530,11 @@ function testPost(req, res, next) {
 	
 	
 	var myImage = Buffer.from(req.body).toString('base64');
+	var myImage2 = Buffer.from(req.body).toString('ascii');
 	
 	console.log(req.body);
 	console.log(myImage);
+	console.log(myImage2);
 	res.send("ok");
 	
 }
