@@ -514,7 +514,25 @@ function testGet(req, res, next) {
 
 function testPost(req, res, next) {
 	
+	console.log(req.originalUrl);
+	// console.log(binary);
+	// console.log("body --> " + Buffer.from(JSON.stringify(myPayload)).toString('base64'));
+	// console.log("post request --> " + JSON.stringify(myPayload));
+	console.log("IP --> " + (req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
+	console.log(JSON.stringify(req.headers));
+	
+	
+	
+	
+	// console.log(req.body);
+	
+	
+	
+	
+	var myImage = Buffer.from(req.body).toString('base64');
+	
 	console.log(req.body);
+	console.log(myImage);
 	res.send("ok");
 	
 }
