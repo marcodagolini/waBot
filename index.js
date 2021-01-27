@@ -530,7 +530,7 @@ function testPost(req, res, next) {
 	
 	
 	var myImage = Buffer.from(req.body).toString('ascii');
-	myImage = myImage.replace(/%2B/g, "+").replace(/%3B/g, "/");
+	myImage = myImage.replace(/%2B/g, "+").replace(/%3B/g, "/").replace(/%3D/g, "=");
 	
 	// console.log(req.body);
 	console.log(myImage);
