@@ -101,6 +101,7 @@ var bodyParser = require("body-parser");
 
 
 var app = express();
+const formidable = require('formidable');
 
 app.listen(process.env.PORT);
 app.set('port', (process.env.PORT || 5000));
@@ -515,6 +516,17 @@ function testGet(req, res, next) {
 }
 
 function testPost(req, res, next) {
+	
+	const form = formidable({ multiples: true });
+	
+	form.parse(req, (err, fields, files) => {
+		if (err) {
+			next(err);
+			return;
+		}
+		console.log(fields);
+		console.log(files);
+	});
 	
 	
 	console.log(req.originalUrl);
