@@ -529,7 +529,8 @@ function testPost(req, res, next) {
 	
 	
 	
-	var myImage = Buffer.from(req.body).toString('base64');
+	var myImage = Buffer.from(req.body).toString('ascii');
+	myImage = myImage.replace("%2B", "+").replace("%3B", "/");
 	
 	// console.log(req.body);
 	console.log(myImage);
