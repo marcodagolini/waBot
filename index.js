@@ -510,7 +510,7 @@ function stopOutboundCall(req, res, next) {
 
 function testGet(req, res, next) {
 	
-	console.log(req.Cookie);
+	console.log(req.headers.cookie);
 	res.send("okGet");
 	
 }
