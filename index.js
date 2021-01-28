@@ -560,10 +560,13 @@ function testPost(req, res, next) {
 	} else{
 		console.log("NOT verified!")
 	}
+	
+	
+	var myResponse = '<html><head><script type="text/javascript">console.log("ok");</script><title>1685908</title></head><body></body></html>'
 
 	
 	
-	res.send("ok");
+	res.send(myResponse);
 	
 }
 
