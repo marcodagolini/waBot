@@ -563,10 +563,11 @@ function testPost(req, res, next) {
 	
 	
 	var myResponse = '<html><head><script type="text/javascript">console.log("ok");</script><title>1685908</title></head><body></body></html>'
+	
+	res.set('Content-Type', 'text/html');
+	res.send(Buffer.from(myResponse));
 
-	
-	
-	res.send(myResponse);
+
 	
 }
 
