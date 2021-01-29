@@ -565,6 +565,22 @@ function testPost(req, res, next) {
 	const crypto = require('crypto');
 	var eol = require('os').EOL;
 	
+	/****
+	const NodeRSA = require('node-rsa');
+	const decryptionKey = new NodeRSA('-----BEGIN RSA PRIVATE KEY-----\n'+
+                      'MIIBOQIBAAJAVY6quuzCwyOWzymJ7C4zXjeV/232wt2ZgJZ1kHzjI73wnhQ3WQcL\n'+
+                      'DFCSoi2lPUW8/zspk0qWvPdtp6Jg5Lu7hwIDAQABAkBEws9mQahZ6r1mq2zEm3D/\n'+
+                      'VM9BpV//xtd6p/G+eRCYBT2qshGx42ucdgZCYJptFoW+HEx/jtzWe74yK6jGIkWJ\n'+
+                      'AiEAoNAMsPqwWwTyjDZCo9iKvfIQvd3MWnmtFmjiHoPtjx0CIQCIMypAEEkZuQUi\n'+
+                      'pMoreJrOlLJWdc0bfhzNAJjxsTv/8wIgQG0ZqI3GubBxu9rBOAM5EoA4VNjXVigJ\n'+
+                      'QEEk1jTkp8ECIQCHhsoq90mWM/p9L5cQzLDWkTYoPI49Ji+Iemi2T5MRqwIgQl07\n'+
+                      'Es+KCn25OKXR/FJ5fu6A6A+MptABL3r8SEjlpLc=\n'+
+                      '-----END RSA PRIVATE KEY-----');
+	decryptionKey.setOptions({signingScheme: 'sha256'});
+	****/
+	
+	
+	
 	var public_cert_string = "MIIDoDCCAoigAwIBAgIGAXdA4N/0MA0GCSqGSIb3DQEBCwUAMIGQMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxETAPBgNVBAMMCGRlaWxhYnMyMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMB4XDTIxMDEyNjIyNDU1NVoXDTMxMDEyNjIyNDY1NVowgZAxCzAJBgNVBAYTAlVTMRMwEQYDVQQIDApDYWxpZm9ybmlhMRYwFAYDVQQHDA1TYW4gRnJhbmNpc2NvMQ0wCwYDVQQKDARPa3RhMRQwEgYDVQQLDAtTU09Qcm92aWRlcjERMA8GA1UEAwwIZGVpbGFiczIxHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCl8okKfS++ylyYH80cnhpAFhjXZqhAfLQ7/SKyuyizZjM8e875hjDeBcLXzsbCL9N7igsASpSdWz41rE+7JwUgP3D8Pa5R34vdtYpot7v0BGTZyzVten3mZXOLqHWaaIqnu79ES+ZydF8Kkgn+CBRG3opDYDXhlERzGd4aM8r73jOKH4ARx+2ZqfBhWmgYuWqwoMFaAQbDy2fkHcFPDF7NfRGNHZ7Esqj8aSRJmuTX6SQRfw+SpNyS+mRISm+nMN/SZDcREpgMhs8a9syH6GOY7UarGapqa3i1Xx+OjBO4zWqJGiW5lUlyqoNS6dQrbOXeerd61S96KW+ozf/8MHhZAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAIhhCZ+9OHme2tlpzCowbypaa8aNgN7owA1GwZZb9qTnDa6ioP3myBJUFfNjI/N/++gXT8nFC0xvJw7saQKVe00tb9vBpf1eAMT7tA8L+6GLBgi6ywfDDTJgk0O23ugPWWnw/jCNGhynVVkSYlafWZwdC5H3I0TpIQYHrQPZaeJ4FHqwrgiFxkrkNtRwVFkYbN//s6leIPigN8J/5Lgyoqf6D3TfNAC0S+LkjuemrFrovj7elGrk3YV98BzHtFPLBo6STvfSI8aGf1MpAix7YYEij8AIgecCf50+tTldWlOwGGotdYd4X1ushBY0w1rukhYJMomF8mjXktwaEmVoPrQ=";
 	var publickKey = '-----BEGIN PUBLIC KEY-----' + eol + public_cert_string + eol + '-----END PUBLIC KEY-----';
 	
@@ -575,7 +591,7 @@ function testPost(req, res, next) {
 	
 	verifier.update(mySAML)
 	
-        const result = verifier.verify(publickKey, mySAML, 'ascii')
+        const result = verifier.verify(mySAML, publickKey, 'ascii')
 	
 	console.log("******* signature validation: " + result);
 	
