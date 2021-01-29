@@ -570,7 +570,7 @@ function testPost(req, res, next) {
 	
 	// var publickKey = '-----BEGIN PUBLIC KEY-----\n' + public_cert_string + '\n-----END PUBLIC KEY-----';
 	
-	var publickKey = fs.readFileSync('publickey.crt');
+	var publickKey = fs.readFileSync('publickey.crt').toString('base64');
         const verifier = crypto.createVerify('RSA-SHA256')
 	
 	verifier.update(mySAML)
