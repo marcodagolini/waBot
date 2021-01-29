@@ -570,12 +570,14 @@ function testPost(req, res, next) {
 	
 	// var publickKey = '-----BEGIN PUBLIC KEY-----\n' + public_cert_string + '\n-----END PUBLIC KEY-----';
 	
-	var publickKey = fs.readFileSync('publickey.crt').toString('base64');
+	var publickKey = fs.readFileSync('publickey.crt').toString('ascii');
         const verifier = crypto.createVerify('RSA-SHA256')
+	
+	mySAML = mySAML.toString('ascii');
 	
 	verifier.update(mySAML)
 	
-        const result = verifier.verify(publickKey, mySAML, 'base64')
+        const result = verifier.verify(publickKey, mySAML, 'ascii')
 	
 	console.log("******* signature validation: " + result);
 	
