@@ -563,11 +563,16 @@ function testPost(req, res, next) {
 	}
 	
 	var saml = require('saml20');
-	saml.parse(Buffer.from(req.body), function(err, profile) {
-		var claims = profile.claims; // Array of user attributes;
-		var issuer = profile.issuer; // String Issuer name.
-		console.log(JSON.stringify(claims));
-		console.log(JSON.stringify(issuer));
+	saml.parse(mySAML, function(err, profile) {
+		if(err){
+			console.log(err)
+		} else{
+			console.log(profile)
+		}
+		// var claims = profile.claims; // Array of user attributes;
+		// var issuer = profile.issuer; // String Issuer name.
+		// console.log(JSON.stringify(claims));
+		// console.log(JSON.stringify(issuer));
 	});
 	
 	
