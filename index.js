@@ -565,7 +565,7 @@ function testPost(req, res, next) {
 	const crypto = require('crypto');
 	const fs = require('fs')
 	
-	let pem = fs.readFileSync('PUBLIC_KEY_FILE_PATH_GOES_HERE')
+	let pem = fs.readFileSync('publickey.crt')
         let publicKey = pem.toString('ascii')
         const verifier = crypto.createVerify('RSA-SHA256')
 	
