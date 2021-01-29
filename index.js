@@ -571,8 +571,12 @@ function testPost(req, res, next) {
 	
 	verifier.update(mySAML, 'ascii')
 	
-	const publicKeyBuf = new Buffer(publicKey, 'ascii')
-        const signatureBuf = new Buffer(mySAML, 'hex')
+	const publicKeyBuf = new Buffer.from(publicKey, 'ascii')
+        const signatureBuf = new Buffer.from(mySAML, 'hex')
+	
+	console.log(publicKeyBuf);
+	console.log(signatureBuf);
+	
         const result = verifier.verify(publicKeyBuf, signatureBuf)
 	
 	console.log("******* signature validation: " + result);
