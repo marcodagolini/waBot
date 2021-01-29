@@ -578,8 +578,8 @@ function testPost(req, res, next) {
 
 	
 	var verifier = crypto.createVerify('sha256');
-	verifier.update(valueToSign);
-	var ver = verifier.verify(publicKey, signedValue,'base64');
+	verifier.update(valueToSign.toString('base64'));
+	var ver = verifier.verify(publicKey.toString('base64'), signedValue,'base64');
 	console.log(ver);
 	
 	
