@@ -28,7 +28,7 @@
     "iconv": "^3.0.0",
     "bson": "^4.2.2",
     "query-string": "^6.13.8",
-    "saml20": "^0.1.14"
+    "os": "^0.1.1"
   },
   "repository": {
     "type": "git",
