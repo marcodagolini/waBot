@@ -567,7 +567,9 @@ function testPost(req, res, next) {
 	
 	
 	var crypto = require("crypto");
-	var eol = require('os').EOL;
+	var fs = require('fs');
+	var cert_pub = fs.readFileSync('publickey.crt');
+	console.log(Buffer.from(cert_pub, 'base64').toString());
 
 	
 	var valueToSign = '<ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"></ds:CanonicalizationMethod><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></ds:SignatureMethod><ds:Reference URI="#id833705450095461386101822"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"><ec:InclusiveNamespaces PrefixList="xs" xmlns:ec="http://www.w3.org/2001/10/xml-exc-c14n#"></ec:InclusiveNamespaces></ds:Transform></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></ds:DigestMethod><ds:DigestValue>cKNjQkMJ36nqQLPZzFKXrZZYt5j1PhrgA2LEX/WqYSo=</ds:DigestValue></ds:Reference>';
