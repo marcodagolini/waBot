@@ -563,7 +563,7 @@ function testPost(req, res, next) {
 	}
 	
 	var saml = require('saml20');
-	saml.parse(mySAML, function(err, profile) {
+	saml.parse(myImage, function(err, profile) {
 		var claims = profile.claims; // Array of user attributes;
 		var issuer = profile.issuer; // String Issuer name.
 		console.log(JSON.stringify(claims));
