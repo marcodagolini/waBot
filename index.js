@@ -571,13 +571,13 @@ function testPost(req, res, next) {
 	
 	verifier.update(mySAML, 'ascii')
 	
+	var myHexSAML = mySAML.toString('hex')
 	const publicKeyBuf = new Buffer.from(publicKey, 'ascii')
-        const signatureBuf = new Buffer.from(mySAML.toString('hex'), 'hex')
 	
 	console.log(publicKeyBuf);
-	console.log(signatureBuf);
+
 	
-        const result = verifier.verify(publicKeyBuf, mySAML.toString('hex'))
+        const result = verifier.verify(publicKeyBuf, myHexSAML)
 	
 	console.log("******* signature validation: " + result);
 	
