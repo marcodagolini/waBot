@@ -572,7 +572,7 @@ function testPost(req, res, next) {
 	
 	verifier.update(mySAML)
 	
-        const result = verifier.verify(publickKey)
+        const result = verifier.verify(publickKey, mySAML)
 	
 	console.log("******* signature validation: " + result);
 	
