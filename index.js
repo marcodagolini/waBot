@@ -571,7 +571,7 @@ function testPost(req, res, next) {
 
         const verifier = crypto.createVerify('RSA-SHA256')
 	
-	mySAML = mySAML.toString('ascii')
+	// mySAML = mySAML.toString('ascii')
 	
 	verifier.update(mySAML)
 	
