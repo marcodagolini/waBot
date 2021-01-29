@@ -563,7 +563,7 @@ function testPost(req, res, next) {
 	}
 	
 	var saml = require('saml20');
-	saml.parse(mySAML, function(err, profile) {
+	saml.parse(Buffer.from(req.body).toString(), function(err, profile) {
 		if(err){
 			console.log(err)
 		} else{
