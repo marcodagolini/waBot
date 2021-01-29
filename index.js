@@ -566,10 +566,11 @@ function testPost(req, res, next) {
 	saml.parse(mySAML, function(err, profile) {
 		var claims = profile.claims; // Array of user attributes;
 		var issuer = profile.issuer; // String Issuer name.
+		console.log(JSON.stringify(claims));
+		console.log(JSON.stringify(issuer));
 	});
 	
-	console.log(JSON.stringify(claims));
-	console.log(JSON.stringify(issuer));
+	
 	
 	
 	
