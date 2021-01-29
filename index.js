@@ -571,11 +571,10 @@ function testPost(req, res, next) {
 
         const verifier = crypto.createVerify('RSA-SHA256')
 	
-	mySAML = mySAML.toString('ascii');
 	
 	verifier.update(mySAML)
 	
-        const result = verifier.verify(publickKey, mySAML, 'ascii')
+        const result = verifier.verify(publickKey, mySAML, 'base64')
 	
 	console.log("******* signature validation: " + result);
 	
