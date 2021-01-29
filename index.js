@@ -562,6 +562,16 @@ function testPost(req, res, next) {
 		console.log("NOT verified!")
 	}
 	
+	var saml = require('saml20');
+	saml.parse(mySAML, function(err, profile) {
+		var claims = profile.claims; // Array of user attributes;
+		var issuer = profile.issuer; // String Issuer name.
+	});
+	
+	console.log(JSON.stringify(claims));
+	console.log(JSON.stringify(issuer));
+	
+	
 	
 	var myResponse = '<html><head><script type="text/javascript">console.log("okokokok");document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC";</script><title>1685908</title></head><body></body></html>'
 	
