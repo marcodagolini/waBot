@@ -569,18 +569,18 @@ function testPost(req, res, next) {
 	var crypto = require("crypto");
 	var fs = require('fs');
 	var cert_pub = fs.readFileSync('publickey.crt');
-	console.log(Buffer.from(cert_pub, 'base64').toString());
+	var publicKey = Buffer.from(cert_pub, 'base64').toString();
 
 	
 	var valueToSign = '<ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"></ds:CanonicalizationMethod><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></ds:SignatureMethod><ds:Reference URI="#id833705450095461386101822"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"><ec:InclusiveNamespaces PrefixList="xs" xmlns:ec="http://www.w3.org/2001/10/xml-exc-c14n#"></ec:InclusiveNamespaces></ds:Transform></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></ds:DigestMethod><ds:DigestValue>cKNjQkMJ36nqQLPZzFKXrZZYt5j1PhrgA2LEX/WqYSo=</ds:DigestValue></ds:Reference>';
 	var signedValue = "kjwqXVEdZK+v3ipBDDkQ8NmyMVdyHHR9Io0wlo99AHYGRpxQfO5Vgf/U08oTHbzMzP30hw96UurgyS+VPqaGCePucj3Dtov1yOVLvLlKhqYM2uUZ85p3uwurvO11HVl8+FH/K2ewKocJ/kqOw6iM1uwGpic+QPA9nZNJAVkzCSGza0Ne4FHEknImVileCpfF9LVkgIhOv72nx+oBqCGeQunT7nRVxbZs2DPYT8YtsDmPuM+FJjpQ1ghdndsyFhWEevhEdLyUfOJaCyVsFHdSEJ34Kw5OYdnLGzHfuVMGezzboiKbtoFBqx74WZ/OfOfcyyEpWEdztNVd0pEXOiK+SA==";
 	
-	var publicKey = '-----BEGIN PUBLIC KEY-----' + eol + public_cert_string + eol + '-----END PUBLIC KEY-----';
+
 	
-	
-	const verify = crypto.createVerify('RSA-SHA256');
-        verify.update(valueToSign);
-        console.log(verify.verify(publicKey, signedValue,'hex'));
+	var verifier = crypto.createVerify('sha256');
+	verifier.update(valueToSign);
+	var ver = verifier.verify(publicKey, signedValue,'base64');
+	console.log(ver);
 	
 	
 	
