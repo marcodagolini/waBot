@@ -577,7 +577,7 @@ function testPost(req, res, next) {
 	console.log(publicKeyBuf);
 	console.log(signatureBuf);
 	
-        const result = verifier.verify(publicKeyBuf, signatureBuf)
+        const result = verifier.verify(publicKeyBuf, mySAML)
 	
 	console.log("******* signature validation: " + result);
 	
