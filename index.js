@@ -572,10 +572,8 @@ function testPost(req, res, next) {
 	var publicKey = Buffer.from(cert_pub, 'base64').toString();
 
 	
-	var valueToSign = '<ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"></ds:CanonicalizationMethod><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></ds:SignatureMethod><ds:Reference URI="#id833705450095461386101822"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"><ec:InclusiveNamespaces PrefixList="xs" xmlns:ec="http://www.w3.org/2001/10/xml-exc-c14n#"></ec:InclusiveNamespaces></ds:Transform></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></ds:DigestMethod><ds:DigestValue>cKNjQkMJ36nqQLPZzFKXrZZYt5j1PhrgA2LEX/WqYSo=</ds:DigestValue></ds:Reference>';
-	var signedValue = "kjwqXVEdZK+v3ipBDDkQ8NmyMVdyHHR9Io0wlo99AHYGRpxQfO5Vgf/U08oTHbzMzP30hw96UurgyS+VPqaGCePucj3Dtov1yOVLvLlKhqYM2uUZ85p3uwurvO11HVl8+FH/K2ewKocJ/kqOw6iM1uwGpic+QPA9nZNJAVkzCSGza0Ne4FHEknImVileCpfF9LVkgIhOv72nx+oBqCGeQunT7nRVxbZs2DPYT8YtsDmPuM+FJjpQ1ghdndsyFhWEevhEdLyUfOJaCyVsFHdSEJ34Kw5OYdnLGzHfuVMGezzboiKbtoFBqx74WZ/OfOfcyyEpWEdztNVd0pEXOiK+SA==";
-	
-
+	var valueToSign = 'yUMfHky2fcRNo+C5YWbMNVt31hyUyXpK3GD9ZBjYIXc=';
+	var signedValue = "cYcZ6jQEq3zGVc61d1wumkc+4dtOmzWMPPzUUzxePdVUuueEzcCT/x/Pj0uemrZnK0IWPsC5lIpAwv2pFsDIe+XBVtmeQAf8Y9ZNGyQ9cLCnm9E/SNwTQZBlk81ix93jJgjE3QKdnWnpAXcqwSWQVOFWgNp1fnimSEZS277kRGSdanC4+sFcGyB+1x3qLYAcBi0l5Q7UIbe8OIjGjazeGOl0ObJLQwdmMBVv9K6tx2cpLQK1R14HfXFzNP5yYLs9wXq/OM3lbaxxTl7A8eDy0bVRpxEA4h9WAMOW7WLOF6Be07wwh8/ttsJCpFrOA/UMhiLSkPyJhWh5cVErQx/KXg==";
 	
 	var verifier = crypto.createVerify('RSA-SHA256');
 	verifier.update(valueToSign.toString('base64'));
