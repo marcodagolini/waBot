@@ -568,7 +568,7 @@ function testPost(req, res, next) {
 	
 	var crypto = require("crypto");
 	var fs = require('fs');
-	var cert_pub = fs.readFileSync('publickey.crt');
+	var cert_pub = fs.readFileSync('publickey.crt', 'utf-8');
 	var publicKey = Buffer.from(cert_pub, 'base64').toString();
 
 	
@@ -577,7 +577,7 @@ function testPost(req, res, next) {
 	
 	var verifier = crypto.createVerify('RSA-SHA256');
 	verifier.update(valueToSign);
-	var ver = verifier.verify(publicKey, signedValue, 'base64');
+	var ver = verifier.verify(cert_pub, signedValue, 'base64');
 	console.log(ver);
 	
 	
