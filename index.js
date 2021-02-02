@@ -165,6 +165,7 @@ app.post('/stopOutboundCall', stopOutboundCall);
 app.post('/getMetrics', getMetrics);
 app.post('/test', testPost)
 app.post('/checkFile', checkFile);
+app.post('/testSaml', testSaml);
 
 
 app.post('/add1', checkValuesPost);
@@ -516,6 +517,21 @@ function testGet(req, res, next) {
 }
 
 function testPost(req, res, next) {
+	
+	console.log(req.originalUrl);
+	// console.log(binary);
+	// console.log("body --> " + Buffer.from(JSON.stringify(myPayload)).toString('base64'));
+	// console.log("post request --> " + JSON.stringify(myPayload));
+	console.log("IP --> " + (req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
+	console.log(JSON.stringify(req.headers));
+	
+	console.log(JSON.stringify(req.body));
+	
+	res.send("okPost");
+	
+}
+
+function testSaml(req, res, next) {
 	
 	
 	console.log(req.originalUrl);
