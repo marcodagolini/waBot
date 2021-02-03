@@ -597,7 +597,7 @@ function testSaml(req, res, next) {
 	var signedValue = "iTK71+ZyrxfLNwYsZPQkVp3YowPD54tIh6miO3eg35hXnQaDz0KQ11G4pS+CCSMJ2LRlFGbmLYkMALCYgN3WaA4pdrjNwOQJMucLRuYIt3qR3G2K/Cw5Xedbc0y4vofQZOqlx4iUyYBTtHCeeekmv2s1EZOwlY+jcPnc3w6c/pbmrn+DjvE/bJJmLRndK8IFramFo5a7KxxJYKrUD4rYpscqPA9scxAVpFRGPAD8tkN/Sdsud6Eicp6zGsVELuuST+8gZCnJ6+4YwppxmpXRK7SXJqjymZVVFLvdgy12ombzHrLUgJx/gtXRIz1tdbLG6Pp3GTLEAm0l4gzBNsLrnA==";
 	
 	var verifier = crypto.createVerify('RSA-SHA256');
-	verifier.update(valueToSign, 'ascii');
+	verifier.update(valueToSign);
 	signedValue = Buffer.from(signedValue, 'hex')
 	
 	var ver = verifier.verify(cert_pub, signedValue);
