@@ -598,7 +598,7 @@ function testSaml(req, res, next) {
 	
 	var verifier = crypto.createVerify('RSA-SHA256');
 	verifier.update(valueToSign, 'ascii');
-	const signedValue = new Buffer(signedValue, 'hex')
+	signedValue = new Buffer(signedValue, 'hex')
 	
 	var ver = verifier.verify(cert_pub, signedValue);
 	console.log(ver);
