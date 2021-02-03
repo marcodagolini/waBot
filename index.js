@@ -584,7 +584,7 @@ function testSaml(req, res, next) {
 	
 	var crypto = require("crypto");
 	var fs = require('fs');
-	var cert_pub = fs.readFileSync('publickey.crt').toString('ascii');
+	var cert_pub = fs.readFileSync('publickey.pem').toString('ascii');
 	cert_pub = cert_pub.slice(0, -1);
 	
 	console.log(cert_pub);
