@@ -584,7 +584,7 @@ function testSaml(req, res, next) {
 	
 	var crypto = require("crypto");
 	var fs = require('fs');
-	var cert_pub = fs.readFileSync('publickey.crt').toString();
+	var cert_pub = fs.readFileSync('publickey.crt').toString('ascii');
 	cert_pub = cert_pub.slice(0, -1);
 	
 	console.log(cert_pub);
@@ -598,7 +598,7 @@ function testSaml(req, res, next) {
 	
 	var verifier = crypto.createVerify('RSA-SHA256');
 	verifier.update(valueToSign, 'ascii');
-	signedValue = new Buffer(signedValue, 'hex')
+	signedValue = Buffer.from(signedValue, 'hex')
 	
 	var ver = verifier.verify(cert_pub, signedValue);
 	console.log(ver);
