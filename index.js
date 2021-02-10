@@ -562,6 +562,7 @@ function testSaml(req, res, next) {
 	
 	
 	var public_cert_string = process.env.samlpubcert;
+	console.log(public_cert_string);
 	
 	var saml = require('saml20');
 	var options = {
@@ -572,6 +573,7 @@ function testSaml(req, res, next) {
 	saml.validate(myXML, options, function(err, profile) {
 		
 		if(err){
+			console.log(err);
 			console.log("not validated")
 		} else{
 			var claims = profile.claims; // Array of user attributes;
