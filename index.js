@@ -560,9 +560,8 @@ function testSaml(req, res, next) {
 	var myXML = Buffer.from(mySAML, 'base64').toString();
 	// console.log(myXML);
 	
-	var public_cert_string = "rdtyfugiuh"
 	
-	// var public_cert_string = process.env.samlpubcert;
+	var public_cert_string = process.env.samlpubcert;
 	console.log(public_cert_string);
 	
 	var saml = require('saml20');
