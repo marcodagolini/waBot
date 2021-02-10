@@ -561,7 +561,7 @@ function testSaml(req, res, next) {
 	// console.log(myXML);
 	
 	
-	var public_cert_string = process.env.samlpubcert;
+	var public_cert_string = process.env.samlPubCert;
 	console.log(public_cert_string);
 	
 	var saml = require('saml20');
