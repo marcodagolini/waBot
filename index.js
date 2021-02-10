@@ -2,6 +2,8 @@
 
 require('dotenv').config()
 
+
+
 var myStoredResponse = {
 	"light":"red",
 	"error":"",
