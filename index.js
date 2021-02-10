@@ -581,6 +581,30 @@ function testSaml(req, res, next) {
 	}
 	
 	
+	var saml = require('saml20');
+	var options = {
+		publicKey: public_cert_string,
+		audience: 'deilabs-org-5312957'
+	}
+	
+	saml.validate(myXML, options, function(err, profile) {
+		
+		if(err){
+			console.log("not validated")
+		} else{
+			var claims = profile.claims; // Array of user attributes;
+			var issuer = profile.issuer; // String Issuer name.
+			
+			console.log("validated!");
+			console.log(JSON.stringify(profile));
+		}
+		
+		
+	});
+	
+	
+	
+	/****
 	
 	var crypto = require("crypto");
 	var fs = require('fs');
@@ -603,6 +627,7 @@ function testSaml(req, res, next) {
 	var ver = verifier.verify(cert_pub, signedValue);
 	console.log(ver);
 	
+	*****/
 	
 	
 	var myResponse = '<html><head><script type="text/javascript">console.log("okokokok");document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC";</script><title>1685908</title></head><body></body></html>'
