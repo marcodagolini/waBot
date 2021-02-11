@@ -671,7 +671,6 @@ function testSaml(req, res, next) {
 	
 	
 	res.set('Content-Type', 'text/html');
-	res.cookie('cookieName', 'cookieValue')
 	res.send(Buffer.from(myResponse));
 
 
