@@ -568,12 +568,14 @@ function testSaml(req, res, next) {
 	console.log(JSON.stringify(req.headers));
 	
 	
-	console.log(req.body);
+	
 	
 	const queryString = require('query-string');
 	
 	
 	var myImage = Buffer.from(req.body).toString('ascii');
+	
+	console.log(myImage);
 	
 	const parsed = queryString.parse(myImage);
 	
