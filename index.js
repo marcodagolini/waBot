@@ -522,6 +522,12 @@ function testLogin(req, res, next) {
 	
 	console.log(req.headers.cookie);
 	
+	const queryString = require('query-string');
+	var myImage = Buffer.from(req.headers.cookie).toString('ascii');
+	const parsed = queryString.parse(myImage);
+	
+	console.log(JSON.stringify(parsed));
+	
 	const Cryptr = require('cryptr');
 	const cryptr = new Cryptr(process.env.secretEncryption);
 	
