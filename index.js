@@ -523,7 +523,7 @@ function testLogin(req, res, next) {
 	console.log(req.headers.cookie);
 	
 	const queryString = require('query-string');
-	var myImage = Buffer.from(req.headers.cookie.replace(' ','')).toString('ascii');
+	var myImage = Buffer.from(req.headers.cookie.replace('; ','&')).toString('ascii');
 
 	const parsed = queryString.parse(myImage);
 	
