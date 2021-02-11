@@ -520,7 +520,7 @@ function testGet(req, res, next) {
 
 function testLogin(req, res, next) {
 	
-	console.log(req.headers.cookie);
+	// console.log(req.headers.cookie);
 	
 	const queryString = require('query-string');
 	var myImage = Buffer.from(req.headers.cookie.replace(new RegExp("; ","g"), '&')).toString('ascii');
@@ -537,6 +537,11 @@ function testLogin(req, res, next) {
 	const decryptedString = cryptr.decrypt(toDecrypt);
 	
 	console.log("decrypted --> " + decryptedString);
+	
+	if(decryptedString.indexOf("timestamp-") > -1 && decryptedString.indexOf("-timestamp") > -1){
+		var myTimestamp = parseInt(decryptedString.replace("timestamp-","").replace("-timestamp",""));
+		console.log(myTimestamp);
+	}
 	
 	res.send("okGet");
 	
