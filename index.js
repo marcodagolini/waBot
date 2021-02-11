@@ -543,7 +543,7 @@ function testLogin(req, res, next) {
 	
 	var myTimestamp = 0;
 	
-	if(decryptedString.indexOf("timestamp-") > -1 && decryptedString.indexOf("-timestamp") > -1 && toDecrypt !== ""){
+	if(decryptedString.indexOf("timestamp-") > -1 && decryptedString.indexOf("-timestamp") > -1 && toDecrypt !== "undefined"){
 		myTimestamp = parseInt(decryptedString.replace("timestamp-","").replace("-timestamp",""));
 		console.log(myTimestamp);
 	}
