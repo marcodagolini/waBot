@@ -520,54 +520,56 @@ function testGet(req, res, next) {
 
 function testLogin(req, res, next) {
 	
-	console.log(req.headers.cookie);
-	
-	const queryString = require('query-string');
-	var myImage = Buffer.from(req.headers.cookie.replace(new RegExp("; ","g"), '&')).toString('ascii');
-
-	const parsed = queryString.parse(myImage);
-	var toDecrypt = parsed.mySamlCookie;
-	
-	console.log("toDecrypt --> " + toDecrypt);
-	    
-
-	
-	const Cryptr = require('cryptr');
-	const cryptr = new Cryptr(process.env.secretEncryption);
-	
-	
-	
-	var decryptedString = "";
-	var tampered = false;
-	if(toDecrypt !== undefined){
-		try {
-			decryptedString = cryptr.decrypt(toDecrypt);
-		}
-		catch(err) {
-			tampered = true;
-			console.log("tampered cookie");
-		}
-	}
-	
-	
-	console.log("decrypted --> " + decryptedString);
-	
-	var myTimestamp = 0;
-	
-	if(decryptedString.indexOf("timestamp-") > -1 && decryptedString.indexOf("-timestamp") > -1 && decryptedString !== ""){
-		myTimestamp = parseInt(decryptedString.replace("timestamp-","").replace("-timestamp",""));
-		console.log(myTimestamp);
-	}
+	// console.log(req.headers.cookie);
 	
 	var myResponse = "";
 	
-	if(tampered){
-		myResponse = '<html><head><script></script><title>1685908</title></head><body>tampered cookie!!!</body></html>';
-	} else if(myTimestamp > Date.now()){
-		myResponse = '<html><head><script></script><title>1685908</title></head><body>login success!!!</body></html>';
+	
+
+	if(req.headers.cookie === undefined){
+		myResponse = '<html><head><script></script><title>1685908</title></head><body>no cookie!!!</body></html>';
 	} else{
-		myResponse = '<html><head><script></script><title>1685908</title></head><body>session expired!!</body></html>';
+		const queryString = require('query-string');
+		var myImage = Buffer.from(req.headers.cookie.replace(new RegExp("; ","g"), '&')).toString('ascii');
+		
+		const parsed = queryString.parse(myImage);
+		var toDecrypt = parsed.mySamlCookie;
+		
+		console.log("toDecrypt --> " + toDecrypt);
+		
+		const Cryptr = require('cryptr');
+		const cryptr = new Cryptr(process.env.secretEncryption);
+		
+		var decryptedString = "";
+		var tampered = false;
+		if(toDecrypt !== undefined){
+			try {
+				decryptedString = cryptr.decrypt(toDecrypt);
+			}
+			catch(err) {
+				tampered = true;
+				console.log("tampered cookie");
+			}
+		}
+		
+		console.log("decrypted --> " + decryptedString);
+		var myTimestamp = 0;
+		
+		if(decryptedString.indexOf("timestamp-") > -1 && decryptedString.indexOf("-timestamp") > -1 && decryptedString !== ""){
+			myTimestamp = parseInt(decryptedString.replace("timestamp-","").replace("-timestamp",""));
+			console.log(myTimestamp);
+		}
+		if(tampered){
+			myResponse = '<html><head><script></script><title>1685908</title></head><body>tampered cookie!!!</body></html>';
+		} else if(myTimestamp > Date.now()){
+		myResponse = '<html><head><script></script><title>1685908</title></head><body>login success!!!</body></html>';
+		} else{
+			myResponse = '<html><head><script></script><title>1685908</title></head><body>session expired!!</body></html>';
+		}
+	
 	}
+	
+	
 	
 	res.set('Content-Type', 'text/html');
 	res.send(Buffer.from(myResponse));
