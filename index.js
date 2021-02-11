@@ -521,6 +521,14 @@ function testGet(req, res, next) {
 function testLogin(req, res, next) {
 	
 	console.log(req.headers.cookie);
+	
+	const Cryptr = require('cryptr');
+	const cryptr = new Cryptr(process.env.secretEncryption);
+	
+	const decryptedString = cryptr.decrypt("5b6582d774f0828f51acfa89b8cd7b221c73c9361c4cd38535570646a64a32c3ecf85a7df1ebae3097f22624e876e9f4110972e0e65040f5e49bb818e6bd7bc881e6e57bbdc21dedaa97f7447a24e70b3c244c4a19a907c2d2679dc3014c6fb2577104dc308347cda147302266");
+	
+	console.log("decrypted --> " + decryptedString);
+	
 	res.send("okGet");
 	
 }
@@ -602,14 +610,15 @@ function testSaml(req, res, next) {
 			const Cryptr = require('cryptr');
 			const cryptr = new Cryptr(process.env.secretEncryption);
 			
+			expiring = "timestamp-" + expiring + "-timestamp";
+			
 			const encryptedTimestamp = cryptr.encrypt(expiring);
 			const decryptedString = cryptr.decrypt(encryptedTimestamp);
 			
 			console.log(encryptedTimestamp); // e7b75a472b65bc4a42e7b3f78833a4d00040beba796062bf7c13d9533b149e5ec3784813dc20348fdf248d28a2982df85b83d1109623bce45f08238f6ea9bd9bb5f406427b2a40f969802635b8907a0a57944f2c12f334bd081d5143a357c173a611e1b64a
 			console.log(decryptedString); // bacon
 			
-			myResponse = '<html><head><script></script><title>1685908</title></head><body>invalid SAML!</body></html>'
-			//myResponse = '<html><head><script type="text/javascript">document.cookie = "myTest=' + encryptedTimestamp + '";window.location.replace("https://marcowabot.herokuapp.com/testLogin");</script><title>1685908</title></head><body></body></html>'
+			myResponse = '<html><head><script type="text/javascript">document.cookie = "myTest=' + encryptedTimestamp + '";window.location.replace("https://marcowabot.herokuapp.com/testLogin");</script><title>1685908</title></head><body></body></html>'
 	
 		}
 		
