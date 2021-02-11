@@ -526,10 +526,9 @@ function testLogin(req, res, next) {
 	var myImage = Buffer.from(req.headers.cookie.replace(new RegExp("; ","g"), '&')).toString('ascii');
 
 	const parsed = queryString.parse(myImage);
-	var toDecrypt = "";
-	if(parsed.hasOwnProperty('mySamlCookie')){
-		toDecrypt = parsed.mySamlCookie;
-	}
+	var toDecrypt = parsed.mySamlCookie;
+	
+	console.log("toDecrypt --> " + toDecrypt);
 	    
 
 	
