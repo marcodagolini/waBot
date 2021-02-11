@@ -553,7 +553,8 @@ function testLogin(req, res, next) {
 		myResponse = '<html><head><script></script><title>1685908</title></head><body>session expired!!</body></html>';
 	}
 	
-	res.send(myResponse);
+	res.set('Content-Type', 'text/html');
+	res.send(Buffer.from(myResponse));
 	
 }
 
