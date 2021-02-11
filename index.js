@@ -587,12 +587,21 @@ function testSaml(req, res, next) {
 	});
 	
 	var unix_timestamp = Date.now();
-	var expiring = new Date(unix_timestamp + 60000);
+	var expiring = unix_timestamp + 60000;
+	
+	const Cryptr = require('cryptr');
+	const cryptr = new Cryptr('myTotalySecretKey');
+	
+	const encryptedTimestamp = cryptr.encrypt(expiring);
+	const decryptedString = cryptr.decrypt(encryptedTimestamp);
+	
+	console.log(encryptedTimestamp); // e7b75a472b65bc4a42e7b3f78833a4d00040beba796062bf7c13d9533b149e5ec3784813dc20348fdf248d28a2982df85b83d1109623bce45f08238f6ea9bd9bb5f406427b2a40f969802635b8907a0a57944f2c12f334bd081d5143a357c173a611e1b64a
+	console.log(decryptedString); // bacon
 	
 
 	
 	
-	var myResponse = '<html><head><script type="text/javascript">console.log("okokokok");document.cookie = "myTest=' + expiring + '";</script><title>1685908</title></head><body></body></html>'
+	var myResponse = '<html><head><script type="text/javascript">console.log("okokokok");document.cookie = "myTest=' + encryptedTimestamp + '";</script><title>1685908</title></head><body></body></html>'
 	
 	res.set('Content-Type', 'text/html');
 	res.cookie('cookieName', 'cookieValue')
