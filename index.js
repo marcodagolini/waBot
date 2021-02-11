@@ -554,7 +554,7 @@ function testSaml(req, res, next) {
 	
 	var mySAML = parsed.SAMLResponse
 	
-	// console.log(mySAML);
+	console.log(mySAML);
 
 	
 	var myXML = Buffer.from(mySAML, 'base64').toString();
