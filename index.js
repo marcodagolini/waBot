@@ -537,13 +537,17 @@ function testLogin(req, res, next) {
 	
 	
 	
-	const decryptedString = cryptr.decrypt(toDecrypt);
+	var decryptedString = "";
+	if(toDecrypt !== "undefined"){
+		decryptedString = cryptr.decrypt(toDecrypt)
+	}
+	
 	
 	console.log("decrypted --> " + decryptedString);
 	
 	var myTimestamp = 0;
 	
-	if(decryptedString.indexOf("timestamp-") > -1 && decryptedString.indexOf("-timestamp") > -1 && toDecrypt !== "undefined"){
+	if(decryptedString.indexOf("timestamp-") > -1 && decryptedString.indexOf("-timestamp") > -1 && decryptedString !== ""){
 		myTimestamp = parseInt(decryptedString.replace("timestamp-","").replace("-timestamp",""));
 		console.log(myTimestamp);
 	}
