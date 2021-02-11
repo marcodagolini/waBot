@@ -159,6 +159,7 @@ app.get('/getFB', checkValuesGetFB)
 app.get('/getGoogleMapKey', getGoogleMapKey)
 app.get('/test', testGet)
 app.get('/getValues', getValues)
+app.get('/testLogin', testLogin)
 app.post('/push', checkValuesPostPush);
 app.post('/bind', checkValuesPostBind);
 app.post('/outboundCall', outboundCall);
@@ -517,6 +518,15 @@ function testGet(req, res, next) {
 	
 }
 
+function testLogin(req, res, next) {
+	
+	console.log(req.headers.cookie);
+	res.send("okGet");
+	
+}
+
+
+
 function testPost(req, res, next) {
 	
 	console.log(req.originalUrl);
@@ -590,7 +600,7 @@ function testSaml(req, res, next) {
 	var expiring = unix_timestamp + 60000;
 	
 	const Cryptr = require('cryptr');
-	const cryptr = new Cryptr('myTotalySecretKey');
+	const cryptr = new Cryptr(process.env.secretEncryption);
 	
 	const encryptedTimestamp = cryptr.encrypt(expiring);
 	const decryptedString = cryptr.decrypt(encryptedTimestamp);
@@ -601,7 +611,7 @@ function testSaml(req, res, next) {
 
 	
 	
-	var myResponse = '<html><head><script type="text/javascript">console.log("okokokok");document.cookie = "myTest=' + encryptedTimestamp + '";</script><title>1685908</title></head><body></body></html>'
+	var myResponse = '<html><head><script type="text/javascript">document.cookie = "myTest=' + encryptedTimestamp + '";window.location.replace("https://marcowabot.herokuapp.com/testLogin");</script><title>1685908</title></head><body></body></html>'
 	
 	res.set('Content-Type', 'text/html');
 	res.cookie('cookieName', 'cookieValue')
