@@ -538,7 +538,7 @@ function testLogin(req, res, next) {
 	
 	
 	var decryptedString = "";
-	if(toDecrypt !== "undefined"){
+	if(toDecrypt !== undefined){
 		decryptedString = cryptr.decrypt(toDecrypt)
 	}
 	
