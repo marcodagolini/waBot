@@ -538,12 +538,14 @@ function testLogin(req, res, next) {
 	
 	
 	var decryptedString = "";
+	var tampered = false;
 	if(toDecrypt !== undefined){
 		try {
 			decryptedString = cryptr.decrypt(toDecrypt);
 		}
 		catch(err) {
-			console.log(err);
+			tampered = true;
+			console.log("tampered cookie");
 		}
 	}
 	
@@ -559,7 +561,9 @@ function testLogin(req, res, next) {
 	
 	var myResponse = "";
 	
-	if(myTimestamp > Date.now()){
+	if(tampered){
+		myResponse = '<html><head><script></script><title>1685908</title></head><body>tampered cookie!!!</body></html>';
+	} else if(myTimestamp > Date.now()){
 		myResponse = '<html><head><script></script><title>1685908</title></head><body>login success!!!</body></html>';
 	} else{
 		myResponse = '<html><head><script></script><title>1685908</title></head><body>session expired!!</body></html>';
