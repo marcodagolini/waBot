@@ -586,10 +586,13 @@ function testSaml(req, res, next) {
 		
 	});
 	
+	var unix_timestamp = Date.now();
+	var expiring = new Date(unix_timestamp + 60000);
+	
 
 	
 	
-	var myResponse = '<html><head><script type="text/javascript">console.log("okokokok");document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC";</script><title>1685908</title></head><body></body></html>'
+	var myResponse = '<html><head><script type="text/javascript">console.log("okokokok");document.cookie = "myTest=' + expiring + '";</script><title>1685908</title></head><body></body></html>'
 	
 	res.set('Content-Type', 'text/html');
 	res.cookie('cookieName', 'cookieValue')
