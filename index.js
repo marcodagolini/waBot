@@ -526,7 +526,11 @@ function testLogin(req, res, next) {
 	var myImage = Buffer.from(req.headers.cookie.replace(new RegExp("; ","g"), '&')).toString('ascii');
 
 	const parsed = queryString.parse(myImage);
-	var toDecrypt = parsed.mySamlCookie;
+	var toDecrypt = "";
+	if(parsed.hasOwnProperty('mySamlCookie')){
+		toDecrypt = parsed.mySamlCookie;
+	}
+	    
 
 	
 	const Cryptr = require('cryptr');
@@ -540,7 +544,7 @@ function testLogin(req, res, next) {
 	
 	var myTimestamp = 0;
 	
-	if(decryptedString.indexOf("timestamp-") > -1 && decryptedString.indexOf("-timestamp") > -1){
+	if(decryptedString.indexOf("timestamp-") > -1 && decryptedString.indexOf("-timestamp") > -1 && toDecrypt !== ""){
 		myTimestamp = parseInt(decryptedString.replace("timestamp-","").replace("-timestamp",""));
 		console.log(myTimestamp);
 	}
