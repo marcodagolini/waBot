@@ -568,7 +568,7 @@ function testSaml(req, res, next) {
 	console.log(JSON.stringify(req.headers));
 	
 	
-	// console.log(req.body);
+	console.log(req.body);
 	
 	const queryString = require('query-string');
 	
