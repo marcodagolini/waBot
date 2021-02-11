@@ -539,7 +539,12 @@ function testLogin(req, res, next) {
 	
 	var decryptedString = "";
 	if(toDecrypt !== undefined){
-		decryptedString = cryptr.decrypt(toDecrypt)
+		try {
+			decryptedString = cryptr.decrypt(toDecrypt);
+		}
+		catch(err) {
+			console.log(err);
+		}
 	}
 	
 	
