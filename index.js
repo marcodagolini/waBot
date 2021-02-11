@@ -520,7 +520,7 @@ function testGet(req, res, next) {
 
 function testLogin(req, res, next) {
 	
-	// console.log(req.headers.cookie);
+	console.log(req.headers.cookie);
 	
 	const queryString = require('query-string');
 	var myImage = Buffer.from(req.headers.cookie.replace(new RegExp("; ","g"), '&')).toString('ascii');
