@@ -562,7 +562,7 @@ function testLogin(req, res, next) {
 		if(tampered){
 			myResponse = '<html><head><script></script><title>1685908</title></head><body>tampered cookie!!!</body></html>';
 		} else if(myTimestamp > Date.now()){
-		myResponse = '<html><head><script></script><title>1685908</title></head><body>login success!!!</body></html>';
+			myResponse = '<html><head><script></script><title>1685908</title></head><body>login success!!!</body></html>';
 		} else{
 			myResponse = '<html><head><script></script><title>1685908</title></head><body>session expired!!</body></html>';
 		}
@@ -658,7 +658,7 @@ function testSaml(req, res, next) {
 			expiring = "timestamp-" + expiring + "-timestamp";
 			
 			const encryptedTimestamp = cryptr.encrypt(expiring);
-			const decryptedString = cryptr.decrypt(encryptedTimestamp);
+			
 			
 			// console.log(encryptedTimestamp);
 			// console.log(decryptedString);
