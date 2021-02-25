@@ -514,6 +514,7 @@ function stopOutboundCall(req, res, next) {
 function testGet(req, res, next) {
 	
 	console.log(req.headers.cookie);
+	console.log((req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
 	res.send("okGet");
 	
 }
