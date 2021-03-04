@@ -612,6 +612,36 @@ function outboundWhatsapp(req, res, next) {
 		console.log(JSON.stringify(req.body));
 		outboundTrafficLight = "red";
 		setTimeout(function(){ outboundTrafficLight = "green"; }, 15000);
+		
+		var request = require('request');
+		var oauth = {
+			consumer_key: process.env.outboundKey1,
+			consumer_secret: process.env.outboundKey2,
+			token: process.env.outboundKey3,
+			token_secret: process.env.outboundKey4	
+		};
+		
+		var url = 'https://va.ivrdeflect.liveperson.net/api/proactiveAlert';
+		
+		var body = {};
+		
+		request.post({
+			url: url,
+			json: true,
+			body: body,
+			oauth: oauth,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}, function (e, r, b) {
+			if(b){
+				callback (b);
+			} else{
+				console.log(e);
+				callback("error");
+			}
+		});
+		
 	}else{
 		console.log("server busy");
 	}
