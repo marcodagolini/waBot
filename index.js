@@ -658,9 +658,7 @@ function outboundWhatsapp(req, res, next) {
 		res.send(JSON.stringify({"state":"error","message":"server busy"}));
 	}
 	
-	
-	
-	res.send("okPost");
+
 	
 }
 
