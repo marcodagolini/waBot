@@ -2,6 +2,8 @@
 
 require('dotenv').config()
 
+var outboundTrafficLight = "green";
+
 
 
 var myStoredResponse = {
@@ -603,10 +605,18 @@ function outboundWhatsapp(req, res, next) {
 	// console.log(binary);
 	// console.log("body --> " + Buffer.from(JSON.stringify(myPayload)).toString('base64'));
 	// console.log("post request --> " + JSON.stringify(myPayload));
-	console.log("IP --> " + (req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
-	console.log(JSON.stringify(req.headers));
+	// console.log("IP --> " + (req.headers['x-forwarded-for'] || '').split(',')[0] || req.connection.remoteAddress);
+	// console.log(JSON.stringify(req.headers));
 	
-	console.log(JSON.stringify(req.body));
+	if(outboundTrafficLight === "green"){
+		console.log(JSON.stringify(req.body));
+		outboundTrafficLight = "red";
+		setTimeout(function(){ outboundTrafficLight = "green"; }, 15000);
+	}else{
+		console.log("server busy");
+	}
+	
+	
 	
 	res.send("okPost");
 	
