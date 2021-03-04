@@ -613,6 +613,14 @@ function outboundWhatsapp(req, res, next) {
 		outboundTrafficLight = "red";
 		setTimeout(function(){ outboundTrafficLight = "green"; }, 15000);
 		
+		var internationalCode = req.body.internationalCode;
+		var number = req.body.number;
+		var siteId = req.body.siteId;
+		var skill = req.body.skill;
+		var proactiveTemplate = req.body.proactiveTemplate;
+		var proactivevariables = req.body.proactivevariables;
+		
+		
 		var request = require('request');
 		var oauth = {
 			consumer_key: process.env.outboundKey1,
@@ -623,7 +631,7 @@ function outboundWhatsapp(req, res, next) {
 		
 		var url = 'https://va.ivrdeflect.liveperson.net/api/proactiveAlert';
 		
-		var body = {};
+		var body = {"siteId": siteId,"skill": skill,"customerCountryCode": internationalCode,"customerPhoneNumber": number,"externalCustomerId": "TWD270774","externalCustomerIdDescriptor": "VIP","externalAlertId": "alert","alertInfo": {"Account ID": "1234567890","Customer Type": "Quad-play VIP","Account Status": "Active"},"firstName": "Tom","lastName": "Durbin","proactiveChannel": "","proactiveLanguage": "en","proactiveTemplate": proactiveTemplate,"proactiveVariables": {"1": proactivevariables,"sms_body": "Hey {{1}}! Thank you for choosing to message with us today. Feel free to respond to us at your own pace throughout the day. How may I assist you?"},"proactiveTemplateVersion": "1"};
 		
 		request.post({
 			url: url,
@@ -635,15 +643,19 @@ function outboundWhatsapp(req, res, next) {
 			}
 		}, function (e, r, b) {
 			if(b){
-				callback (b);
+				if(b.success === true){
+					res.send(JSON.stringify({"state":"success","message":"success"}));
+				}else{
+					res.send(JSON.stringify({"state":"error","message":"invalid number"}));
+				}
 			} else{
-				console.log(e);
-				callback("error");
+				res.send(JSON.stringify({"state":"error","message":"LivePerson server error"}));
 			}
 		});
 		
 	}else{
 		console.log("server busy");
+		res.send(JSON.stringify({"state":"error","message":"server busy"}));
 	}
 	
 	
