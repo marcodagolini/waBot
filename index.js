@@ -171,6 +171,8 @@ app.post('/getMetrics', getMetrics);
 app.post('/test', testPost)
 app.post('/checkFile', checkFile);
 app.post('/testSaml', testSaml);
+
+app.options('/outboundWhatsapp', cors())
 app.post('/outboundWhatsapp', cors(), outboundWhatsapp);
 
 
