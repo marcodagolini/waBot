@@ -126,6 +126,7 @@ app.use(bodyParser.raw({
 }));
 
 
+
 /****
 app.use(
   bodyParser.raw({ type : 'application/x-www-form-urlencoded' }),
@@ -170,7 +171,7 @@ app.post('/getMetrics', getMetrics);
 app.post('/test', testPost)
 app.post('/checkFile', checkFile);
 app.post('/testSaml', testSaml);
-app.post('/outboundWhatsapp', outboundWhatsapp);
+app.post('/outboundWhatsapp', cors(), outboundWhatsapp);
 
 
 
