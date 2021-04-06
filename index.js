@@ -624,6 +624,15 @@ function outboundWhatsapp(req, res, next) {
 		var proactivevariables = req.body.proactivevariables;
 		var smsBody = req.body.smsbody;
 		
+		var proactiveVariablesJSON = "";
+		var proactivevariablesLength = proactivevariables.length;
+		for (var z = 0; z < proactivevariablesLength; z++){
+			if (z === 0){
+				proactiveVariablesJSON = "{"
+			}
+		}
+		
+		
 		
 		var request = require('request');
 		var oauth = {
