@@ -643,6 +643,8 @@ function outboundWhatsapp(req, res, next) {
 		
 		console.log(JSON.stringify(proactiveVariablesJSON));
 		
+		proactiveVariablesJSON = JSON.parse(proactiveVariablesJSON);
+		
 		
 		
 		var request = require('request');
