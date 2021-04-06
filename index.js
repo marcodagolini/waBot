@@ -657,7 +657,6 @@ function outboundWhatsapp(req, res, next) {
 		
 		var body = {"siteId": siteId,"skill": skill,"customerCountryCode": internationalCode,"customerPhoneNumber": number,"externalCustomerId": "TWD270774","externalCustomerIdDescriptor": "VIP","externalAlertId": "alert","alertInfo": {"Account ID": "1234567890","Customer Type": "Quad-play VIP","Account Status": "Active"},"firstName": "Tom","lastName": "Durbin","proactiveChannel": "","proactiveLanguage": "en","proactiveTemplate": proactiveTemplate,"proactiveVariables": proactiveVariablesJSON,"proactiveTemplateVersion": "1"};
 		
-		/*******
 		
 		request.post({
 			url: url,
@@ -679,9 +678,8 @@ function outboundWhatsapp(req, res, next) {
 			}
 		});
 		
-		*******/
 		
-		res.send(JSON.stringify({"state":"error","message":"server under maintenance"}));
+		// res.send(JSON.stringify({"state":"error","message":"server under maintenance"}));
 		
 	}else{
 		console.log("server busy");
