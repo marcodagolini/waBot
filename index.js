@@ -620,6 +620,7 @@ function outboundWhatsapp(req, res, next) {
 		var number = req.body.number;
 		var siteId = req.body.siteId;
 		var skill = req.body.skill;
+		var language = req.body.language;
 		var proactiveTemplate = req.body.proactiveTemplate;
 		var proactivevariables = JSON.parse(req.body.proactivevariables);
 		var smsBody = req.body.smsBody;
@@ -657,7 +658,7 @@ function outboundWhatsapp(req, res, next) {
 		
 		var url = 'https://va.ivrdeflect.liveperson.net/api/proactiveAlert';
 		
-		var body = {"siteId": siteId,"skill": skill,"customerCountryCode": internationalCode,"customerPhoneNumber": number,"externalCustomerId": "TWD270774","externalCustomerIdDescriptor": "VIP","externalAlertId": "alert","alertInfo": {"Account ID": "1234567890","Customer Type": "Quad-play VIP","Account Status": "Active"},"firstName": "Tom","lastName": "Durbin","proactiveChannel": "","proactiveLanguage": "en","proactiveTemplate": proactiveTemplate,"proactiveVariables": proactiveVariablesJSON,"proactiveTemplateVersion": "1"};
+		var body = {"siteId": siteId,"skill": skill,"customerCountryCode": internationalCode,"customerPhoneNumber": number,"externalCustomerId": "TWD270774","externalCustomerIdDescriptor": "VIP","externalAlertId": "alert","alertInfo": {"Account ID": "1234567890","Customer Type": "Quad-play VIP","Account Status": "Active"},"firstName": "Tom","lastName": "Durbin","proactiveChannel": "","proactiveLanguage": language,"proactiveTemplate": proactiveTemplate,"proactiveVariables": proactiveVariablesJSON,"proactiveTemplateVersion": "1"};
 		
 		
 		request.post({
