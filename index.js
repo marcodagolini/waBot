@@ -637,7 +637,7 @@ function outboundWhatsapp(req, res, next) {
 			currentIndex = z + 1;
 			proactiveVariablesJSON = proactiveVariablesJSON + '"' + currentIndex + '":"' + proactivevariables[z] + '",'
 			if ((z + 1) === proactivevariablesLength){
-				proactiveVariablesJSON = proactiveVariablesJSON + '"sms_body":"' + smsBody + '"';
+				proactiveVariablesJSON = proactiveVariablesJSON + '"sms_body":"' + smsBody + '"}';
 			}
 		}
 		
