@@ -622,6 +622,7 @@ function outboundWhatsapp(req, res, next) {
 		var skill = req.body.skill;
 		var proactiveTemplate = req.body.proactiveTemplate;
 		var proactivevariables = req.body.proactivevariables;
+		var smsBody = req.body.smsbody;
 		
 		
 		var request = require('request');
@@ -634,7 +635,9 @@ function outboundWhatsapp(req, res, next) {
 		
 		var url = 'https://va.ivrdeflect.liveperson.net/api/proactiveAlert';
 		
-		var body = {"siteId": siteId,"skill": skill,"customerCountryCode": internationalCode,"customerPhoneNumber": number,"externalCustomerId": "TWD270774","externalCustomerIdDescriptor": "VIP","externalAlertId": "alert","alertInfo": {"Account ID": "1234567890","Customer Type": "Quad-play VIP","Account Status": "Active"},"firstName": "Tom","lastName": "Durbin","proactiveChannel": "","proactiveLanguage": "en","proactiveTemplate": proactiveTemplate,"proactiveVariables": {"1": proactivevariables,"sms_body": "Hey {{1}}! Thank you for choosing to message with us today. Feel free to respond to us at your own pace throughout the day. How may I assist you?"},"proactiveTemplateVersion": "1"};
+		var body = {"siteId": siteId,"skill": skill,"customerCountryCode": internationalCode,"customerPhoneNumber": number,"externalCustomerId": "TWD270774","externalCustomerIdDescriptor": "VIP","externalAlertId": "alert","alertInfo": {"Account ID": "1234567890","Customer Type": "Quad-play VIP","Account Status": "Active"},"firstName": "Tom","lastName": "Durbin","proactiveChannel": "","proactiveLanguage": "en","proactiveTemplate": proactiveTemplate,"proactiveVariables": {"1": proactivevariables,"sms_body": smsBody},"proactiveTemplateVersion": "1"};
+		
+		/*******
 		
 		request.post({
 			url: url,
@@ -655,6 +658,10 @@ function outboundWhatsapp(req, res, next) {
 				res.send(JSON.stringify({"state":"error","message":"LivePerson server error"}));
 			}
 		});
+		
+		*******/
+		
+		res.send(JSON.stringify({"state":"error","message":"server under maintenance"}));
 		
 	}else{
 		console.log("server busy");
