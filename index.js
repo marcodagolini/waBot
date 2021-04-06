@@ -622,7 +622,7 @@ function outboundWhatsapp(req, res, next) {
 		var skill = req.body.skill;
 		var proactiveTemplate = req.body.proactiveTemplate;
 		var proactivevariables = JSON.parse(req.body.proactivevariables);
-		var smsBody = req.body.smsbody;
+		var smsBody = req.body.smsBody;
 		
 		var proactiveVariablesJSON = "";
 		var proactivevariablesLength = proactivevariables.length;
