@@ -621,16 +621,27 @@ function outboundWhatsapp(req, res, next) {
 		var siteId = req.body.siteId;
 		var skill = req.body.skill;
 		var proactiveTemplate = req.body.proactiveTemplate;
-		var proactivevariables = req.body.proactivevariables;
+		var proactivevariables = JSON.parse(req.body.proactivevariables);
 		var smsBody = req.body.smsbody;
 		
 		var proactiveVariablesJSON = "";
 		var proactivevariablesLength = proactivevariables.length;
+		var currentIndex;
+		
+		proactiveVariablesJSON = proactiveVariablesJSON + '{"sms_body":"' + smsBody + '"}';
+		
 		for (var z = 0; z < proactivevariablesLength; z++){
 			if (z === 0){
 				proactiveVariablesJSON = "{"
 			}
+			currentIndex = z + 1;
+			proactiveVariablesJSON = proactiveVariablesJSON + '"' + currentIndex + '":"' + proactivevariables[z] + '",'
+			if ((z + 1) === proactivevariablesLength){
+				proactiveVariablesJSON = proactiveVariablesJSON + '"sms_body":"' + smsBody + '"';
+			}
 		}
+		
+		console.log(JSON.stringify(proactiveVariablesJSON));
 		
 		
 		
@@ -644,7 +655,7 @@ function outboundWhatsapp(req, res, next) {
 		
 		var url = 'https://va.ivrdeflect.liveperson.net/api/proactiveAlert';
 		
-		var body = {"siteId": siteId,"skill": skill,"customerCountryCode": internationalCode,"customerPhoneNumber": number,"externalCustomerId": "TWD270774","externalCustomerIdDescriptor": "VIP","externalAlertId": "alert","alertInfo": {"Account ID": "1234567890","Customer Type": "Quad-play VIP","Account Status": "Active"},"firstName": "Tom","lastName": "Durbin","proactiveChannel": "","proactiveLanguage": "en","proactiveTemplate": proactiveTemplate,"proactiveVariables": {"1": proactivevariables,"sms_body": smsBody},"proactiveTemplateVersion": "1"};
+		var body = {"siteId": siteId,"skill": skill,"customerCountryCode": internationalCode,"customerPhoneNumber": number,"externalCustomerId": "TWD270774","externalCustomerIdDescriptor": "VIP","externalAlertId": "alert","alertInfo": {"Account ID": "1234567890","Customer Type": "Quad-play VIP","Account Status": "Active"},"firstName": "Tom","lastName": "Durbin","proactiveChannel": "","proactiveLanguage": "en","proactiveTemplate": proactiveTemplate,"proactiveVariables": proactiveVariablesJSON,"proactiveTemplateVersion": "1"};
 		
 		/*******
 		
