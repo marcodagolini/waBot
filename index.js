@@ -624,16 +624,13 @@ function outboundWhatsapp(req, res, next) {
 		var proactivevariables = JSON.parse(req.body.proactivevariables);
 		
 		var proactiveVariablesJSON = {};
-		var elementToPush = "";
 		var proactivevariablesLength = proactivevariables.length;
 		var currentIndex;
 		
 		
 		for (var z = 0; z < proactivevariablesLength; z++){
 			currentIndex = z + 1;
-			elementToPush = '"' + currentIndex + '":"' + proactivevariables[z] + '"';
-			proactiveVariablesJSON = elementToPush;
-
+			proactiveVariablesJSON.currentIndex = proactivevariables[z];
 		}
 		
 		console.log(JSON.stringify(proactiveVariablesJSON));
