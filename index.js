@@ -632,7 +632,7 @@ function outboundWhatsapp(req, res, next) {
 		for (var z = 0; z < proactivevariablesLength; z++){
 			currentIndex = z + 1;
 			elementToPush = '"' + currentIndex + '":"' + proactivevariables[z] + '"';
-			proactiveVariablesJSON.push(elementToPush);
+			proactiveVariablesJSON = elementToPush;
 
 		}
 		
