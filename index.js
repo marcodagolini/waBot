@@ -630,7 +630,7 @@ function outboundWhatsapp(req, res, next) {
 		
 		for (var z = 0; z < proactivevariablesLength; z++){
 			currentIndex = z + 1;
-			proactiveVariablesJSON.currentIndex = proactivevariables[z];
+			proactiveVariablesJSON.[currentIndex] = proactivevariables[z];
 		}
 		
 		console.log(JSON.stringify(proactiveVariablesJSON));
