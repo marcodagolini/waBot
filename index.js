@@ -5,7 +5,6 @@ require('dotenv').config()
 var outboundTrafficLight = "green";
 
 
-
 var myStoredResponse = {
 	"light":"red",
 	"error":"",
