@@ -617,6 +617,8 @@ function outboundWhatsapp(req, res, next) {
 		
 		var internationalCode = req.body.internationalCode;
 		var number = req.body.number;
+		
+		var customerNumber = internationalCode + number;
 
 		var skill = req.body.skill;
 		var templateID = req.body.templateID;
@@ -635,7 +637,8 @@ function outboundWhatsapp(req, res, next) {
 		
 		console.log(JSON.stringify(proactiveVariablesJSON));
 		
-		// proactiveVariablesJSON = JSON.parse(proactiveVariablesJSON);
+		var bodyToSend = {"campaignName": "whatsapp web widget","skill": skill,"templateId": templateID,"outboundNumber": outboundNumber,"consent": true,"consumers": [{"consumerContent": {"wa": customerNumber},"variables": proactiveVariablesJSON}]};
+		
 		
 		/*****
 		
