@@ -618,35 +618,30 @@ function outboundWhatsapp(req, res, next) {
 		
 		var internationalCode = req.body.internationalCode;
 		var number = req.body.number;
-		var siteId = req.body.siteId;
+
 		var skill = req.body.skill;
-		var language = req.body.language;
-		var proactiveTemplate = req.body.proactiveTemplate;
+		var templateID = req.body.templateID;
+		var outboundNumber = req.body.outboundNumber;
 		var proactivevariables = JSON.parse(req.body.proactivevariables);
-		var smsBody = req.body.smsBody;
 		
-		var proactiveVariablesJSON = "";
+		var proactiveVariablesJSON = {};
+		var elementToPush = "";
 		var proactivevariablesLength = proactivevariables.length;
 		var currentIndex;
 		
-		proactiveVariablesJSON = proactiveVariablesJSON + '{"sms_body":"' + smsBody + '"}';
 		
 		for (var z = 0; z < proactivevariablesLength; z++){
-			if (z === 0){
-				proactiveVariablesJSON = "{"
-			}
 			currentIndex = z + 1;
-			proactiveVariablesJSON = proactiveVariablesJSON + '"' + currentIndex + '":"' + proactivevariables[z] + '",'
-			if ((z + 1) === proactivevariablesLength){
-				proactiveVariablesJSON = proactiveVariablesJSON + '"sms_body":"' + smsBody + '"}';
-			}
+			elementToPush = '"' + currentIndex + '":"' + proactivevariables[z] + '"';
+			proactiveVariablesJSON.push(elementToPush);
+
 		}
 		
 		console.log(JSON.stringify(proactiveVariablesJSON));
 		
-		proactiveVariablesJSON = JSON.parse(proactiveVariablesJSON);
+		// proactiveVariablesJSON = JSON.parse(proactiveVariablesJSON);
 		
-		
+		/*****
 		
 		var request = require('request');
 		var oauth = {
@@ -681,8 +676,9 @@ function outboundWhatsapp(req, res, next) {
 			}
 		});
 		
+		*****/
 		
-		// res.send(JSON.stringify({"state":"error","message":"server under maintenance"}));
+		res.send(JSON.stringify({"state":"error","message":"server under maintenance"}));
 		
 	}else{
 		console.log("server busy");
