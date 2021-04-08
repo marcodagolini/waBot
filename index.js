@@ -640,6 +640,25 @@ function outboundWhatsapp(req, res, next) {
 		var bodyToSend = {"campaignName": "whatsapp web widget","skill": skill,"templateId": templateID,"outboundNumber": outboundNumber,"consent": true,"consumers": [{"consumerContent": {"wa": customerNumber},"variables": proactiveVariablesJSON}]};
 		
 		
+		var request = require('request');
+		
+		var url = 'https://va.sentinel.liveperson.net/sentinel/api/account/1685908/app/token?v=1.0&grant_type=client_credentials&client_id=' + process.env.whatsAppClient + '&client_secret=' + process.env.whatsAppSecret;
+		
+		
+		request.get({
+			url: url,
+			json: true,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}, function (e, r, b) {
+			if(b){
+				console.log(b.access_token);
+			} else{
+				res.send(JSON.stringify({"state":"error","message":"LivePerson token server error"}));
+			}
+		});
+		
 		/*****
 		
 		var request = require('request');
