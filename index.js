@@ -654,6 +654,7 @@ function outboundWhatsapp(req, res, next) {
 		}, function (e, r, b) {
 			if(b){
 				console.log(b.access_token);
+				res.send(JSON.stringify({"state":"error","message":"server under maintenance"}));
 			} else{
 				res.send(JSON.stringify({"state":"error","message":"LivePerson token server error"}));
 			}
@@ -696,7 +697,7 @@ function outboundWhatsapp(req, res, next) {
 		
 		*****/
 		
-		res.send(JSON.stringify({"state":"error","message":"server under maintenance"}));
+		
 		
 	}else{
 		console.log("server busy");
