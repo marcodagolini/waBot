@@ -672,7 +672,7 @@ function outboundWhatsapp(req, res, next) {
 					
 					console.log(oauth);
 					console.log("******");
-					console.log(bodyToSend);
+					console.log(JSON.stringify(bodyToSend));
 					console.log("******");
 					console.log(JSON.stringify(e));
 					console.log(JSON.stringify(r));
