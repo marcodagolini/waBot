@@ -645,7 +645,7 @@ function outboundWhatsapp(req, res, next) {
 		var url = 'https://va.sentinel.liveperson.net/sentinel/api/account/1685908/app/token?v=1.0&grant_type=client_credentials&client_id=' + process.env.whatsAppClient + '&client_secret=' + process.env.whatsAppSecret;
 		
 		
-		request.get({
+		request.post({
 			url: url,
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded'
