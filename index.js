@@ -657,7 +657,7 @@ function outboundWhatsapp(req, res, next) {
 				console.log(token);
 				
 				var request = require('request');
-				var oauth = "Bearer: " + token;
+				var oauth = "Bearer " + token;
 				var url = 'https://proactive-messaging.z1.fs.liveperson.com/api/v2/account/1685908/campaign';
 				
 				request.post({
