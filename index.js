@@ -670,6 +670,9 @@ function outboundWhatsapp(req, res, next) {
 					}
 				}, function (e, r, b) {
 					if(b){
+						console.log(JSON.stringify(e));
+						console.log(JSON.stringify(r));
+						console.log(JSON.stringify(b));
 						if(b.acceptedConsumers.length > 0){
 							res.send(JSON.stringify({"state":"success","message":"success"}));
 						}else{
