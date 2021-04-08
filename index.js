@@ -654,7 +654,7 @@ function outboundWhatsapp(req, res, next) {
 
 			if(b){
 				var token = JSON.parse(b).access_token
-				console.log(token);
+				// console.log(token);
 				
 				var request = require('request');
 				var oauth = "Bearer " + token;
@@ -669,14 +669,6 @@ function outboundWhatsapp(req, res, next) {
 						'Authorization': oauth
 					}
 				}, function (e, r, b) {
-					
-					console.log(oauth);
-					console.log("******");
-					console.log(JSON.stringify(bodyToSend));
-					console.log("******");
-					console.log(JSON.stringify(e));
-					console.log(JSON.stringify(r));
-					console.log(JSON.stringify(b));
 					
 					if(b){
 						
