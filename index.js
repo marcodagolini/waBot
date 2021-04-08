@@ -647,7 +647,6 @@ function outboundWhatsapp(req, res, next) {
 		
 		request.get({
 			url: url,
-			json: true,
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded'
 			}
