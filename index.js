@@ -664,9 +664,9 @@ function outboundWhatsapp(req, res, next) {
 					url: url,
 					json: true,
 					body: bodyToSend,
-					oauth: oauth,
 					headers: {
-						'Content-Type': 'application/json'
+						'Content-Type': 'application/json',
+						'Authorization': oauth
 					}
 				}, function (e, r, b) {
 					
