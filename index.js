@@ -652,6 +652,9 @@ function outboundWhatsapp(req, res, next) {
 				'Content-Type': 'application/x-www-form-urlencoded'
 			}
 		}, function (e, r, b) {
+			console.log(JSON.stringify(e));
+			console.log(JSON.stringify(r));
+			console.log(JSON.stringify(b));
 			if(b){
 				console.log(b.access_token);
 				res.send(JSON.stringify({"state":"error","message":"server under maintenance"}));
