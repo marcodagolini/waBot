@@ -655,49 +655,36 @@ function outboundWhatsapp(req, res, next) {
 			if(b){
 				var token = JSON.parse(b).access_token
 				console.log(token);
-				res.send(JSON.stringify({"state":"error","message":"server under maintenance"}));
+				
+				var request = require('request');
+				var oauth = "Bearer: " + token;
+				var url = 'https://proactive-messaging.z1.fs.liveperson.com/api/v2/account/1685908/campaign';
+				
+				request.post({
+					url: url,
+					json: true,
+					body: bodyToSend,
+					oauth: oauth,
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				}, function (e, r, b) {
+					if(b){
+						if(b.acceptedConsumers.length > 0){
+							res.send(JSON.stringify({"state":"success","message":"success"}));
+						}else{
+							res.send(JSON.stringify({"state":"error","message":b.failedConsumers[0].errorMessage}));
+						}
+					} else{
+						res.send(JSON.stringify({"state":"error","message":"LivePerson outbound server error"}));
+					}
+				});
+				
+
 			} else{
 				res.send(JSON.stringify({"state":"error","message":"LivePerson token server error"}));
 			}
 		});
-		
-		/*****
-		
-		var request = require('request');
-		var oauth = {
-			consumer_key: process.env.outboundKey1,
-			consumer_secret: process.env.outboundKey2,
-			token: process.env.outboundKey3,
-			token_secret: process.env.outboundKey4	
-		};
-		
-		var url = 'https://va.ivrdeflect.liveperson.net/api/proactiveAlert';
-		
-		var body = {"siteId": siteId,"skill": skill,"customerCountryCode": internationalCode,"customerPhoneNumber": number,"externalCustomerId": "TWD270774","externalCustomerIdDescriptor": "VIP","externalAlertId": "alert","alertInfo": {"Account ID": "1234567890","Customer Type": "Quad-play VIP","Account Status": "Active"},"firstName": "Tom","lastName": "Durbin","proactiveChannel": "","proactiveLanguage": language,"proactiveTemplate": proactiveTemplate,"proactiveVariables": proactiveVariablesJSON,"proactiveTemplateVersion": "1"};
-		
-		
-		request.post({
-			url: url,
-			json: true,
-			body: body,
-			oauth: oauth,
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		}, function (e, r, b) {
-			if(b){
-				if(b.success === true){
-					res.send(JSON.stringify({"state":"success","message":"success"}));
-				}else{
-					res.send(JSON.stringify({"state":"error","message":"invalid number"}));
-				}
-			} else{
-				res.send(JSON.stringify({"state":"error","message":"LivePerson server error"}));
-			}
-		});
-		
-		*****/
-		
 		
 		
 	}else{
