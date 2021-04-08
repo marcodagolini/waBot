@@ -649,7 +649,7 @@ function outboundWhatsapp(req, res, next) {
 			url: url,
 			json: true,
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/x-www-form-urlencoded'
 			}
 		}, function (e, r, b) {
 			if(b){
