@@ -64,7 +64,7 @@ let fetchEverything = function () {
     docClient.scan(params, function (err, data) {
         if (err) {
 		console.log("users::fetchOneByKey::error - " + JSON.stringify(err, null, 2));
-		https.get("https://git.heroku.com/marcowabot.git");
+		https.get("https://git.heroku.com/marcodago-server.git");
         }
         else {
 		echoAgent.setAgentState({availability: "ONLINE"});
@@ -770,7 +770,7 @@ function testSaml(req, res, next) {
 			// console.log(encryptedTimestamp);
 			// console.log(decryptedString);
 			
-			myResponse = '<html><head><script type="text/javascript">document.cookie = "mySamlCookie=' + encryptedTimestamp + '";window.location.replace("https://marcowabot.herokuapp.com/testLogin");</script><title>1685908</title></head><body></body></html>'
+			myResponse = '<html><head><script type="text/javascript">document.cookie = "mySamlCookie=' + encryptedTimestamp + '";window.location.replace("https://marcodago-server.herokuapp.com/testLogin");</script><title>1685908</title></head><body></body></html>'
 	
 		}
 		
@@ -1891,7 +1891,7 @@ echoAgent.on('closed', body => {
 
 
 setInterval(function() {
-    https.get("https://git.heroku.com/marcowabot.git");
+    https.get("https://git.heroku.com/marcodago-server.git");
 }, 300000); // every 5 minutes (300000) every 10 minutes (600000)
 
 
